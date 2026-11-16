@@ -47,7 +47,7 @@ Gate between milestones: Bert/testers approve before the next one starts (Plan.m
 - [ ] **E0.2.6** Motion: one `useCalm()` hook reading the Rustknop setting + `prefers-reduced-motion`; all animation goes through it.
 
 ### E0.3 Internationalisation
-- [ ] **E0.3.1** Locale routing `/nl/…`, `/en/…`, `/de/…` with localised slugs (e.g. `/nl/reserveren`, `/en/book`, `/de/buchen`). `/` redirects by `Accept-Language`, default NL.
+- [ ] **E0.3.1** Locale routing: Dutch without a prefix (`/` is the Dutch homepage), `/en/…` and `/de/…` with localised slugs (e.g. `/reserveren`, `/en/book`, `/de/buchen`). No automatic redirect. `/en` and `/de` stay off until translated (Dutch first, see [mvp.md](mvp.md)).
 - [ ] **E0.3.2** UI string catalogue per language (buttons, labels, errors). Missing key fails the build.
 - [ ] **E0.3.3** Language switcher that keeps the current page; `hreflang` alternates on every page.
 - [ ] **E0.3.4** Date/number/currency formatting per locale.
@@ -57,31 +57,31 @@ Gate between milestones: Bert/testers approve before the next one starts (Plan.m
 ## E1 – Data model and security (M)
 
 ### E1.1 Schema (Supabase migrations)
-- [ ] **E1.1.1** `profiles` (user id, email, role enum: `beheerder`, `receptie`, `animatie`, `seizoenskracht`).
-- [ ] **E1.1.2** `plots` (`code` T1…S8, type, electricity, surface, level, shade, wheelchair, max_persons, price_group, map_x/map_y/shape id, `gecontroleerd`, photo, active).
+- [ ] **E1.1.1** `profiles` (user id, email, role enum: `admin`, `reception`, `animation`, `seasonal`).
+- [ ] **E1.1.2** `plots` (`code` T1…S8, type, electricity, surface, level, shade, wheelchair, max_persons, price_group, map_x/map_y/shape id, `checked`, photo, active).
 - [ ] **E1.1.3** `facilities` (key, name/description per language, photo, opening hours, accessibility, map position).
 - [ ] **E1.1.4** `price_groups`, `seasons` (1 Apr–31 Oct, peak Jul–Aug), `prices` (price group × period → price per night), extra fees (open question to Bert).
-- [ ] **E1.1.5** `reserveringen` (plot, `stay daterange`, persons, accommodation type, status: `vastgehouden` / `aangevraagd` / `bevestigd` / `geannuleerd`, contact fields, locale, remarks, `vastgehouden_tot`, `hold_token`, `manage_token`, source: web/phone/desk).
+- [ ] **E1.1.5** `reservations` (plot, `stay daterange`, persons, accommodation type, status: `held` / `requested` / `confirmed` / `cancelled`, contact fields, locale, remarks, `held_until`, `hold_token`, `manage_token`, source: web/phone/desk).
 - [ ] **E1.1.6** `plot_blocks` (plot, date range, reason, created_by).
 - [ ] **E1.1.7** `events` (title/body per language, start, end, recurrence rule, location, age, icon, photo, status draft/published).
 - [ ] **E1.1.8** `pages` + `blocks` (page, block type, locale, text, media, order, status), `media` (file, alt text per language), `messages` (sender, email, text, status), `settings` (key, value per language), `jokes` (locale, text, active).
 - [ ] **E1.1.9** Content tables store text per language (`*_nl`, `*_en`, `*_de` or a translations table — decide in E1.1, document it).
 
 ### E1.2 No double bookings (critical)
-- [ ] **E1.2.1** `btree_gist` + exclusion constraint on `reserveringen`: `EXCLUDE USING gist (plot_id WITH =, stay WITH &&) WHERE (status IN ('vastgehouden','aangevraagd','bevestigd'))`. Holds count as occupying.
+- [ ] **E1.2.1** `btree_gist` + exclusion constraint on `reservations`: `EXCLUDE USING gist (plot_id WITH =, stay WITH &&) WHERE (status IN ('held','requested','confirmed'))`. Holds count as occupying.
 - [ ] **E1.2.2** Same check against `plot_blocks` (trigger or a second constraint via a shared occupancy table).
-- [ ] **E1.2.3** Expired holds never block: a scheduled job (pg_cron, every minute) sets expired `vastgehouden` rows to `verlopen`; availability queries also ignore `vastgehouden_tot < now()`.
+- [ ] **E1.2.3** Expired holds never block: a scheduled job (pg_cron, every minute) sets expired `held` rows to `expired` (or deletes them, still open in [mvp.md](mvp.md)); availability queries also ignore `held_until < now()`.
 - [ ] **E1.2.4** Check constraints: departure > arrival, stay inside the season, persons ≤ plot max.
 - [ ] **E1.2.5** DB tests: overlapping insert fails, back-to-back stays (depart = next arrive) succeed, expired hold frees the plot, two concurrent transactions → exactly one wins.
 
 ### E1.3 Role access in the database (RLS)
 - [ ] **E1.3.1** RLS on every table. Public (anon) may read published content, plots, facilities, prices, published events, and an availability view without personal data.
-- [ ] **E1.3.2** Policies per role (beheerder all · receptie bookings, messages, events, plot blocks · animatie events, media · seizoenskracht read only).
+- [ ] **E1.3.2** Policies per role (`admin` all · `reception` bookings, messages, events, plot blocks · `animation` events, media · `seasonal` read only).
 - [ ] **E1.3.3** Guests create holds/bookings only through server functions (RPC `hold_plot`, `confirm_booking`) — no direct table insert.
 - [ ] **E1.3.4** RLS tests per role (role X tries forbidden action → denied).
 
 ### E1.4 Seed data
-- [ ] **E1.4.1** 60 plots (T1–T40, C1–C12, S1–S8) with placeholder attributes, all `gecontroleerd = false` until Bert's walk-through.
+- [ ] **E1.4.1** 60 plots (T1–T40, C1–C12, S1–S8) with placeholder attributes, all `checked = false` until Bert's walk-through.
 - [ ] **E1.4.2** Facilities, a sample season with prices, sample events, sample jokes per language, page blocks.
 
 ---
@@ -167,9 +167,9 @@ Gate between milestones: Bert/testers approve before the next one starts (Plan.m
 
 ### E5.2 Availability, hold and confirm (server)
 - [ ] **E5.2.1** `GET availability(from, to, persons, type)` → plot states without personal data.
-- [ ] **E5.2.2** `hold_plot` RPC: creates `vastgehouden` row with `vastgehouden_tot = now() + 15 min`; replaces visitor's previous hold; max N concurrent holds per visitor/IP; countdown shown in UI.
+- [ ] **E5.2.2** `hold_plot` RPC: creates `held` row with `held_until = now() + 15 min`; replaces visitor's previous hold; max N concurrent holds per visitor/IP; countdown shown in UI.
 - [ ] **E5.2.3** Release on change of plot/dates and on expiry (E1.2.3).
-- [ ] **E5.2.4** `confirm_booking` RPC: converts the hold → `aangevraagd` (level 1) or `bevestigd` (level 2) in one transaction; constraint violation → typed error.
+- [ ] **E5.2.4** `confirm_booking` RPC: converts the hold → `requested` (level 1) or `confirmed` (level 2) in one transaction; constraint violation → typed error.
 - [ ] **E5.2.5** Conflict screen: "Deze plek is net weg" → back to map with 3 free alternatives of the same type.
 - [ ] **E5.2.6** Price calculation on the server (price group × period × nights + fees), shown before confirmation.
 - [ ] **E5.2.7** Booking level switch in settings (1 or 2).
@@ -201,7 +201,7 @@ Gate between milestones: Bert/testers approve before the next one starts (Plan.m
 - [ ] **E6.3.5** Export to Excel (.xlsx/.csv) for the accountant.
 
 ### E6.4 Plots, blocks and facilities
-- [ ] **E6.4.1** Plot list + edit form (all plot fields, photo, `gecontroleerd` checkbox with date).
+- [ ] **E6.4.1** Plot list + edit form (all plot fields, photo, `checked` checkbox with date, labelled "gecontroleerd").
 - [ ] **E6.4.2** Block a plot for a date range with reason (visible on map as Geblokkeerd).
 - [ ] **E6.4.3** Facility edit (text per language, photo, times, accessibility).
 
@@ -221,7 +221,7 @@ Gate between milestones: Bert/testers approve before the next one starts (Plan.m
 ### E6.8 Messages, settings, users
 - [ ] **E6.8.1** Messages inbox: read, mark handled, reply via mail link.
 - [ ] **E6.8.2** Settings: contact details, reception hours, announcement banner, jokes list per language, Plekmatch on/off, booking level.
-- [ ] **E6.8.3** Users & roles: invite, change role, revoke; only beheerder.
+- [ ] **E6.8.3** Users & roles: invite, change role, revoke; only `admin`.
 
 ---
 
@@ -246,7 +246,7 @@ Gate between milestones: Bert/testers approve before the next one starts (Plan.m
 
 ## E9 – Shoulds (after all Musts)
 
-- [ ] **E9.1 Plekmatch** — 5 questions by the chicken (persons+kids, type, electricity, accessibility, preference); filter on requirements → score preferences (distance, quiet, shade, level) → top 3 free plots with one reason each; never recommend a non-`gecontroleerd` plot as accessible; near-match with alternative dates; answers not linked to a person; on/off in settings. Unit-tested scoring function.
+- [ ] **E9.1 Plekmatch** — 5 questions by the chicken (persons+kids, type, electricity, accessibility, preference); filter on requirements → score preferences (distance, quiet, shade, level) → top 3 free plots with one reason each; never recommend a non-`checked` plot as accessible; near-match with alternative dates; answers not linked to a person; on/off in settings. Unit-tested scoring function.
 - [ ] **E9.2 Reminder email** — scheduled job N days before arrival, route + arrival times, per language.
 - [ ] **E9.3 Version history + audit log** — content versions with restore; log who changed what.
 - [ ] **E9.4 Facebook integration** — show Bert's latest posts (without tracking pixels; server-side fetch).

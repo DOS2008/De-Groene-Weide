@@ -7,19 +7,19 @@ This roadmap turns [Plan.md](../Plan.md) into features and tasks you can build o
 - The user stories with acceptance criteria are in [user-stories.md](user-stories.md), and each one names its feature number.
 - Tasks marked **(Bert)** wait on an answer from *Open vragen voor Bert*. Build them with placeholder values and keep the value in settings, not in code.
 
-## Assumed stack (confirm before M0)
+## Stack (decided)
 
-CLAUDE.md marks the stack as a proposal. These are the defaults this roadmap assumes. Change them here first if the team decides otherwise.
+The stack is decided: Next.js + Supabase, all self-hosted in Docker. The reasons are in [decisions/0001-stack-nextjs-supabase-docker.md](decisions/0001-stack-nextjs-supabase-docker.md).
 
 | Layer | Choice | Why |
 | --- | --- | --- |
 | Framework | **Next.js (App Router) + TypeScript**, server components and server actions | SSR for SEO, one codebase for the site and `/admin` |
 | Styling | CSS variables from the Stijlgids + CSS Modules | Tokens as variables (hard rule). No hex values in components |
-| i18n | `next-intl` with `/nl`, `/en`, `/de` route prefixes and slugs per language | A URL per language, hreflang |
-| Database, auth, files | **Supabase** (EU region), Postgres, RLS, Auth with TOTP MFA, Storage | Exclusion constraint, roles in the database |
-| Email | Transactional service with an EU region (for example Brevo, or Resend in the EU) plus `react-email` templates | Templates per language |
-| Hosting | Vercel with functions in `fra1`, or another EU host | EU hosting, SSL, previews per PR |
-| Analytics | Plausible (EU, no cookies) | No tracking cookies |
+| i18n | `next-intl` with Dutch at `/` without a prefix (`localePrefix: 'as-needed'`), `/en` and `/de` prefixes, and slugs per language | A URL per language, hreflang. Dutch first (see [mvp.md](mvp.md)) |
+| Database, auth, files | **Self-hosted Supabase** in Docker: Postgres 17, RLS, Auth with TOTP MFA, Storage | Exclusion constraint, roles in the database |
+| Email | Transactional service with an EU region (for example Brevo, or Resend in the EU) over SMTP, plus `react-email` templates. Mailpit catches all mail in development | Templates per language. Sending mail is the one external service, because self-hosted mail ends up in spam |
+| Hosting | **Docker Compose** on one EU server, with Caddy for HTTPS (`compose.prod.yaml`) | EU hosting, SSL, the same setup as development |
+| Analytics | Plausible Community Edition, self-hosted in Docker (no cookies) | No tracking cookies |
 | Spam protection | Honeypot field + server-side rate limit (optionally Friendly Captcha, EU) | No tracking |
 | Fonts | **Self-hosted** Bricolage Grotesque and Atkinson Hyperlegible (`next/font/local`) | Loading from Google Fonts sends visitor IPs to Google (AVG) |
 | Tests | Vitest (logic), pgTAP or SQL tests (constraints, RLS), Playwright + axe-core (flows, accessibility) | The technical tests from the plan |
@@ -48,8 +48,8 @@ M2 can start right after M0 with hard-coded content and switch to database conte
 **Done:** `npm run dev`, `npm test` and `npm run e2e` work on a fresh clone, and CI is green.
 
 ### F0.2 Supabase project and migrations
-- [ ] Create the Supabase project in an EU region, under Bert's or the campsite's account (see risks in the plan).
-- [ ] Set up the local Supabase CLI, `supabase/migrations/` and `supabase/seed.sql`.
+- [x] Self-hosted Supabase runs in Docker (`compose.yaml`, `infra/supabase/`). On the server, it runs on an EU machine registered to Bert or the campsite (see risks in the plan).
+- [ ] Set up `supabase/migrations/` and `supabase/seed.sql`, applied to the Docker database with the Supabase CLI (`--db-url`). Add the commands to CLAUDE.md.
 - [ ] Generate database types into `src/lib/database.types.ts` with an npm script.
 
 **Done:** `supabase db reset` builds the whole schema and seed data from scratch.
@@ -66,8 +66,8 @@ M2 can start right after M0 with hard-coded content and switch to database conte
 **Done:** a `/dev/components` page (dev only) shows every component, and axe reports no issues on it.
 
 ### F0.4 Language routing
-- [ ] Set up `next-intl` routes for `/nl`, `/en` and `/de`, with `/` sending visitors to `/nl`. Suggest the browser's language, but never redirect automatically.
-- [ ] Translate slugs per language (for example `/nl/reserveren`, `/en/book`, `/de/buchen`) and add a helper that maps the current page to its URL in another language.
+- [ ] Set up `next-intl` routes: Dutch has no prefix and `/` is the Dutch homepage, while English and German use `/en` and `/de`. Never redirect automatically. Keep `/en` and `/de` switched off until their translation is complete (Prio 4 in [mvp.md](mvp.md)).
+- [ ] Translate slugs per language (for example `/reserveren`, `/en/book`, `/de/buchen`) and add a helper that maps the current page to its URL in another language.
 - [ ] Keep UI string catalogs in `messages/{nl,en,de}.json` and write the jokes per language, not as translations.
 - [ ] Set `lang` on `<html>` and `hreflang` alternates on every page.
 
@@ -266,7 +266,7 @@ Every screen is in plain Dutch, with a short hint and example next to each field
 | **F5.2 Start** | 4 quick actions (new event, add booking, block plot, post notice), bookings waiting for confirmation, new messages, missing translations | Hi · Admin panel |
 | **F5.3 Reserveringen** | List with filters (date, status, plot, language), week calendar per plot, detail, confirm, edit, cancel, CSV/Excel export for the accountant | Hi · Admin reserveringen |
 | **F5.4 Reservering toevoegen** | Same map and same RPCs as guests, with `source = phone/desk`; sends the guest's email when an address is given | Hi · Admin reservering toevoegen |
-| **F5.5 Plekken** | List of 60 plots with filters, edit all fields, `gecontroleerd` toggle with date, block a plot for a period with a reason | Hi · Admin plekken |
+| **F5.5 Plekken** | List of 60 plots with filters, edit all fields, `checked` toggle ("gecontroleerd") with date, block a plot for a period with a reason | Hi · Admin plekken |
 | **F5.6 Prijzen & seizoenen** | Season dates, price groups, periods (peak), price per night, extras | Hi · Admin prijzen |
 | **F5.7 Evenementen** | List and week view, create, edit, copy, recurrence ("elke dag"), draft or published, NL/EN/DE tabs with missing-language labels | Hi · Admin evenement bewerken |
 | **F5.8 Pagina's & teksten** | Block editor per page, NL/EN/DE side by side, missing translation label, preview, publish | Hi · Admin pagina's & teksten |

@@ -7,29 +7,51 @@ School project (HMW 2): **De Groene Weide Online**, a website plus admin panel f
 - **Plan:** [Plan.md](Plan.md), in Dutch (online: https://claude.ai/artifact/C5VRLX81zqcXyAHxZ3Htsj#0d8f06ac-43c8.mj2drskz17b.16048). It covers scope, rules, data model, tests, budget and open questions. Read the relevant section before building a feature.
 - **Design:** https://claude.ai/artifact/SXWHgyViiegf9Hydgdezrf#page-8424d452da33. Build from the page *High-fidelity (bouw)*: Stijlgids, Home, Reserveren, Plekmatch (phone), Admin panel. The *Mid-fidelity* page holds the pitch wireframes.
 
-## Tech stack (proposal, not final)
+## Tech stack (decided)
 
-Next.js or SvelteKit with SSR, one codebase for the site and the admin panel. PostgreSQL via Supabase (auth, 2FA, storage). An SVG site map. A transactional mail service. EU hosting. Analytics without tracking cookies. The alternative is WordPress with a booking plugin for level 1. **Record the final choice here, plus the setup, build, test and run commands, once the code exists.**
+**Next.js 16** (App Router, TypeScript, `output: "standalone"`) for the site and the admin panel in one codebase. **Self-hosted Supabase** (PostgreSQL 17, Auth with TOTP 2FA, Storage, Studio). **Everything runs in Docker Compose**, both in development and on the server, with no managed cloud services. Caddy handles HTTPS on the server and Mailpit catches email in development. Plus an SVG site map and analytics without tracking cookies. The reasons are in [docs/decisions/0001-stack-nextjs-supabase-docker.md](docs/decisions/0001-stack-nextjs-supabase-docker.md).
+
+- [compose.yaml](compose.yaml) is development. [compose.prod.yaml](compose.prod.yaml) is the server. [Dockerfile](Dockerfile) has the targets `dev` and `runner`.
+- [infra/supabase/](infra/supabase/) is an **unchanged** copy of the upstream Supabase `docker/` folder. Never edit it: put changes in `infra/supabase.override.yml` (dev and server) or `infra/supabase.prod.yml` (server only).
+- Server code reaches Supabase at `SUPABASE_URL` (`http://api-gw:8000`, inside Docker). The browser uses `NEXT_PUBLIC_SUPABASE_URL`.
+- `.env` is generated and never committed. New settings go in `.env.app.example`.
+
+### Commands
+
+| What | Command |
+| --- | --- |
+| Set up (once) | `sh scripts/init-env.sh` |
+| Run dev with live reload | `docker compose up --watch` (site :3000, Supabase/Studio :8000, mail :8025) |
+| Lint / type check | `docker compose exec web npm run lint` · `docker compose exec web npm run typecheck` |
+| Stop / reset data | `docker compose down` · `docker compose down -v` |
+| Server deploy | `docker compose -f compose.prod.yaml up -d --build` (see README, "Deploying") |
+
+Update this table when tests, migrations or new scripts are added.
+
+On Windows, run `docker compose` builds from a working directory that starts with an uppercase `C:\`. With a lowercase `c:\`, Compose's bake builder fails with `failed to execute bake` (see README, "Troubleshooting on Windows").
 
 ## Hard rules
 
 **Booking**
-- **No double bookings, enforced by the database.** `reserveringen` must reject overlapping nights for the same plot (in Postgres, an exclusion constraint on plot plus date range). Never rely on app-side checks alone.
-- A chosen plot is **held for 15 minutes** (`vastgehouden_tot`), then frees up automatically. Set a maximum number of held plots per visitor.
+- **No double bookings, enforced by the database.** `reservations` must reject overlapping nights for the same plot (in Postgres, an exclusion constraint on plot plus date range). Never rely on app-side checks alone.
+- A chosen plot is **held for 15 minutes** (`held_until`), then frees up automatically. Set a maximum number of held plots per visitor.
 - If the plot is taken at confirmation, send the guest back to the map with free alternatives.
 - Admin bookings (phone or desk) go through the same rules and the same map.
 - Collect only name, email, phone, number of persons, accommodation type and remarks. Never store payment data.
 
 **Security**
 - **Role access is enforced in the database** (Supabase RLS), not only in the UI.
-- Roles: Bert/beheerder (everything) · Receptie (bookings, messages, events, blocking plots) · Animatie (events, photos) · Seizoenskracht (read only).
+- Roles: Bert/beheerder (everything) · Receptie (bookings, messages, events, blocking plots) · Animatie (events, photos) · Seizoenskracht (read only). In the database: `admin`, `reception`, `animation`, `seasonal`.
 - Admin accounts use 2FA. Spam protection on forms without tracking.
 
 **Languages**
-- NL (first), EN and DE. Separate text fields per language and **a URL per language**. No automatic translation.
+- NL, EN and DE. Separate text fields per language and **a URL per language**. No automatic translation.
+- **Dutch first:** the MVP launches in Dutch only, and EN and DE follow (see [docs/mvp.md](docs/mvp.md)). Build the structure for all three languages from the start, but keep `/en` and `/de` off until their translation is complete.
+- **URLs:** `/` is the Dutch homepage and Dutch pages have no prefix (`/reserveren`). EN and DE use `/en/…` and `/de/…` with their own slugs. Never redirect `/` automatically.
+- The admin panel is in Dutch only.
 - Content tables store their text per language. Emails go out in the guest's language.
 - Every language gets its own joke. Never translate jokes word for word.
-- Code, identifiers and commits are in English.
+- Code, identifiers, commits and the database (tables, columns, enum values, functions) are in English. Dutch only appears in texts that users read.
 
 **Accessibility (WCAG 2.2 AA)**
 - Text contrast is at least 4.5:1. Full keyboard support. Tap targets are at least 44 px.
@@ -44,14 +66,14 @@ Next.js or SvelteKit with SSR, one codebase for the site and the admin panel. Po
 ## Domain
 
 - **60 plots:** T1–T40 tent/caravan, C1–C12 camper, S1–S8 safari tent. The numbering is still to be confirmed by Bert.
-- **Plot fields:** type, electricity, surface, level (vlak), shade, wheelchair access, max persons, price group, map position, checked (`gecontroleerd`).
+- **Plot fields:** type, electricity, surface, level (vlak), shade, wheelchair access, max persons, price group, map position, checked (`checked`, "gecontroleerd" in the UI).
 - **Distances** to facilities are calculated from the SVG coordinates and never entered by hand.
 - **The map has two modes:** explore (no dates, everything clickable) and book (booked plots are visible but disabled).
 - **Booking flow (7 steps):** Datum → Personen & verblijf → Plekmatch → Plek kiezen → Gegevens → Controleren → Bevestiging.
 - **Booking levels:** 1 = request that Bert confirms (Must) · 2 = instant confirmation with an automatic email (Must) · 3 = online payment via iDEAL (Could).
 - **Plekmatch:** the chicken asks 5 questions and shows the 3 best free plots, each with one reason.
   - **Rule-based, no AI.** Filter on requirements (persons, type, electricity, accessibility), then score preferences (distance, quiet, shade, level ground).
-  - A plot that isn't `gecontroleerd` is never recommended as accessible.
+  - A plot that isn't `checked` is never recommended as accessible.
   - Answers are never linked to a person.
 
 ## Priorities

@@ -1,0 +1,10 @@
+* text=auto
+
+# Files that run inside Linux containers must keep LF line endings,
+# also when checked out on Windows.
+*.sh eol=lf
+*.yml eol=lf
+*.yaml eol=lf
+Dockerfile eol=lf
+Caddyfile eol=lf
+.env* eol=lf

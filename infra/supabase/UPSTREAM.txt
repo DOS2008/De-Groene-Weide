@@ -1,0 +1,1 @@
+upstream: supabase/supabase@2a9b02a99ab96040f35fa97ada1814be3c769464 (docker/, 2026-11-16)

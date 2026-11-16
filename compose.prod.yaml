@@ -1,0 +1,55 @@
+# Server stack: production Next.js + self-hosted Supabase + Caddy (HTTPS).
+#
+#   docker compose -f compose.prod.yaml up -d --build
+#
+# Caddy gets Let's Encrypt certificates for SITE_DOMAIN and API_DOMAIN from .env.
+# Only ports 80 and 443 are open to the outside. The database and the
+# Supabase gateway listen on 127.0.0.1 only. See README.md, "Deploying".
+
+name: groene-weide
+
+include:
+  - path:
+      - infra/supabase/docker-compose.yml
+      - infra/supabase.override.yml
+      - infra/supabase.prod.yml
+    env_file: .env
+
+services:
+  web:
+    image: groene-weide-web:prod
+    build:
+      context: .
+      target: runner
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_PUBLIC_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
+    restart: unless-stopped
+    expose:
+      - "3000"
+    environment:
+      SUPABASE_URL: http://api-gw:8000
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+
+  caddy:
+    image: caddy:2.11-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN}
+      API_DOMAIN: ${API_DOMAIN}
+    volumes:
+      - ./infra/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - web
+      - api-gw
+
+volumes:
+  caddy-data:
+  caddy-config:

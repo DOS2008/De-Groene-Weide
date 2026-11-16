@@ -1,0 +1,16 @@
+# HTTPS for the server stack (compose.prod.yaml).
+# Caddy requests and renews Let's Encrypt certificates automatically.
+
+# The website
+{$SITE_DOMAIN} {
+	encode zstd gzip
+	reverse_proxy web:3000
+	header -Server
+}
+
+# Supabase API (auth, rest, storage) for the browser.
+# The Studio dashboard is also served here, behind the dashboard login from .env.
+{$API_DOMAIN} {
+	reverse_proxy api-gw:8000
+	header -Server
+}

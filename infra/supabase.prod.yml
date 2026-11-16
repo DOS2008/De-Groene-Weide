@@ -1,0 +1,8 @@
+# Server-only changes on top of the official Supabase compose file.
+
+services:
+  # Caddy is the only way in from outside. The gateway stays reachable on
+  # 127.0.0.1 for an SSH tunnel to the Studio dashboard.
+  api-gw:
+    ports: !override
+      - "127.0.0.1:${API_GW_HTTP_PORT}:8000"

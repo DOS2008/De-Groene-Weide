@@ -1,0 +1,26 @@
+# Our changes on top of the official Supabase compose file (infra/supabase/),
+# used by both compose.yaml and compose.prod.yaml. Keep infra/supabase/ itself
+# unchanged, so it can be replaced with a newer upstream copy.
+
+services:
+  # Named volumes instead of bind mounts: Postgres can't use a data folder on a
+  # Windows drive, and named volumes behave the same on every host.
+  db:
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  storage:
+    volumes:
+      - storage-data:/var/lib/storage
+  imgproxy:
+    volumes:
+      - storage-data:/var/lib/storage
+
+  # The database pooler only listens on this machine, never on the network.
+  supavisor:
+    ports: !override
+      - "127.0.0.1:${POSTGRES_PORT}:5432"
+      - "127.0.0.1:${POOLER_PROXY_PORT_TRANSACTION}:6543"
+
+volumes:
+  db-data:
+  storage-data:

@@ -1,0 +1,25 @@
+/* Design tokens from the hi-fi Stijlgids (see CLAUDE.md).
+   Components use these variables only, never hex values. */
+:root {
+  --color-weidegroen: #2f6b3e;
+  --color-weidegroen-hover: #24502f;
+  --color-gras-licht: #e4f0de;
+  --color-schuurbruin: #5a3e26;
+  --color-stro: #f2e8dc;
+  --color-eigeel: #f5c84b; /* surfaces only, never text on white */
+  --color-kam-oranje: #ee8a3c; /* surfaces only, never text on white */
+  --color-inkt: #1e2a21;
+  --color-melk: #fbfaf6;
+  --color-muted: #4b574e;
+  --color-border: #d9ddd3;
+  --color-dark-green: #24502f;
+
+  /* Fonts are self-hosted in F0.3; these are the fallbacks until then. */
+  --font-heading: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-size-body: 1.125rem; /* 18px */
+  --line-height-body: 1.6;
+
+  --focus-ring: 3px solid var(--color-inkt);
+  --focus-offset: 2px;
+}

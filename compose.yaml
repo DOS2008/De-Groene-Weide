@@ -1,0 +1,62 @@
+# Development stack: Next.js with live reload + self-hosted Supabase + a mail catcher.
+#
+#   docker compose up --watch
+#
+# Site:          http://localhost:3000
+# Supabase API:  http://localhost:8000  (Studio dashboard on the same URL, login from .env)
+# Mail catcher:  http://localhost:8025
+#
+# Code changes are synced into the container by Compose Watch, and Next.js
+# Fast Refresh shows them right away. Changing package.json rebuilds the image.
+
+name: groene-weide
+
+include:
+  - path:
+      - infra/supabase/docker-compose.yml
+      - infra/supabase.override.yml
+    env_file: .env
+
+services:
+  web:
+    image: groene-weide-web:dev
+    build:
+      context: .
+      target: dev
+    ports:
+      - "3000:3000"
+    environment:
+      # Server-side calls go over the internal Docker network.
+      SUPABASE_URL: http://api-gw:8000
+      # The browser talks to Supabase through the published port.
+      NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_PUBLIC_URL}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
+      SMTP_HOST: mailpit
+      SMTP_PORT: "1025"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - node_modules/
+            - .next/
+            - .git/
+            - infra/
+            - docs/
+        - action: rebuild
+          path: package.json
+        - action: rebuild
+          path: package-lock.json
+        - action: sync+restart
+          path: next.config.ts
+          target: /app/next.config.ts
+
+  mailpit:
+    image: axllent/mailpit:v1.33
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"

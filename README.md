@@ -31,7 +31,14 @@ docker compose down                     # stop everything (the data stays)
 docker compose down -v                  # stop and delete all data (database, uploads)
 docker compose exec web npm run lint
 docker compose exec web npm run typecheck
+docker compose exec web npm test        # unit tests (Vitest)
 ```
+
+`docker compose up --watch` keeps the container in sync. If you started the stack without `--watch`, run `docker compose watch web --no-up` in a second terminal.
+
+### Content and placeholders
+
+Site texts are in `messages/nl.json`. Facilities, events, jokes, prices and contact details are in `src/content/`. Anything Bert still has to supply (address, phone, prices, times) is `null` or written as `[…]` there, and the site shows it as a marked placeholder. Search for `[` and `null` in `src/content/` to find them.
 
 ### Troubleshooting on Windows
 
@@ -53,6 +60,7 @@ The server stack is [compose.prod.yaml](compose.prod.yaml): the production websi
    - `SUPABASE_PUBLIC_URL=https://<API_DOMAIN>`
    - `API_EXTERNAL_URL=https://<API_DOMAIN>/auth/v1`
    - the `SMTP_*` values for a real EU mail provider
+   - `CONTACT_EMAIL`, the inbox that receives the contact form
 4. Start it:
 
    ```sh

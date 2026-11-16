@@ -1,0 +1,16 @@
+.page {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem 3rem;
+  min-height: 60vh;
+}
+
+.page > div {
+  flex: 1 1 22rem;
+}
+
+.chicken {
+  flex-shrink: 0;
+  transform: rotate(-8deg);
+}

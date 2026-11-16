@@ -29,8 +29,11 @@ COPY . .
 # NEXT_PUBLIC_* values are baked into the browser bundle at build time.
 ARG NEXT_PUBLIC_SUPABASE_URL
 ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
+# SITE_URL goes into prerendered pages (canonical URLs, sitemap.xml).
+ARG SITE_URL
 ENV NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL} \
-    NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY} \
+    SITE_URL=${SITE_URL}
 RUN npm run build
 
 # ---------- production runtime ----------

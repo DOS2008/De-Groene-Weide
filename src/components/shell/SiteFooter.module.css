@@ -1,0 +1,94 @@
+.footer {
+  background: var(--color-dark-green);
+  color: var(--color-white);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: 2rem 3rem;
+  padding-block: 3rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.brand {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.heading {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.muted,
+.address,
+.hours {
+  color: var(--color-on-dark-muted);
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  font-style: normal;
+}
+
+.hours {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0;
+}
+
+.hours dd {
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a,
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  color: var(--color-white);
+}
+
+.links a:hover,
+.linkButton:hover {
+  color: var(--color-gras-licht);
+}
+
+.linkButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+/* Placeholders stay readable on the dark green. */
+.footer :global(.placeholder) {
+  color: var(--color-inkt);
+}
+
+.footer :focus-visible {
+  outline-color: var(--color-white);
+}

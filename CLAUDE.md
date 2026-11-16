@@ -23,10 +23,19 @@ School project (HMW 2): **De Groene Weide Online**, a website plus admin panel f
 | Set up (once) | `sh scripts/init-env.sh` |
 | Run dev with live reload | `docker compose up --watch` (site :3000, Supabase/Studio :8000, mail :8025) |
 | Lint / type check | `docker compose exec web npm run lint` · `docker compose exec web npm run typecheck` |
+| Unit tests (Vitest) | `docker compose exec web npm test` |
 | Stop / reset data | `docker compose down` · `docker compose down -v` |
 | Server deploy | `docker compose -f compose.prod.yaml up -d --build` (see README, "Deploying") |
 
 Update this table when tests, migrations or new scripts are added.
+
+### Code layout
+
+- Pages live in `src/app/[locale]/<route>/`, with **English folder names** (`book`, `site-map`). The public slug per language is set in [src/i18n/routing.ts](src/i18n/routing.ts) (`/book` → `/reserveren`). Link with the internal route: `<Link href="/book">` from `@/i18n/navigation`.
+- Read the language with `getPageLocale()` from `@/i18n/locale` (root params), never through the `params` prop: that keeps pages static and navigation instant.
+- UI strings are in `messages/nl.json`. Content (facilities, events, jokes, prices, settings) is in `src/content/`, with a field per language (`title_nl`, `title_en`, `title_de`) until it moves to the database in Prio 5.
+- Facts that Bert still has to supply are `null` or `[…]` in the content, and show on the site as a marked placeholder.
+- Never import a constant from a `"use client"` file into a server component: it arrives as a client reference, not the value. Put shared constants in a plain module.
 
 On Windows, run `docker compose` builds from a working directory that starts with an uppercase `C:\`. With a lowercase `c:\`, Compose's bake builder fails with `failed to execute bake` (see README, "Troubleshooting on Windows").
 

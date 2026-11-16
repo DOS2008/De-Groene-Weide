@@ -1,0 +1,33 @@
+/* Shared by the footer pages (Toegankelijkheid, Huisregels & FAQ, Privacy). */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status[data-status="yes"] {
+  background: var(--color-gras-licht);
+}
+
+.status[data-status="partly"] {
+  background: var(--color-stro);
+}
+
+.status[data-status="unchecked"] {
+  background: var(--color-white);
+  border: 1px dashed var(--color-muted);
+}
+
+.report {
+  margin-top: 1.5rem;
+}
+
+.updated {
+  color: var(--color-muted);
+  font-size: var(--font-size-small);
+}

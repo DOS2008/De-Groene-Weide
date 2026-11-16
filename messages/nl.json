@@ -1,0 +1,437 @@
+{
+  "meta": {
+    "siteName": "De Groene Weide",
+    "titleTemplate": "%s – De Groene Weide",
+    "defaultTitle": "De Groene Weide – familiecamping op de boerderij",
+    "defaultDescription": "Kamperen op de boerderij van Bert. Kippen, een speelweide met tractor, een buitenzwembad en de oude melkstal. Open van 1 april tot en met 31 oktober."
+  },
+  "common": {
+    "skipToContent": "Naar de inhoud",
+    "bookCta": "Boek je plekje in de wei",
+    "routeCta": "Plan je route",
+    "messageCta": "Stuur een bericht",
+    "viewOnMap": "Bekijk op de plattegrond",
+    "season": "1 april t/m 31 oktober",
+    "placeholder": "Nog in te vullen",
+    "newWindow": "opent een andere website"
+  },
+  "nav": {
+    "label": "Hoofdmenu",
+    "home": "Home",
+    "activities": "Terrein & activiteiten",
+    "siteMap": "Plattegrond",
+    "book": "Reserveren",
+    "events": "Evenementen",
+    "about": "Over ons",
+    "contact": "Contact",
+    "openMenu": "Menu",
+    "closeMenu": "Sluiten"
+  },
+  "calm": {
+    "label": "Rustknop",
+    "long": "Rustknop: beweging en geluid uit",
+    "on": "Rustknop staat aan. Beweging en geluid zijn uit.",
+    "off": "Rustknop staat uit."
+  },
+  "footer": {
+    "tagline": "Camping op de boerderij van Bert",
+    "navLabel": "Voettekst",
+    "accessibility": "Toegankelijkheid",
+    "houseRules": "Huisregels & FAQ",
+    "privacy": "Privacy & cookies",
+    "cookieSettings": "Cookie-instellingen",
+    "facebook": "Volg ons op Facebook",
+    "address": "Adres",
+    "reception": "Receptie",
+    "weekdays": "Ma – vr",
+    "weekend": "Za – zo",
+    "season": "Seizoen"
+  },
+  "cookies": {
+    "title": "Koekjes? Alleen die van oma.",
+    "text": "We gebruiken alleen wat nodig is om de site te laten werken. Statistiek meten we zonder cookies. Extra's, zoals Facebook-berichten, staan uit tot jij ze aanzet.",
+    "onlyNeeded": "Alleen nodige",
+    "choose": "Kies zelf",
+    "save": "Bewaar mijn keuze",
+    "needed": "Nodig om de site te laten werken",
+    "neededHint": "Je cookiekeuze en de stand van de Rustknop. Staat altijd aan.",
+    "extras": "Extra's van andere websites",
+    "extrasHint": "Bijvoorbeeld Facebook-berichten op de homepage. Die sturen gegevens naar Facebook.",
+    "readMore": "Lees de privacyverklaring",
+    "saved": "Je keuze is bewaard."
+  },
+  "home": {
+    "metaTitle": "Familiecamping op de boerderij",
+    "badge": "Gezinscamping · 1 april – 31 oktober",
+    "title": "Beleef het echte boerenleven",
+    "lead": "Tussen de kippen, de tractor en de oude melkstal. Kies zelf je plek en word wakker met gekakel.",
+    "illustration": "Getekend erf met heuvels, de oude melkstal, een hek en een kip",
+    "jokeLabel": "Grap van de dag",
+    "activitiesEyebrow": "Terrein & activiteiten",
+    "activitiesTitle": "Wat kun je hier doen?",
+    "activitiesMore": "Alles over het terrein",
+    "plotsEyebrow": "60 plekken",
+    "plotsTitle": "Een plekje dat bij jullie past",
+    "plotsText": "Tent, caravan, camper of safaritent. Op de plattegrond zie je waar alles ligt, van het kippenhok tot het zwembad.",
+    "plotsCta": "Bekijk de plattegrond",
+    "eventsEyebrow": "Evenementen",
+    "eventsTitle": "Binnenkort op het erf",
+    "eventsAll": "Hele agenda",
+    "eventsFromSeason": "De camping is dicht tot 1 april. Dit staat er klaar voor de eerste dagen.",
+    "findTitle": "Zo vind je ons",
+    "findSeason": "Seizoen: 1 april t/m 31 oktober",
+    "findReception": "Receptie open"
+  },
+  "activities": {
+    "metaTitle": "Terrein & activiteiten",
+    "metaDescription": "Kippen voeren, spelen op de tractor, zwemmen in het buitenzwembad en koffie in de oude melkstal. Alles op loopafstand van je plek.",
+    "eyebrow": "Terrein & activiteiten",
+    "title": "Wat kun je hier doen?",
+    "lead": "Eieren rapen, op de tractor klimmen, afkoelen in het zwembad of gewoon niks. Alles ligt op loopafstand van je plek.",
+    "onThisPage": "Op deze pagina",
+    "chickenQuote": "“Ik ben hier de baas. Bert denkt van niet.”",
+    "when": "Wanneer:",
+    "open": "Open:",
+    "access": "Toegankelijk:",
+    "accessTitle": "Rolstoel of kinderwagen?",
+    "accessText": "Bij elke voorziening staat hoe toegankelijk hij is. Bert controleert alles ter plekke.",
+    "accessCta": "Lees over toegankelijkheid",
+    "ctaTitle": "Zin gekregen?",
+    "ctaText": "Kies zelf je plek, vlak bij wat jij het leukst vindt."
+  },
+  "siteMap": {
+    "metaTitle": "Plattegrond",
+    "metaDescription": "Bekijk waar de plekken, het zwembad, de speelweide, de kippen en het sanitair liggen op De Groene Weide.",
+    "eyebrow": "Plattegrond",
+    "title": "Loop alvast over het erf",
+    "lead": "Zo ligt het terrein erbij. Verdwalen kan niet, de kippen wijzen de weg.",
+    "cta": "Kies je data en reserveer",
+    "mapLabel": "Kaart van het terrein. Links Weide A met plekken T1 tot T20, daaronder de speelweide met tractor en Weide B met plekken T21 tot T40. In het midden de kippen, de oude melkstal met de kantine, het sanitair en de receptie met het winkeltje bij de ingang. Rechts de camperplaatsen C1 tot C12, het buitenzwembad en de safaritenten S1 tot S8.",
+    "draftNote": "Voorlopige tekening. De echte kaart volgt na de rondgang met Bert, en dan klik je hier op elke plek.",
+    "entrance": "Ingang",
+    "facilitiesTitle": "Voorzieningen",
+    "where": "Waar:",
+    "plotsTitle": "Plekken",
+    "plotsText": "Er zijn 60 genummerde plekken. Welke plek vrij is, zie je bij het reserveren.",
+    "plotsRange": "{prefix}1 – {prefix}{count}",
+    "plotCount": "{count} plekken",
+    "zoneA": "Weide A · T1–T20",
+    "zoneB": "Weide B · T21–T40",
+    "zoneC": "Camperplaatsen C1–C12",
+    "zoneS": "Safaritenten S1–S8"
+  },
+  "book": {
+    "metaTitle": "Reserveren",
+    "metaDescription": "Prijzen, seizoen en zo reserveer je een plek op De Groene Weide: tent, caravan, camper of safaritent.",
+    "eyebrow": "Reserveren",
+    "title": "Boek je plekje in de wei",
+    "lead": "Binnenkort kies je hier zelf je plek op de kaart. Tot die tijd reserveer je makkelijk per telefoon of e-mail.",
+    "joke": "Hoor je gekakel op de achtergrond? Dan heb je het goede nummer.",
+    "howTitle": "Zo reserveer je",
+    "howText": "Bel of mail ons. Geef je data door, met hoeveel je komt en wat voor plek je zoekt. Bert bevestigt je plek zo snel mogelijk.",
+    "call": "Bel ons",
+    "mail": "Mail ons",
+    "orForm": "Of stuur een bericht via het contactformulier.",
+    "needTitle": "Dit vragen we je",
+    "need": [
+      "Je naam, e-mailadres en telefoonnummer",
+      "Je aankomst- en vertrekdatum",
+      "Met hoeveel personen je komt",
+      "Tent, caravan, camper of safaritent",
+      "Eventuele wensen, zoals stroom of een vlakke plek"
+    ],
+    "seasonTitle": "Seizoen en tijden",
+    "seasonOpen": "Open",
+    "arrival": "Aankomst",
+    "departure": "Vertrek",
+    "arrivalFrom": "vanaf {time}",
+    "departureUntil": "tot {time}",
+    "pricesTitle": "Prijzen per nacht",
+    "plotType": "Soort plek",
+    "plots": "Plekken",
+    "maxPersons": "Max. personen",
+    "price": "Prijs per nacht",
+    "extrasTitle": "Bijkomende kosten",
+    "rulesTitle": "Goed om te weten",
+    "rulesText": "Op het erf gelden een paar huisregels, zodat iedereen goed slaapt. De kippen ook.",
+    "rulesCta": "Lees de huisregels"
+  },
+  "events": {
+    "metaTitle": "Evenementen",
+    "metaDescription": "De agenda van De Groene Weide: kippen voeren, tractor-toer, zwemmen, pannenkoeken en kampvuur. Per dag en per week.",
+    "eyebrow": "Evenementen",
+    "title": "Wat is er te doen op het erf?",
+    "lead": "Meedoen is gratis, tenzij het er anders bij staat. De haan begint om zes uur, wij iets later.",
+    "toolbar": "Agenda instellen",
+    "week": "Week",
+    "day": "Dag",
+    "viewLabel": "Weergave",
+    "prevWeek": "Vorige week",
+    "nextWeek": "Volgende week",
+    "prevDay": "Vorige dag",
+    "nextDay": "Volgende dag",
+    "weekOf": "Week van {date}",
+    "ageLabel": "Leeftijd",
+    "age": {
+      "all": "Iedereen",
+      "toddlers": "0–4 jaar",
+      "kids": "4–12 jaar",
+      "adults": "Volwassenen"
+    },
+    "ageText": {
+      "all": "alle leeftijden",
+      "toddlers": "0–4 jaar",
+      "kids": "4–12 jaar",
+      "adults": "volwassenen"
+    },
+    "kind": {
+      "animals": "Dieren",
+      "play": "Spelen & tractor",
+      "pool": "Zwembad",
+      "food": "Melkstal & eten"
+    },
+    "legend": "Legenda",
+    "today": "Vandaag",
+    "tomorrow": "Morgen",
+    "closed": "Dicht",
+    "closedDay": "De camping is deze dag dicht. Het seizoen loopt van 1 april tot en met 31 oktober.",
+    "closedWeek": "De camping is deze week dicht. Het seizoen loopt van 1 april tot en met 31 oktober.",
+    "nothing": "Geen activiteiten",
+    "nothingForAge": "Geen activiteiten voor deze leeftijd.",
+    "toFirstWeek": "Naar de eerste week van het seizoen",
+    "everyDay": "Elke dag",
+    "everyWeekday": "Elke {weekday}",
+    "sampleNote": "Voorbeeldagenda. Bert en het animatieteam zetten de echte activiteiten er binnenkort in."
+  },
+  "about": {
+    "metaTitle": "Over ons",
+    "metaDescription": "Het verhaal van Bert, van melkveehouder tot campingboer, en het team van De Groene Weide.",
+    "eyebrow": "Over ons",
+    "title": "Van melkveehouder tot campingboer",
+    "lead": "Bert molk [aantal] jaar lang koeien op deze boerderij. Nu melkt hij vooral de zon. De koeien zijn weg, de kippen en de tractor gebleven, en het erf is van jullie.",
+    "photo": "Foto van Bert op het erf bij de oude melkstal",
+    "storyTitle": "Het verhaal van de boerderij",
+    "valuesTitle": "Waar we voor staan",
+    "values": [
+      {
+        "title": "Echt boerenleven",
+        "text": "Geen pretpark. Wel kippen, modder, een tractor en de geur van hooi."
+      },
+      {
+        "title": "Rust voor iedereen",
+        "text": "Ruime plekken, stille avonden en een website met een Rustknop."
+      },
+      {
+        "title": "Welkom zoals je bent",
+        "text": "Met rolstoel, kinderwagen of een hond. We zeggen eerlijk wat wel en niet kan."
+      }
+    ],
+    "teamTitle": "Het team",
+    "ctaTitle": "Kom het zelf beleven",
+    "ctaText": "Kies je plek in de wei, of stel eerst een vraag.",
+    "ctaQuestion": "Stel een vraag"
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Bel, mail of stuur een bericht naar De Groene Weide. Met adres, route en de openingstijden van de receptie.",
+    "eyebrow": "Contact",
+    "title": "Vraag het gerust",
+    "lead": "Bert leest elk bericht. Meestal antwoordt hij binnen een dag, tenzij er net een kalfje… nee, die hebben we niet meer.",
+    "directTitle": "Direct contact",
+    "phone": "Telefoon",
+    "email": "E-mail",
+    "address": "Adres",
+    "receptionTitle": "Receptie open",
+    "weekdays": "Ma – vr",
+    "weekend": "Za – zo",
+    "arrival": "Aankomst",
+    "arrivalFrom": "vanaf {time}",
+    "season": "Seizoen: 1 april t/m 31 oktober",
+    "routeTitle": "Route",
+    "routeText": "De camping ligt op de boerderij. Volg de bordjes met de kip.",
+    "faqText": "Misschien staat je antwoord al bij de veelgestelde vragen: honden, aankomsttijden, stroom en meer.",
+    "faqCta": "Bekijk de vragen",
+    "form": {
+      "title": "Stuur een bericht",
+      "name": "Naam",
+      "email": "E-mailadres",
+      "emailHint": "Hier sturen we het antwoord naartoe.",
+      "subject": "Waar gaat het over?",
+      "optional": "(mag leeg)",
+      "message": "Je bericht",
+      "messageHint": "Gaat het over een reservering? Zet dan je data en het soort plek erbij.",
+      "website": "Laat dit veld leeg",
+      "privacy": "We gebruiken je gegevens alleen om je vraag te beantwoorden. Geen nieuwsbrief, geen gedoe.",
+      "privacyLink": "Privacyverklaring",
+      "submit": "Verstuur je bericht",
+      "sending": "Bezig met versturen…",
+      "spamNote": "Spambescherming zonder cookies of puzzels.",
+      "sentTitle": "Verstuurd!",
+      "sentText": "Bedankt voor je bericht. Bert antwoordt zo snel mogelijk.",
+      "errorSummary": "Er ging iets mis. Kijk de velden hieronder na.",
+      "errors": {
+        "nameRequired": "Vul je naam in.",
+        "nameTooLong": "Je naam is te lang. Gebruik maximaal 100 tekens.",
+        "emailRequired": "Vul je e-mailadres in.",
+        "emailInvalid": "Dit lijkt geen e-mailadres. Bijvoorbeeld: naam@voorbeeld.nl",
+        "subjectTooLong": "Het onderwerp is te lang. Gebruik maximaal 150 tekens.",
+        "messageRequired": "Schrijf je bericht.",
+        "messageTooShort": "Je bericht is wel erg kort. Schrijf minstens 10 tekens.",
+        "messageTooLong": "Je bericht is te lang. Gebruik maximaal 5000 tekens.",
+        "rateLimited": "Je hebt net al een paar berichten gestuurd. Probeer het over een kwartier nog eens, of bel ons.",
+        "sendFailed": "Versturen lukte niet. Probeer het later nog eens, of bel of mail ons."
+      }
+    }
+  },
+  "infoPages": {
+    "navLabel": "Informatie"
+  },
+  "accessibility": {
+    "metaTitle": "Toegankelijkheid",
+    "metaDescription": "Wat wel en niet kan met een rolstoel, kinderwagen of beperking op De Groene Weide, en hoe deze website toegankelijk is.",
+    "eyebrow": "Informatie",
+    "title": "Toegankelijkheid",
+    "lead": "Iedereen moet het erf kunnen beleven. Hier lees je eerlijk wat wel en niet kan, op de site en op het terrein.",
+    "siteTitle": "Op deze website",
+    "site": [
+      "Alles werkt met het toetsenbord. Met Tab spring je naar de volgende knop of link.",
+      "De Rustknop bovenaan zet beweging en geluid uit. Staat op je apparaat 'minder beweging' aan, dan doen we dat vanzelf.",
+      "De plattegrond krijgt altijd een lijst als alternatief. Elke plek heeft een naam voor schermlezers.",
+      "Kleuren op de kaart hebben ook een patroon of teken, zodat je ze ook zonder kleur herkent.",
+      "We volgen de richtlijn WCAG 2.2, niveau AA."
+    ],
+    "terrainTitle": "Op het terrein",
+    "facility": "Voorziening",
+    "wheelchair": "Rolstoel",
+    "stroller": "Kinderwagen",
+    "notes": "Toelichting",
+    "yes": "ja",
+    "partly": "deels",
+    "unchecked": "niet gecontroleerd",
+    "terrainRows": [
+      { "facility": "Sanitair", "wheelchair": "yes", "stroller": "yes", "notes": "Aangepaste douche en toilet" },
+      { "facility": "Kantine", "wheelchair": "yes", "stroller": "yes", "notes": "Hellingbaan bij de ingang" },
+      { "facility": "Zwembad", "wheelchair": "unchecked", "stroller": "yes", "notes": "[Bert controleert ter plekke]" },
+      { "facility": "Speelweide", "wheelchair": "partly", "stroller": "yes", "notes": "Gras, deels hobbelig" },
+      { "facility": "Winkeltje", "wheelchair": "yes", "stroller": "yes", "notes": "Drempelvrij" }
+    ],
+    "plotsNote": "Bij het reserveren zie je per plek of hij vlak en rolstoeltoegankelijk is. We noemen een plek alleen toegankelijk als Bert hem zelf heeft gecontroleerd. Laatst gecontroleerd: [datum].",
+    "faqTitle": "Vragen over toegankelijkheid",
+    "faq": [
+      {
+        "q": "Kan ik een plek reserveren dicht bij het aangepaste sanitair?",
+        "a": "Ja. Zeg het als je belt of mailt, dan zoekt Bert een vlakke plek dichtbij."
+      },
+      { "q": "Mag mijn hulphond mee?", "a": "[Antwoord van Bert]" },
+      { "q": "Is er een rustige plek voor prikkelgevoelige gasten?", "a": "[Antwoord van Bert]" }
+    ],
+    "reportText": "Werkt iets niet voor jou? Laat het ons weten, dan lossen we het op.",
+    "reportCta": "Meld het ons"
+  },
+  "houseRules": {
+    "metaTitle": "Huisregels & FAQ",
+    "metaDescription": "De huisregels van De Groene Weide en antwoorden op veelgestelde vragen over honden, aankomst, stroom en meer.",
+    "eyebrow": "Informatie",
+    "title": "Huisregels & veelgestelde vragen",
+    "lead": "Een paar afspraken, zodat iedereen goed slaapt. De kippen gaan om acht uur op stok, jij mag langer op.",
+    "rulesTitle": "Huisregels",
+    "rules": [
+      "Stilte op het terrein van [tijd] tot [tijd].",
+      "Rij stapvoets over het erf. Kippen en kinderen hebben voorrang.",
+      "Honden zijn [welkom/niet welkom], aangelijnd en uit de buurt van de kippen.",
+      "Laat de hekken van de wei dicht. Wat binnen is, wil binnen blijven.",
+      "Kinderen onder de [leeftijd] zwemmen alleen met een volwassene.",
+      "Afval scheiden kan bij de [plek]. Glas, plastic en de rest."
+    ],
+    "rulesNote": "De precieze regels en tijden volgen van Bert.",
+    "faqTitle": "Veelgestelde vragen",
+    "faq": [
+      {
+        "q": "Wanneer is de camping open?",
+        "a": "Van 1 april tot en met 31 oktober. In de winter rusten de wei en Bert."
+      },
+      {
+        "q": "Hoe laat kan ik aankomen en moet ik vertrekken?",
+        "a": "Aankomst vanaf [tijd], vertrek tot [tijd]. Later aankomen? Bel even, dan zetten we het hek open."
+      },
+      { "q": "Zijn honden welkom?", "a": "[Antwoord van Bert]" },
+      {
+        "q": "Heeft elke plek stroom?",
+        "a": "Niet elke plek. De camperplaatsen hebben allemaal stroom; bij tenten en caravans verschilt het per plek. Vraag het als je reserveert."
+      },
+      { "q": "Kan ik mijn reservering wijzigen of annuleren?", "a": "[Voorwaarden van Bert]" },
+      {
+        "q": "Mogen de kinderen helpen op de boerderij?",
+        "a": "Graag zelfs. Elke ochtend mogen ze mee de kippen voeren. Kijk in de agenda voor de rest."
+      }
+    ],
+    "moreText": "Staat je vraag er niet bij?",
+    "moreCta": "Stel je vraag"
+  },
+  "privacy": {
+    "metaTitle": "Privacy & cookies",
+    "metaDescription": "Welke gegevens De Groene Weide gebruikt, waarom, hoe lang we ze bewaren en welke cookies de site gebruikt.",
+    "eyebrow": "Informatie",
+    "title": "Privacy & cookies",
+    "lead": "We vragen alleen wat we echt nodig hebben, en we verkopen niks door. Zelfs geen eieren van de buren.",
+    "updated": "Laatst bijgewerkt: [datum]",
+    "sections": [
+      {
+        "title": "Wie zijn wij?",
+        "paragraphs": [
+          "De Groene Weide is de camping op de boerderij van Bert, [adres]. Vragen over je gegevens stel je via de contactpagina of per e-mail aan [e-mailadres]."
+        ]
+      },
+      {
+        "title": "Welke gegevens gebruiken we?",
+        "paragraphs": [
+          "Stuur je een bericht via het contactformulier, dan gebruiken we je naam, je e-mailadres en je bericht om je vraag te beantwoorden. Meer niet.",
+          "Reserveer je, dan vragen we je naam, e-mailadres, telefoonnummer, het aantal personen, het soort verblijf en eventuele opmerkingen. Betaalgegevens bewaren we nooit op deze website.",
+          "We vragen en bewaren geen gegevens over kinderen."
+        ]
+      },
+      {
+        "title": "Hoe lang bewaren we ze?",
+        "paragraphs": [
+          "Berichten bewaren we [termijn]. Reserveringen bewaren we zolang de wet dat vraagt voor de boekhouding: [termijn]."
+        ]
+      },
+      {
+        "title": "Waar staan je gegevens?",
+        "paragraphs": [
+          "De website en alle gegevens staan op een server in de Europese Unie. E-mail versturen we via een Europese maildienst."
+        ]
+      },
+      {
+        "title": "Cookies en wat er in je browser staat",
+        "paragraphs": [
+          "We gebruiken geen trackingcookies. In je browser bewaren we alleen je cookiekeuze en de stand van de Rustknop. Die zijn nodig om de site te laten werken en blijven op je eigen apparaat.",
+          "Extra's van andere websites, zoals Facebook-berichten, staan uit tot jij ze aanzet. Je kunt je keuze altijd wijzigen via Cookie-instellingen onderaan elke pagina.",
+          "Bezoekersstatistieken meten we nu niet. Gaan we dat doen, dan zonder cookies en zonder dat we je kunnen herkennen."
+        ]
+      },
+      {
+        "title": "Jouw rechten",
+        "paragraphs": [
+          "Je mag altijd vragen welke gegevens we van je hebben, en vragen om ze te verbeteren of te verwijderen. Stuur ons een bericht, dan regelen we het binnen een maand.",
+          "Ben je het niet eens met hoe we met je gegevens omgaan? Dan kun je een klacht indienen bij de Autoriteit Persoonsgegevens."
+        ]
+      }
+    ]
+  },
+  "notFound": {
+    "metaTitle": "Pagina niet gevonden",
+    "eyebrow": "Foutje 404",
+    "title": "Deze koe is ontsnapt.",
+    "text": "De pagina die je zoekt staat niet meer in de wei. Misschien is hij verhuisd, of heeft iemand het hek open laten staan.",
+    "home": "Terug naar het erf",
+    "map": "Bekijk de plattegrond"
+  },
+  "error": {
+    "eyebrow": "Foutje",
+    "title": "De tractor wil even niet starten.",
+    "text": "Er ging iets mis aan onze kant. Probeer het zo nog eens. Lukt het dan nog niet, bel of mail ons gerust.",
+    "retry": "Probeer het opnieuw",
+    "home": "Terug naar het erf"
+  }
+}

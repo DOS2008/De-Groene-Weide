@@ -1,0 +1,8 @@
+.notice {
+  padding: 0.625rem var(--gutter);
+  background: var(--color-eigeel);
+  color: var(--color-inkt);
+  text-align: center;
+  font-size: var(--font-size-small);
+  font-weight: 700;
+}

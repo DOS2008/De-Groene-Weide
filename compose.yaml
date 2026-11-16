@@ -31,8 +31,13 @@ services:
       # The browser talks to Supabase through the published port.
       NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_PUBLIC_URL}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
+      SITE_URL: ${SITE_URL}
+      # All mail goes to Mailpit (http://localhost:8025), whatever the address.
       SMTP_HOST: mailpit
       SMTP_PORT: "1025"
+      SMTP_ADMIN_EMAIL: ${SMTP_ADMIN_EMAIL}
+      SMTP_SENDER_NAME: ${SMTP_SENDER_NAME}
+      CONTACT_EMAIL: ${CONTACT_EMAIL:-bert@degroeneweide.example}
     develop:
       watch:
         - action: sync

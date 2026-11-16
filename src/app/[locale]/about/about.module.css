@@ -1,0 +1,79 @@
+.top {
+  background: var(--color-gras-licht);
+}
+
+.topInner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-block: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.photo {
+  display: flex;
+  flex: 0 1 24rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 15rem;
+  border-radius: var(--radius-xl);
+  background: var(--color-stro);
+}
+
+.h2 {
+  margin-bottom: 1.5rem;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.milestone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.year {
+  align-self: flex-start;
+  padding: 0.125rem 0.625rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-gras-licht);
+  color: var(--color-schuurbruin);
+  font-weight: 700;
+}
+
+.plain {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.value,
+.member {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.memberPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-stro);
+}
+
+.cta {
+  margin-bottom: var(--section-space);
+}

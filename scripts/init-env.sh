@@ -33,6 +33,10 @@ sed -i.bak \
     .env
 rm -f .env.bak
 
+# Our own secrets.
+sed -i.bak     -e "s|^JOBS_SECRET=.*|JOBS_SECRET=$(openssl rand -hex 32)|"     -e "s|^MANAGE_LINK_SECRET=.*|MANAGE_LINK_SECRET=$(openssl rand -hex 32)|"     .env
+rm -f .env.bak
+
 # Fresh secrets and API keys (official Supabase script).
 sh infra/supabase/utils/generate-keys.sh --update-env > /dev/null
 rm -f .env.old

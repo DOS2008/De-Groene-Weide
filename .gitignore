@@ -45,3 +45,6 @@ next-env.d.ts
 # Playwright
 /test-results/
 /playwright-report/
+
+# backups (scripts/db/backup.sh)
+/backups/

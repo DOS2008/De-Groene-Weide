@@ -23,7 +23,15 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   projects: [
-    { name: "desktop", use: { ...devices["Desktop Chrome"] }, grepInvert: /@phone/ },
-    { name: "phone", use: { ...devices["Pixel 7"] }, grep: /@phone/ },
+    { name: "desktop", use: { ...devices["Desktop Chrome"] }, grepInvert: /@phone/, testIgnore: /settings-.*\.spec\.ts/ },
+    { name: "phone", use: { ...devices["Pixel 7"] }, grep: /@phone/, testIgnore: /settings-.*\.spec\.ts/ },
+    // Tests that change a site-wide setting (e.g. booking level 2) run
+    // last and alone, so they never disturb the other tests.
+    {
+      name: "settings",
+      use: { ...devices["Desktop Chrome"] },
+      testMatch: /settings-.*\.spec\.ts/,
+      dependencies: ["desktop", "phone"],
+    },
   ],
 });

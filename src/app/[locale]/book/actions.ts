@@ -11,7 +11,7 @@ import { deliver, guestMail, noticeMail, type MailBooking } from "@/lib/email/bo
 import { createRateLimit } from "@/lib/rate-limit";
 import { publicDb } from "@/lib/supabase/public";
 import { serviceDb } from "@/lib/supabase/service";
-import { manageLinkParagraph } from "@/lib/email/manage-link";
+import { manageLinkFor } from "@/lib/email/manage-link";
 
 /*
  * Guest side of booking. The visitor is anonymous: an essential, httpOnly
@@ -254,7 +254,7 @@ export async function submitBooking(input: BookingInput): Promise<SubmitResult> 
     priceTotal: price,
     status: result.status,
   };
-  const manage = await manageLinkParagraph(result.manage_token, locale);
+  const manage = await manageLinkFor(result.id!, locale);
   await Promise.all([deliver(await guestMail(result.status, booking, manage)), deliver(await noticeMail(booking))]);
 
   return { status: result.status, code: result.code!, email: booking.email! };

@@ -67,7 +67,24 @@ The server stack is [compose.prod.yaml](compose.prod.yaml): the production websi
    docker compose -f compose.prod.yaml up -d --build
    ```
 
-5. To update, run `git pull` and then the same command.
+5. Create Bert's account (prints a one-time password; 2FA is set up on the first login):
+
+   ```sh
+   docker compose -f compose.prod.yaml run --rm --no-deps \
+     -v ./scripts/create-staff.ts:/app/create-staff.ts:ro \
+     web node create-staff.ts bert@example.nl "Bert" admin
+   ```
+
+   Invite everyone else from *Gebruikers & rollen*. Add a second admin, so Bert's 2FA can be reset if he loses his phone.
+
+6. To update, run `git pull` and then the same command.
+
+The stack also starts:
+
+- `cron`, which calls `/api/jobs` every 15 minutes with `JOBS_SECRET` (mail retries, reminders, farewell mails);
+- `backup`, which writes a nightly database dump and a copy of the photos to `./backups` (14 kept). Copy that folder off the server. The restore test is `docker compose -f compose.prod.yaml run --rm backup sh /scripts/restore-check.sh`.
+
+The handover checklist (accounts, recurring tasks, emergency plan) is [docs/handover.md](docs/handover.md); the one-page manual for Bert is [docs/manual.md](docs/manual.md).
 
 Only ports 80 and 443 are open to the outside. To reach the Studio dashboard, use `https://<API_DOMAIN>` with the dashboard login, or an SSH tunnel to port 8000.
 

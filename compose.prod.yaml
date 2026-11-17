@@ -58,6 +58,9 @@ services:
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
       SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
       SITE_URL: ${SITE_URL}
+      JOBS_SECRET: ${JOBS_SECRET}
+      MANAGE_LINK_SECRET: ${MANAGE_LINK_SECRET}
+      FACEBOOK_PAGE_TOKEN: ${FACEBOOK_PAGE_TOKEN:-}
       SMTP_HOST: ${SMTP_HOST}
       SMTP_PORT: ${SMTP_PORT}
       SMTP_USER: ${SMTP_USER}
@@ -65,6 +68,46 @@ services:
       SMTP_ADMIN_EMAIL: ${SMTP_ADMIN_EMAIL}
       SMTP_SENDER_NAME: ${SMTP_SENDER_NAME}
       CONTACT_EMAIL: ${CONTACT_EMAIL:-}
+
+  # Calls the website's jobs endpoint every 15 minutes: mail retries,
+  # reminders and farewell mails. Each job is safe to run twice.
+  cron:
+    image: curlimages/curl:8.11.1
+    restart: unless-stopped
+    entrypoint: ["sh", "-c"]
+    command:
+      - >-
+        sleep 60; while true; do
+        curl -fsS -X POST -H "Authorization: Bearer $$JOBS_SECRET" http://web:3000/api/jobs || true;
+        echo; sleep 900; done
+    environment:
+      JOBS_SECRET: ${JOBS_SECRET}
+    depends_on:
+      - web
+
+  # Nightly database dump plus the uploaded photos, 14 days kept in
+  # ./backups. Copy that folder off the server as well (docs/handover.md).
+  backup:
+    image: supabase/postgres:17.6.1.136
+    restart: unless-stopped
+    entrypoint: ["sh", "-c"]
+    command:
+      - >-
+        while true; do sh /scripts/backup.sh || echo "backup failed";
+        sleep 86400; done
+    environment:
+      PGHOST: db
+      PGPORT: ${POSTGRES_PORT}
+      PGDATABASE: ${POSTGRES_DB}
+      PGUSER: postgres
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./scripts/db:/scripts:ro
+      - ./backups:/backups
+      - ./infra/supabase/volumes/storage:/storage:ro
+    depends_on:
+      db:
+        condition: service_healthy
 
   caddy:
     image: caddy:2.11-alpine

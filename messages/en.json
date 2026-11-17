@@ -400,7 +400,7 @@
       {
         "title": "How long do we keep it?",
         "paragraphs": [
-          "We keep messages for [period]. We keep bookings for as long as the law requires for our accounts: [period]."
+          "We keep messages and the contact details of a booking for [period] after your stay or your message. After that, the system automatically removes your name, email address, phone number and remarks. What remains (which pitch, which nights) no longer says anything about you."
         ]
       },
       {
@@ -590,7 +590,15 @@
   "booking": {
     "stepOf": "Book · step {step} of 7",
     "stepsLabel": "Steps",
-    "steps": ["Dates", "Guests & stay", "Pitch match", "Choose a pitch", "Details", "Check", "Confirmation"],
+    "steps": [
+      "Dates",
+      "Guests & stay",
+      "Pitch match",
+      "Choose a pitch",
+      "Details",
+      "Check",
+      "Confirmation"
+    ],
     "stepDone": "done",
     "stepCurrent": "current step",
     "titles": [
@@ -703,7 +711,7 @@
     "doneNext": "What now?",
     "doneSteps": [
       "Keep your booking number.",
-      "Want to change or cancel something? Get in touch with us.",
+      "Want to cancel? Use the link in your email. Need to change something? Get in touch with us.",
       "Arrive within the arrival times. The chickens will be waiting."
     ],
     "doneHome": "Back to home",
@@ -724,5 +732,39 @@
       "adults_required": "At least one adult must come along."
     },
     "phoneAlternativeLink": "Go to the contact page"
+  },
+  "manage": {
+    "metaTitle": "My booking",
+    "eyebrow": "My booking",
+    "title": "Your booking {code}",
+    "intro": "Here is your booking. Want to change something? Call or email Bert and he'll sort it out.",
+    "joke": "The rooster has already rehearsed your wake-up call.",
+    "notFoundTitle": "This link doesn't work (any more)",
+    "notFoundText": "Maybe your stay is long over, or part of the link went missing. Get in touch and we'll work it out together.",
+    "statusLabel": "Status",
+    "status": {
+      "requested": "Request: Bert will confirm as soon as he can",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled"
+    },
+    "plot": "Pitch",
+    "arrival": "Arrival",
+    "departure": "Departure",
+    "persons": "People",
+    "personsValue": "{adults, plural, one {# adult} other {# adults}}{children, plural, =0 {} one {, # child} other {, # children}}{dogs, plural, =0 {} one {, # dog} other {, # dogs}}",
+    "price": "Price",
+    "priceUnknown": "Bert will let you know",
+    "cancelTitle": "Cancel",
+    "cancelUntil": "You can cancel free of charge up to and including {date}.",
+    "cancelTooLate": "Online cancellation is no longer possible: it was open until {date}. Call or email Bert and we'll see what we can do.",
+    "cancelOffline": "To cancel, please contact Bert by phone or email.",
+    "cancelCheck": "I'm sure: the pitch becomes available to other guests straight away.",
+    "cancelButton": "Cancel my booking",
+    "cancelBusy": "Working…",
+    "cancelled": "Your booking has been cancelled. We've sent you a confirmation by email. What a shame! We hope to see you another time.",
+    "cancelError": "That didn't work. Please try again or get in touch.",
+    "cancelNeedsCheck": "Please tick the box first to confirm you're sure.",
+    "contact": "Get in touch",
+    "home": "To the homepage"
   }
 }

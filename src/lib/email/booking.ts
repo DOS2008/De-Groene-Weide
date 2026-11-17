@@ -5,6 +5,7 @@ import { formatDate } from "@/lib/dates";
 import { nightCount } from "@/lib/booking-rules";
 import { contactRecipient, sendMail, type Mail } from "@/lib/mail";
 import { siteUrl } from "@/lib/seo";
+import { serviceDb } from "@/lib/supabase/service";
 
 /**
  * Booking emails (F4.5). Each one is written in the booking's own language
@@ -115,14 +116,29 @@ export async function noticeMail(b: MailBooking): Promise<Mail> {
   };
 }
 
-/** Sends, and logs instead of throwing: a booking never fails on email. */
+/**
+ * Sends, and never throws: a booking never fails on email. A mail that
+ * can't go out now waits in mail_outbox; the jobs endpoint retries it.
+ */
 export async function deliver(mail: Mail | null): Promise<boolean> {
   if (!mail) return true;
   try {
     await sendMail(mail);
     return true;
   } catch (e) {
-    console.error("mail failed:", mail.subject, e);
+    const reason = e instanceof Error ? e.message : String(e);
+    console.error("mail failed, queued for a retry:", mail.subject, reason);
+    const { error } = await serviceDb()
+      .from("mail_outbox")
+      .insert({
+        to_address: mail.to,
+        reply_to: mail.replyTo ?? null,
+        subject: mail.subject,
+        body_text: mail.text,
+        body_html: mail.html ?? null,
+        last_error: reason.slice(0, 500),
+      });
+    if (error) console.error("mail_outbox:", error.message);
     return false;
   }
 }

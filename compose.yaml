@@ -58,6 +58,9 @@ services:
       # Server only: used for jobs (reminders, retention) and staff invites.
       SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
       SITE_URL: ${SITE_URL}
+      JOBS_SECRET: ${JOBS_SECRET}
+      MANAGE_LINK_SECRET: ${MANAGE_LINK_SECRET}
+      FACEBOOK_PAGE_TOKEN: ${FACEBOOK_PAGE_TOKEN:-}
       # All mail goes to Mailpit (http://localhost:8025), whatever the address.
       SMTP_HOST: mailpit
       SMTP_PORT: "1025"
@@ -83,6 +86,22 @@ services:
         - action: sync+restart
           path: next.config.ts
           target: /app/next.config.ts
+
+  # Calls the website's jobs endpoint every 15 minutes: mail retries,
+  # reminders and farewell mails. Each job is safe to run twice.
+  cron:
+    image: curlimages/curl:8.11.1
+    restart: unless-stopped
+    entrypoint: ["sh", "-c"]
+    command:
+      - >-
+        sleep 60; while true; do
+        curl -fsS -X POST -H "Authorization: Bearer $$JOBS_SECRET" http://web:3000/api/jobs || true;
+        echo; sleep 900; done
+    environment:
+      JOBS_SECRET: ${JOBS_SECRET}
+    depends_on:
+      - web
 
   # End-to-end tests (Playwright + axe) against the running stack:
   #   docker compose --profile test run --rm e2e

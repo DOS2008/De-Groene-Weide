@@ -174,6 +174,14 @@ test("no serious accessibility issues on the admin screens", async ({ page }) =>
       await page.waitForLoadState("networkidle");
       for (const p of await axe(page)) problems.push(`${path} → ${p}`);
     }
+    // Reflow (WCAG 1.4.10): the panel works on a phone, tables scroll in their own box.
+    await page.setViewportSize({ width: 320, height: 640 });
+    for (const path of adminPages) {
+      await page.goto(path);
+      await page.waitForLoadState("networkidle");
+      const [scroll, client] = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
+      if (scroll > client) problems.push(`${path} → ${scroll}px wide at 320px`);
+    }
     expect(problems).toEqual([]);
   } finally {
     await removeStaff(staff);

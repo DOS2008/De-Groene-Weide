@@ -11,7 +11,7 @@ Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway t
 | 3 Booking level 1 + minimal admin | Built. All database and e2e tests pass | Yes (`73a9ef8`) |
 | 4 English and German | Built. Native-speaker check still to do | Yes (`73a9ef8`) |
 | 5 Admin panel for content | Built. All database, unit and e2e tests pass | Yes |
-| 6 Booking level 2 + launch hardening | Not started (the DB function already supports level 2) | – |
+| 6 Booking level 2 + launch hardening | Built. Manual checks with Bert and real users still to do | Yes |
 | 7 Shoulds | Not started | – |
 | 8 Coulds | Skipped on purpose: only when Bert asks for them | – |
 
@@ -93,14 +93,28 @@ Fixed on the way:
 
 Noted: after a save, another visitor can see the old page once while the cache refreshes (seconds). The editor sees the change straight away.
 
+## Prio 6 – Booking level 2 + launch hardening
+
+- **Level 1/2** is a setting (Instellingen → Reserveren). Level 2 confirms at once and mails the guest automatically; tested in the database and end to end.
+- **Manage link (F4.6):** `/mijn-reservering/<token>` (`/en/my-booking`, `/de/meine-buchung`), not indexed. Shows the booking and lets the guest cancel up to `cancel_free_days` before arrival (0 = only through Bert). The token is an HMAC of the booking id (`MANAGE_LINK_SECRET`), so Bert's confirmation, a change and the reminder can all include the same link; the database keeps only its sha256 (`manage_lookup`, `manage_cancel` in `0005_launch.sql`). Bert gets a mail when a guest cancels.
+- **Mail retries:** a failed mail goes to `mail_outbox`; `/api/jobs` retries it after 5 min, 15 min, 1 h, 4 h, 4 h, then gives up.
+- **Jobs:** the `cron` service (curl) calls `POST /api/jobs` every 15 minutes with `JOBS_SECRET`.
+- **Retention (AVG):** `apply_retention()` runs nightly in pg_cron. After `retention_months` it removes name, email, phone and remarks from bookings (the row stays for the figures, `anonymised_at`) and deletes old messages and mail. The privacy text says so (the period is still `[termijn]`).
+- **Security headers** in `next.config.ts`: CSP (own origin only; `'unsafe-inline'` scripts because nonces would make every page dynamic), HSTS in production, nosniff, frame-ancestors none, Referrer- and Permissions-Policy. No `X-Powered-By`.
+- **Backups:** the `backup` service in `compose.prod.yaml` dumps the database and the photos nightly (14 kept). `scripts/db/restore-check.sh` restores the newest dump into a scratch database and compares row counts; tested in development.
+- **Reflow:** a new e2e test loads every public page and every admin screen at 320 px. It found the events week navigation 23 px too wide (fixed).
+- **Handover:** [manual.md](manual.md) (one page for Bert, in Dutch) and [handover.md](handover.md) (accounts, backups, recurring tasks, emergency plan). `scripts/create-staff.ts` no longer needs packages, so it also runs in the production image.
+
+Not done, because it needs people: the NVDA/VoiceOver pass, user test round 2, the practice session with Bert, the spending limit with the host, and Bert's answers (cancellation conditions, retention period, level at launch).
+
 ## Tests and how far they are verified
 
 | Check | Command | Last result (17 November, late evening) |
 | --- | --- | --- |
-| Database rules: double booking, holds, dates, blocks, phone booking, roles, content roles, last admin, 3-way race | `docker compose run --rm --entrypoint sh migrate /scripts/test.sh` | **All pass** |
-| Unit tests (pricing, booking rules, geometry, messages, texts, CSV, earlier tests) | `docker compose exec web npm test` | **65/65 pass** |
+| Database rules: double booking, holds, dates, blocks, phone booking, roles, content roles, last admin, manage link, retention, level 2, 3-way race | `docker compose run --rm --entrypoint sh migrate /scripts/test.sh` | **All pass** |
+| Unit tests (pricing, booking rules, geometry, messages, texts, CSV, earlier tests) | `docker compose exec web npm test` | **67/67 pass** |
 | Types / lint | `npm run typecheck` · `npm run lint` (in `web`) | **Clean** |
-| End-to-end (Playwright + axe) | `docker compose --profile test run --rm e2e` | **25/25 pass**: booking on a phone, EN and DE booking with email, two-browser race, invalid dates, admin phone booking, no admin without 2FA, Plattegrond hand-over, axe on all 11 public pages at phone width, plus the Prio 5 test tasks (post an event, block a plot, change a price), the inbox and reply, a role refusal and axe on 17 admin screens |
+| End-to-end (Playwright + axe) | `docker compose --profile test run --rm e2e` | **27/27 pass**: booking on a phone, EN and DE booking with email, two-browser race, invalid dates, admin phone booking, no admin without 2FA, Plattegrond hand-over, axe on all 11 public pages at phone width, plus the Prio 5 test tasks (post an event, block a plot, change a price), the inbox and reply, a role refusal, axe and 320 px reflow on 17 admin screens and all public pages, and level 2 with cancelling through the manage link |
 
 Only the Playwright screenshots have been looked at. Nobody has clicked through the new screens in a real browser yet.
 

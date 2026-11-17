@@ -44,16 +44,28 @@ const slugs = {
   },
 } as const satisfies Record<string, Record<AnyLocale, string>>;
 
+/**
+ * Pages that are never in the sitemap or the menu, such as the guest's own
+ * booking behind the manage link from the email.
+ */
+const privateSlugs = {
+  "/my-booking/[token]": {
+    nl: "/mijn-reservering/[token]",
+    en: "/my-booking/[token]",
+    de: "/meine-buchung/[token]",
+  },
+} as const satisfies Record<string, Record<AnyLocale, string>>;
+
 export type RouteKey = keyof typeof slugs;
 export const routeKeys = Object.keys(slugs) as RouteKey[];
 
 function pathnamesFor<L extends AnyLocale>(locales: readonly L[]) {
   return Object.fromEntries(
-    Object.entries(slugs).map(([route, perLocale]) => [
+    Object.entries({ ...slugs, ...privateSlugs }).map(([route, perLocale]) => [
       route,
       Object.fromEntries(locales.map((l) => [l, perLocale[l]])),
     ]),
-  ) as { [K in RouteKey]: Record<L, string> };
+  ) as { [K in RouteKey | keyof typeof privateSlugs]: Record<L, string> };
 }
 
 export const routing = defineRouting({

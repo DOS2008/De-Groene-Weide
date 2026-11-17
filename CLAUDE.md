@@ -26,8 +26,11 @@ School project (HMW 2): **De Groene Weide Online**, a website plus admin panel f
 | Lint / type check | `docker compose exec web npm run lint` · `docker compose exec web npm run typecheck` |
 | Unit tests (Vitest) | `docker compose exec web npm test` |
 | Database tests (bookings, holds, roles, race) | `docker compose run --rm --entrypoint sh migrate /scripts/test.sh` |
-| End-to-end tests (Playwright + axe) | `docker compose --profile test run --rm e2e` (one file: append `e2e/booking.spec.ts`). Needs the stack running; installs its own packages in a volume |
-| First staff account | `docker compose exec web npm run create-staff -- <email> "<name>" <role>` |
+| End-to-end tests (Playwright + axe) | `docker compose --profile test run --rm e2e` (one file: append `e2e/booking.spec.ts`). Needs the stack running; installs its own packages in a volume. Tests that change a site-wide setting go in `e2e/settings-*.spec.ts`: they run last, alone |
+| First staff account | `docker compose exec web npm run create-staff -- <email> "<name>" <role>` (server: see README, "Deploying") |
+| Copy edits into the dev container | `node scripts/dev/check-sync.mjs --fix` (when Compose Watch doesn't sync) |
+| Background jobs by hand | `curl -X POST -H "Authorization: Bearer $JOBS_SECRET" http://localhost:3000/api/jobs` (the `cron` service does this every 15 min) |
+| Backup / restore test | `docker compose run --rm -v ./backups:/backups --entrypoint sh migrate /scripts/backup.sh` · same with `/scripts/restore-check.sh` (server: the `backup` service, see docs/handover.md) |
 | Apply migrations + seed | runs on every `docker compose up` (service `migrate`); by hand: `docker compose run --rm migrate` |
 | Map positions and distances | edit `src/content/map/terrain.svg`, then `npm run import-map` (writes `supabase/seed/03_map.sql`) |
 | Content seed from `src/content` | `npm run seed-content` (writes `supabase/seed/02_content.sql`) |

@@ -400,7 +400,7 @@
       {
         "title": "Hoe lang bewaren we ze?",
         "paragraphs": [
-          "Berichten bewaren we [termijn]. Reserveringen bewaren we zolang de wet dat vraagt voor de boekhouding: [termijn]."
+          "Berichten en de contactgegevens bij een reservering bewaren we [termijn] na je vertrek of je bericht. Daarna haalt het systeem je naam, e-mailadres, telefoonnummer en opmerkingen automatisch weg. Wat overblijft (welke plek, welke nachten) zegt niets meer over jou."
         ]
       },
       {
@@ -711,7 +711,7 @@
     "doneNext": "Wat nu?",
     "doneSteps": [
       "Bewaar je reserveringsnummer.",
-      "Wil je iets wijzigen of annuleren? Neem contact met ons op.",
+      "Wil je annuleren? Dat kan via de link in je mail. Iets wijzigen? Neem contact met ons op.",
       "Kom tussen de aankomsttijden. De kippen staan klaar."
     ],
     "doneHome": "Terug naar home",
@@ -732,5 +732,39 @@
       "adults_required": "Er moet minimaal één volwassene mee."
     },
     "phoneAlternativeLink": "Naar de contactpagina"
+  },
+  "manage": {
+    "metaTitle": "Mijn reservering",
+    "eyebrow": "Mijn reservering",
+    "title": "Je reservering {code}",
+    "intro": "Hier staat je reservering. Wil je iets veranderen? Bel of mail Bert, dat regelt hij.",
+    "joke": "De kippen houden je plekje alvast warm.",
+    "notFoundTitle": "Deze link werkt niet (meer)",
+    "notFoundText": "Misschien is je verblijf al lang voorbij, of is de link niet helemaal meegekomen. Neem contact op, dan zoeken we het samen uit.",
+    "statusLabel": "Status",
+    "status": {
+      "requested": "Aanvraag: Bert bevestigt zo snel mogelijk",
+      "confirmed": "Bevestigd",
+      "cancelled": "Geannuleerd"
+    },
+    "plot": "Plek",
+    "arrival": "Aankomst",
+    "departure": "Vertrek",
+    "persons": "Personen",
+    "personsValue": "{adults, plural, one {# volwassene} other {# volwassenen}}{children, plural, =0 {} one {, # kind} other {, # kinderen}}{dogs, plural, =0 {} one {, # hond} other {, # honden}}",
+    "price": "Prijs",
+    "priceUnknown": "Volgt van Bert",
+    "cancelTitle": "Annuleren",
+    "cancelUntil": "Gratis annuleren kan tot en met {date}.",
+    "cancelTooLate": "Online annuleren kan niet meer: dat kon tot en met {date}. Bel of mail Bert, dan kijken we samen wat kan.",
+    "cancelOffline": "Annuleren gaat via Bert. Bel of mail ons.",
+    "cancelCheck": "Ik weet het zeker: de plek komt dan meteen vrij voor andere gasten.",
+    "cancelButton": "Annuleer mijn reservering",
+    "cancelBusy": "Bezig…",
+    "cancelled": "Je reservering is geannuleerd. Je krijgt een bevestiging per mail. Jammer! Hopelijk tot een andere keer.",
+    "cancelError": "Dat lukte niet. Probeer het opnieuw of neem contact op.",
+    "cancelNeedsCheck": "Vink eerst aan dat je het zeker weet.",
+    "contact": "Contact opnemen",
+    "home": "Naar de homepage"
   }
 }

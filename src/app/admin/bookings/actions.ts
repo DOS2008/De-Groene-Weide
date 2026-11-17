@@ -9,6 +9,7 @@ import { staffDb } from "@/lib/supabase/staff";
 import { calculatePrice } from "@/lib/pricing";
 import { getPriceInfo } from "@/lib/data/booking";
 import { getPlots } from "@/lib/data/map";
+import { manageLinkFor } from "@/lib/email/manage-link";
 
 export type ActionState = { ok?: string; error?: string };
 
@@ -26,7 +27,9 @@ export async function confirmBooking(_: ActionState, form: FormData): Promise<Ac
     .maybeSingle<BookingRow>();
   if (error) return { error: dbErrorText(error.message) };
   if (!data) return { error: "Deze aanvraag is al afgehandeld, of dat mag jouw rol niet." };
-  const sent = await deliver(await guestMail("confirmed", toMailBooking(data, "confirmed")));
+  const sent = await deliver(
+    await guestMail("confirmed", toMailBooking(data, "confirmed"), data.email ? await manageLinkFor(data.id, data.locale) : []),
+  );
   revalidatePath("/admin", "layout");
   return { ok: `${data.code} is bevestigd.${data.email ? (sent ? " De gast kreeg een mail." : " De mail kon niet worden verstuurd.") : ""}` };
 }
@@ -134,7 +137,9 @@ export async function createBooking(input: NewBooking): Promise<ActionState & { 
     .select(BOOKING_COLUMNS)
     .single<BookingRow>();
   if (error) return { error: dbErrorText(error.message) };
-  if (input.sendMail && data.email) await deliver(await guestMail("confirmed", toMailBooking(data, "confirmed")));
+  if (input.sendMail && data.email) {
+    await deliver(await guestMail("confirmed", toMailBooking(data, "confirmed"), await manageLinkFor(data.id, data.locale)));
+  }
   revalidatePath("/admin", "layout");
   return { ok: `Geboekt: ${data.code}, plek ${data.plot_id}.`, code: data.code };
 }
@@ -233,7 +238,7 @@ export async function updateBooking(_: ActionState, form: FormData): Promise<Act
   if (error) return { error: dbErrorText(error.message) };
   if (!data) return { error: "Een geannuleerde reservering kun je niet meer wijzigen, of dat mag jouw rol niet." };
   if (form.get("notify") === "on" && data.email && data.status === "confirmed") {
-    await deliver(await guestMail("confirmed", toMailBooking(data, "confirmed")));
+    await deliver(await guestMail("confirmed", toMailBooking(data, "confirmed"), await manageLinkFor(data.id, data.locale)));
   }
   refreshAll();
   return { ok: `${data.code} is gewijzigd.` };

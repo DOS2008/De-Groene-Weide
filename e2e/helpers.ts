@@ -35,3 +35,13 @@ export async function toPlotStep(page: Page, stay: { arrival: string; departure:
   await page.getByRole("button", { name: "Kies zelf op de kaart" }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Kies je plekje in de wei" })).toBeVisible();
 }
+
+/** The plain text of the newest mail for `to` whose subject matches. */
+export async function mailText(to: string, subject: RegExp): Promise<string> {
+  await expectMail(to, subject);
+  const res = await fetch(`${mailpit}/api/v1/search?query=${encodeURIComponent(`to:${to}`)}`);
+  const data = (await res.json()) as { messages: { ID: string; Subject: string }[] };
+  const hit = data.messages.find((m) => subject.test(m.Subject))!;
+  const msg = (await (await fetch(`${mailpit}/api/v1/message/${hit.ID}`)).json()) as { Text: string };
+  return msg.Text;
+}

@@ -1,0 +1,69 @@
+.wrap {
+  max-width: 44rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) 1fr;
+  gap: 0.5rem 1.25rem;
+  margin: 0;
+}
+
+.facts dt {
+  font-weight: 700;
+}
+
+.facts dd {
+  margin: 0;
+}
+
+.status {
+  display: inline-block;
+  border-radius: var(--radius-pill);
+  padding: 0.15rem 0.75rem;
+  background: var(--color-gras-licht);
+  font-weight: 700;
+}
+
+.status[data-status="requested"] {
+  background: var(--color-eigeel);
+}
+
+.status[data-status="cancelled"] {
+  background: var(--color-stro);
+}
+
+.check {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  min-height: var(--tap-min);
+}
+
+.check input {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.15rem;
+  flex: none;
+  accent-color: var(--color-weidegroen);
+}
+
+.ok {
+  background: var(--color-gras-licht);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin: 0;
+}
+
+.error {
+  color: var(--color-schuurbruin);
+  font-weight: 700;
+  margin: 0;
+}
+
+.joke {
+  font-style: italic;
+}

@@ -25,3 +25,19 @@ for (const path of pages) {
     expect(serious.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).slice(0, 3).join(", ")}`)).toEqual([]);
   });
 }
+
+// WCAG 1.4.10 Reflow: at 320 CSS pixels wide (the same as 400 % zoom on a
+// 1280 px screen) nothing may make the page scroll sideways.
+test("no page scrolls sideways at 320 px wide", async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 320, height: 640 } });
+  const page = await context.newPage();
+  const wide: string[] = [];
+  for (const path of [...pages, "/en/book", "/de/buchen", "/mijn-reservering/onbekend"]) {
+    await page.goto(path);
+    await page.waitForLoadState("networkidle");
+    const [scroll, client] = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
+    if (scroll > client) wide.push(`${path}: ${scroll}px`);
+  }
+  expect(wide).toEqual([]);
+  await context.close();
+});

@@ -400,7 +400,7 @@
       {
         "title": "Wie lange bewahren wir sie auf?",
         "paragraphs": [
-          "Nachrichten bewahren wir [Zeitraum] auf. Buchungen bewahren wir so lange auf, wie das Gesetz es für die Buchhaltung verlangt: [Zeitraum]."
+          "Nachrichten und die Kontaktdaten einer Buchung bewahren wir [Zeitraum] nach deiner Abreise oder deiner Nachricht auf. Danach löscht das System deinen Namen, deine E-Mail-Adresse, Telefonnummer und Anmerkungen automatisch. Was übrig bleibt (welcher Platz, welche Nächte), sagt nichts mehr über dich."
         ]
       },
       {
@@ -590,7 +590,15 @@
   "booking": {
     "stepOf": "Buchen · Schritt {step} von 7",
     "stepsLabel": "Schritte",
-    "steps": ["Datum", "Personen & Unterkunft", "Platzfinder", "Platz wählen", "Angaben", "Prüfen", "Bestätigung"],
+    "steps": [
+      "Datum",
+      "Personen & Unterkunft",
+      "Platzfinder",
+      "Platz wählen",
+      "Angaben",
+      "Prüfen",
+      "Bestätigung"
+    ],
     "stepDone": "erledigt",
     "stepCurrent": "aktueller Schritt",
     "titles": [
@@ -703,7 +711,7 @@
     "doneNext": "Wie geht es weiter?",
     "doneSteps": [
       "Bewahre deine Buchungsnummer auf.",
-      "Du möchtest etwas ändern oder stornieren? Nimm Kontakt mit uns auf.",
+      "Du möchtest stornieren? Das geht über den Link in deiner E-Mail. Etwas ändern? Melde dich bei uns.",
       "Komm innerhalb der Anreisezeiten. Die Hühner warten schon."
     ],
     "doneHome": "Zurück zur Startseite",
@@ -724,5 +732,39 @@
       "adults_required": "Mindestens ein Erwachsener muss mitkommen."
     },
     "phoneAlternativeLink": "Zur Kontaktseite"
+  },
+  "manage": {
+    "metaTitle": "Meine Buchung",
+    "eyebrow": "Meine Buchung",
+    "title": "Deine Buchung {code}",
+    "intro": "Hier ist deine Buchung. Möchtest du etwas ändern? Ruf Bert an oder schreib ihm, er kümmert sich darum.",
+    "joke": "Die Kühe fragen schon, wann du endlich kommst.",
+    "notFoundTitle": "Dieser Link funktioniert nicht (mehr)",
+    "notFoundText": "Vielleicht ist dein Aufenthalt schon lange vorbei, oder der Link ist nicht ganz angekommen. Melde dich bei uns, dann klären wir das zusammen.",
+    "statusLabel": "Status",
+    "status": {
+      "requested": "Anfrage: Bert bestätigt so schnell wie möglich",
+      "confirmed": "Bestätigt",
+      "cancelled": "Storniert"
+    },
+    "plot": "Platz",
+    "arrival": "Anreise",
+    "departure": "Abreise",
+    "persons": "Personen",
+    "personsValue": "{adults, plural, one {# Erwachsener} other {# Erwachsene}}{children, plural, =0 {} one {, # Kind} other {, # Kinder}}{dogs, plural, =0 {} one {, # Hund} other {, # Hunde}}",
+    "price": "Preis",
+    "priceUnknown": "Folgt von Bert",
+    "cancelTitle": "Stornieren",
+    "cancelUntil": "Kostenlos stornieren geht bis einschließlich {date}.",
+    "cancelTooLate": "Online stornieren geht nicht mehr: Das war bis {date} möglich. Ruf Bert an oder schreib ihm, dann schauen wir gemeinsam.",
+    "cancelOffline": "Stornieren geht über Bert. Ruf uns an oder schreib uns.",
+    "cancelCheck": "Ich bin mir sicher: Der Platz wird sofort für andere Gäste frei.",
+    "cancelButton": "Meine Buchung stornieren",
+    "cancelBusy": "Einen Moment…",
+    "cancelled": "Deine Buchung ist storniert. Du bekommst eine Bestätigung per E-Mail. Schade! Hoffentlich bis zu einem anderen Mal.",
+    "cancelError": "Das hat nicht geklappt. Versuch es noch einmal oder melde dich bei uns.",
+    "cancelNeedsCheck": "Bitte setz zuerst das Häkchen, dass du dir sicher bist.",
+    "contact": "Kontakt aufnehmen",
+    "home": "Zur Startseite"
   }
 }

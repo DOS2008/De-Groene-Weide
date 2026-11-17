@@ -29,12 +29,22 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  max-width: 100%;
 }
 
+/* Shrinks on a narrow screen (WCAG 1.4.10: no sideways scrolling at 320 px);
+   wider screens keep the arrows in one place from week to week. */
 .periodTitle {
-  min-width: 13rem;
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: 1.25rem;
   text-align: center;
+}
+
+@media (min-width: 30rem) {
+  .periodTitle {
+    min-width: 13rem;
+  }
 }
 
 .square {

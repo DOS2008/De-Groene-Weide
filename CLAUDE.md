@@ -25,6 +25,9 @@ School project (HMW 2): **De Groene Weide Online**, a website plus admin panel f
 | Run dev with live reload | `docker compose up --watch` (site :3000, Supabase/Studio :8000, mail :8025) |
 | Lint / type check | `docker compose exec web npm run lint` · `docker compose exec web npm run typecheck` |
 | Unit tests (Vitest) | `docker compose exec web npm test` |
+| Database tests (bookings, holds, roles, race) | `docker compose run --rm --entrypoint sh migrate /scripts/test.sh` |
+| End-to-end tests (Playwright + axe) | `docker compose --profile test run --rm e2e` (one file: append `e2e/booking.spec.ts`). Needs the stack running; installs its own packages in a volume |
+| First staff account | `docker compose exec web npm run create-staff -- <email> "<name>" <role>` |
 | Apply migrations + seed | runs on every `docker compose up` (service `migrate`); by hand: `docker compose run --rm migrate` |
 | Map positions and distances | edit `src/content/map/terrain.svg`, then `npm run import-map` (writes `supabase/seed/03_map.sql`) |
 | Content seed from `src/content` | `npm run seed-content` (writes `supabase/seed/02_content.sql`) |

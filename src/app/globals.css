@@ -368,6 +368,9 @@ svg {
 /* ---------- Tables ---------- */
 
 .table-wrap {
+  /* Positioned, so absolutely positioned children (visually-hidden text)
+     are clipped by the scroll box instead of widening the page. */
+  position: relative;
   overflow-x: auto;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);

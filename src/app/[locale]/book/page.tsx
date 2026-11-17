@@ -12,6 +12,7 @@ import { getBookingRules, getPriceInfo, type PriceInfo } from "@/lib/data/bookin
 import { getFacilities, getPlots } from "@/lib/data/map";
 import { BookingFlow } from "./BookingFlow";
 import styles from "./book.module.css";
+import { TableWrap } from "@/components/TableWrap";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getPageLocale();
@@ -64,7 +65,7 @@ async function BookInfo({ locale, prices, site }: { locale: Locale; prices: Pric
         <h2 id="prices-title" className={styles.h2}>
           {t("pricesTitle")}
         </h2>
-        <div className="table-wrap">
+        <TableWrap label={t("pricesTitle")}>
           <table className="table">
             <thead>
               <tr>
@@ -96,7 +97,7 @@ async function BookInfo({ locale, prices, site }: { locale: Locale; prices: Pric
               ))}
             </tbody>
           </table>
-        </div>
+        </TableWrap>
 
         <h3 className={styles.h3}>{t("extrasTitle")}</h3>
         <ul className={styles.extras}>

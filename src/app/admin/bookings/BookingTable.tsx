@@ -2,12 +2,13 @@ import { formatDate } from "@/lib/dates";
 import { sourceNames, statusNames, type BookingRow } from "@/lib/admin/bookings";
 import { ActionForm, Submit } from "../ActionForm";
 import { cancelBooking, confirmBooking } from "./actions";
+import { TableWrap } from "@/components/TableWrap";
 
 const short = (d: string) => formatDate(d, "nl", { weekday: "short", day: "numeric", month: "short" });
 
 export function BookingTable({ rows, canEdit }: { rows: BookingRow[]; canEdit: boolean }) {
   return (
-    <div className="table-wrap">
+    <TableWrap label={"Boekingen"}>
       <table className="admin-table">
         <thead>
           <tr>
@@ -98,6 +99,6 @@ export function BookingTable({ rows, canEdit }: { rows: BookingRow[]; canEdit: b
           ))}
         </tbody>
       </table>
-    </div>
+    </TableWrap>
   );
 }

@@ -5,9 +5,14 @@ test("a guest books a plot on a phone, and gets an email @phone", async ({ page 
   const stay = randomStay();
   const email = `gast-${Date.now()}@example.nl`;
   await toPlotStep(page, stay);
+  // A guest answers the cookie banner first: on a phone it sits over the bottom sheet.
+  await page.getByRole("button", { name: "Alleen nodige" }).click();
 
   // Pick T12 from the list view (always available next to the map).
   await page.getByRole("button", { name: "Lijst" }).click();
+  // The wide table scrolls inside its own box; the page never scrolls sideways.
+  const widths = await page.evaluate(() => [document.documentElement.scrollWidth, document.documentElement.clientWidth]);
+  expect(widths[0]).toBeLessThanOrEqual(widths[1]);
   await page.getByRole("button", { name: "Bekijk plek T12" }).click();
   await expect(page.getByText(/Nog \d+:\d\d vastgehouden/)).toBeVisible();
   await page.getByRole("button", { name: "Verder naar je gegevens" }).first().click();
@@ -76,8 +81,8 @@ test("the Plattegrond hands the chosen plot over to booking", async ({ page }) =
 });
 
 for (const lang of [
-  { path: "/en/book", next: "Next", group: "Who's coming?", skip: "Choose on the map myself", map: "Choose your spot in the meadow", list: "List", pick: "View pitch T18", toDetails: "Continue to your details", name: "Name", email: "Email address", rules: "Send request", done: /Your request is in/, subject: /request for pitch T18/ },
-  { path: "/de/buchen", next: "Weiter", group: "Mit wem kommst du?", skip: "Selbst auf dem Plan wählen", map: "Such dir dein Plätzchen auf der Wiese aus", list: "Liste", pick: "Platz T18 ansehen", toDetails: "Weiter zu deinen Angaben", name: "Name", email: "E-Mail-Adresse", rules: "Anfrage senden", done: /Deine Anfrage ist da/, subject: /Anfrage für Platz T18/ },
+  { path: "/en/book", next: "Next", group: "Who's coming?", skip: "Choose on the map myself", map: "Choose your spot in the meadow", list: "List", pick: "View pitch T18", held: /Held for another \d+:\d\d/, toDetails: "Continue to your details", name: "Name", email: "Email address", rules: "Send request", done: /Your request is in/, subject: /request for pitch T18/ },
+  { path: "/de/buchen", next: "Weiter", group: "Mit wem kommst du?", skip: "Selbst auf dem Plan wählen", map: "Such dir dein Plätzchen auf der Wiese aus", list: "Liste", pick: "Platz T18 ansehen", held: /Noch \d+:\d\d festgehalten/, toDetails: "Weiter zu deinen Angaben", name: "Name", email: "E-Mail-Adresse", rules: "Anfrage senden", done: /Deine Anfrage ist da/, subject: /Anfrage für Platz T18/ },
 ]) {
   test(`the booking flow and email work in ${lang.path.slice(1, 3).toUpperCase()}`, async ({ page }) => {
     const stay = randomStay();
@@ -85,17 +90,19 @@ for (const lang of [
     await page.goto(`${lang.path}?aankomst=${stay.arrival}&vertrek=${stay.departure}`);
     await page.waitForLoadState("networkidle");
     await expect(page.locator("html")).toHaveAttribute("lang", lang.path.slice(1, 3));
-    await page.getByRole("button", { name: lang.next }).click();
+    await page.getByRole("button", { name: lang.next, exact: true }).click();
     await expect(page.getByRole("heading", { level: 1, name: lang.group })).toBeVisible();
-    await page.getByRole("button", { name: lang.next }).click();
+    await page.getByRole("button", { name: lang.next, exact: true }).click();
     await page.getByRole("button", { name: lang.skip }).click();
     await expect(page.getByRole("heading", { level: 1, name: lang.map })).toBeVisible();
     await page.getByRole("button", { name: lang.list }).click();
     await page.getByRole("button", { name: lang.pick }).click();
+    // Wait for the hold: before it lands, "continue" only asks you to pick a plot.
+    await expect(page.getByText(lang.held)).toBeVisible();
     await page.getByRole("button", { name: lang.toDetails }).first().click();
     await page.getByLabel(lang.name, { exact: true }).fill("Test Family");
     await page.getByLabel(lang.email).fill(email);
-    await page.getByRole("button", { name: lang.next }).click();
+    await page.getByRole("button", { name: lang.next, exact: true }).click();
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: lang.rules }).click();
     await expect(page.getByRole("heading", { level: 1, name: lang.done })).toBeVisible();

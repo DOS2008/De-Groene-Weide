@@ -1,6 +1,6 @@
 # Build progress – 17 November 2026
 
-Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway through Prio 5. Only Prio 2 is committed (`9ae0583`); everything after that is in the working tree, uncommitted, on `feature/implementation-roadmap`.
+Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway through Prio 5. Prio 2 is in `9ae0583`, and Prio 3, 4 and the start of Prio 5 are in `73a9ef8`, both on `feature/implementation-roadmap`. All checks pass (see *Tests*).
 
 ## Summary
 
@@ -8,9 +8,9 @@ Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway t
 | --- | --- | --- |
 | 1 Public website (NL) | Done earlier | Yes (`a2decbd`) |
 | 2 Clickable site map | Done | Yes (`9ae0583`) |
-| 3 Booking level 1 + minimal admin | Built. Database tests pass; e2e partly green | No |
-| 4 English and German | Built. Native-speaker check still to do | No |
-| 5 Admin panel for content | Started: database, seed and loaders only, no admin screens | No |
+| 3 Booking level 1 + minimal admin | Built. All database and e2e tests pass | Yes (`73a9ef8`) |
+| 4 English and German | Built. Native-speaker check still to do | Yes (`73a9ef8`) |
+| 5 Admin panel for content | Started: database, seed and loaders only, no admin screens | Yes (`73a9ef8`) |
 | 6 Booking level 2 + launch hardening | Not started (the DB function already supports level 2) | – |
 | 7 Shoulds | Not started | – |
 | 8 Coulds | Skipped on purpose: only when Bert asks for them | – |
@@ -23,7 +23,7 @@ Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway t
 - **Map component** (`src/components/map/SiteMap.tsx`), built from the hi-fi design. Every plot is a `<button>` with an `aria-label`, and each state has a colour plus a pattern or icon. There is a legend, zoom, arrow-key navigation, filters, a list view, and a detail panel that becomes a bottom sheet on phones.
 - **Plattegrond page** in explore mode. Facility links (`/plattegrond#pool`) open that facility, and "Is deze plek vrij?" carries the plot over into booking.
 
-## Prio 3 – Booking level 1 + minimal admin (uncommitted)
+## Prio 3 – Booking level 1 + minimal admin
 
 **Database** (`0002_booking.sql`):
 - Tables `reservations`, `plot_blocks`, `seasons`, `price_periods`, `prices`, `extras` and `settings`.
@@ -59,7 +59,7 @@ Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway t
 
 **Auth settings** in `infra/supabase.override.yml`: TOTP on, sessions time out after 8 hours of inactivity and after 24 hours at most.
 
-## Prio 4 – English and German (uncommitted)
+## Prio 4 – English and German
 
 - `messages/en.json` and `messages/de.json` are complete. `src/lib/messages.test.ts` fails on a missing key, a different placeholder or an empty text, and **passes**.
 - All content in `src/content` now has EN and DE. Jokes, the 404 title and other funny lines are written per language, not translated.
@@ -83,14 +83,14 @@ Not done:
 
 ## Tests and how far they are verified
 
-| Check | Command | Last result |
+| Check | Command | Last result (17 November, evening) |
 | --- | --- | --- |
 | Database rules: double booking, holds, dates, blocks, phone booking, roles, 3-way race | `docker compose run --rm --entrypoint sh migrate /scripts/test.sh` | **All pass** |
-| Unit tests (pricing, booking rules, geometry, messages, earlier tests) | `docker compose exec web npm test` | Passed per file; not re-run as a full suite after the last edits |
-| Types / lint | `npm run typecheck` · `npm run lint` | Clean before the Prio 5 loader switch; type check after it printed no errors, but this wasn't double-checked |
-| End-to-end (Playwright + axe) | `docker compose --profile test run --rm e2e` | Last run, interrupted: passed without-2FA redirect, date errors, **two-browser race (one winner)**, Plattegrond hand-over and axe on 3 pages. Failed: phone booking, EN/DE booking and the admin phone booking. That run overlapped with my edits to the pages, so these failures may not be real. **Re-run before committing.** |
+| Unit tests (pricing, booking rules, geometry, messages, earlier tests) | `docker compose exec web npm test` | **54/54 pass** |
+| Types / lint | `npm run typecheck` · `npm run lint` (in `web`) | **Clean** |
+| End-to-end (Playwright + axe) | `docker compose --profile test run --rm e2e` | **19/19 pass**: booking on a phone, EN and DE booking with email, two-browser race, invalid dates, admin phone booking, no admin without 2FA, Plattegrond hand-over, axe on all 11 public pages at phone width |
 
-I couldn't check anything visually: the Chrome extension wasn't connected. Nobody has looked at the new screens in a browser yet.
+Only the Playwright screenshots have been looked at. Nobody has clicked through the new screens in a real browser yet.
 
 ## Known issues and notes
 
@@ -100,28 +100,19 @@ I couldn't check anything visually: the Chrome extension wasn't connected. Nobod
 - In dev mode the 404 page renders as Next's error document, so axe flags `html-has-lang`. Check this against a production build.
 - The admin nav only links to screens that exist (`ADMIN_ROUTES` in `src/app/admin/AdminShell.tsx`). Extend it as Prio 5 screens are added.
 
-## Where work stopped (end of 17 November)
+## Fixed after the restart (17 November, evening)
 
-Nothing changed in the code after the sections above. The rest of the day went into getting a test run, and none got through:
+After the machine restart the stack started normally and every check ran. The fixes:
 
-- **The host machine ran out of memory:** about 400 MB free of 16 GB, with 2.2 GB of compressed memory. `docker ps` took 10–90 s, and one `docker exec` into `web` took 72 s. Docker Desktop was restarted, but the containers still showed "Up 5–7 hours", so the VM itself didn't restart. The user is restarting the whole machine.
-- **`scripts/dev/check-sync.mjs`** replaces the old `check-sync.sh`, which had a syntax error. Its first run failed inside the container: the output ended in a Node stack trace, and the full error is not looked at yet. The last run of the old `.sh` reported `supabase/migrations/0003_content.sql` and `supabase/seed/02_content.sql` as out of sync in the container. `supabase/` is in the watch ignore list, so that may be expected; check it.
-- No unit test, type check, lint or e2e run happened after the Prio 5 loader switch.
-
-### Resume here
-
-From `C:\dev\De-Groene-Weide`, with an uppercase `C:`, in PowerShell:
-
-1. Start the stack with `docker compose up --watch`. Check that `docker ps` answers within a few seconds. If memory is still tight, stop the Supabase services the tests don't need (`studio`, `functions`, `realtime`, `imgproxy`).
-2. Run `node scripts/dev/check-sync.mjs --fix` and fix its error inside the container first. Until then, `docker compose up --build web` gives a container with the current files.
-3. In the `web` container, one at a time: `npm run typecheck`, then `npm run lint`, then `npm test`.
-4. Run the database tests: `docker compose run --rm --entrypoint sh migrate /scripts/test.sh`.
-5. Run the e2e tests: `docker compose --profile test run --rm e2e`. The ones to watch failed last time: the phone booking, the EN/DE booking and the admin phone booking.
-6. Fix the real failures, then commit Prio 3 and Prio 4, separately if possible, and update the tests table above.
+- **The page scrolled sideways on a phone in the list view.** The `visually-hidden` text inside the table is absolutely positioned and escaped the scroll box of `.table-wrap`, so the page became 554 px wide on a 412 px screen. `.table-wrap` is now `position: relative`. The phone booking test checks that the page never gets wider than the screen.
+- **Wide tables weren't reachable by keyboard** (axe `scrollable-region-focusable`). New `src/components/TableWrap.tsx`: a named region with `tabIndex=0`, used for all five tables.
+- **The e2e service needed `node_modules` on the host**, which the Windows host doesn't have. It now installs its packages into its own volume and only reinstalls when `package-lock.json` changes.
+- **Test fixes, not app bugs:** the EN/DE test clicked "continue" before the hold had landed; `Next` also matched the Next.js dev tools button (now `exact: true`); on a phone the cookie banner (z 50) sits over the bottom sheet (z 40), so the phone test answers it first, like a guest would.
+- The cookie banner stays above the bottom sheet on purpose: putting the sheet on top would hide the banner's buttons from keyboard users (WCAG 2.4.11).
+- `scripts/dev/check-sync.mjs` wasn't needed: starting with `docker compose up -d --build` gives a `web` container with the current files. Its error inside the container is still not looked at.
 
 ## Next steps
 
-1. See "Resume here" above.
-2. Prio 5 admin screens, in the order given in mvp.md.
-3. Prio 6: the booking level switch in settings, the manage link page (`manageLinkParagraph` is a stub), security headers, a retention job, and backup and restore.
-4. Prio 7: Plekmatch (the `Plekmatch` slot in `BookingFlow` is ready), the reminder email, the audit log, the review button and Facebook.
+1. Prio 5 admin screens, in the order given in mvp.md.
+2. Prio 6: the booking level switch in settings, the manage link page (`manageLinkParagraph` is a stub), security headers, a retention job, and backup and restore.
+3. Prio 7: Plekmatch (the `Plekmatch` slot in `BookingFlow` is ready), the reminder email, the audit log, the review button and Facebook.

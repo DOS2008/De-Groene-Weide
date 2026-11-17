@@ -8,6 +8,7 @@ import type { FacilityIcon } from "@/content/facilities";
 import { WithPlaceholders } from "@/components/Placeholder";
 import { CloseIcon } from "@/components/icons";
 import styles from "./SiteMap.module.css";
+import { TableWrap } from "@/components/TableWrap";
 
 /** Availability of a plot for the chosen dates (book mode only). */
 export type PlotStatus = "free" | "taken" | "blocked" | "unsuitable";
@@ -439,7 +440,7 @@ function ListView({
   const t = useTranslations("map");
   return (
     <div className="stack">
-      <div className="table-wrap">
+      <TableWrap label={t("listCaption")}>
         <table className="table">
           <caption className="visually-hidden">{t("listCaption")}</caption>
           <thead>
@@ -490,7 +491,7 @@ function ListView({
             })}
           </tbody>
         </table>
-      </div>
+      </TableWrap>
       {mode === "explore" && (
         <section className="stack">
           <h3>{t("facilitiesCaption")}</h3>

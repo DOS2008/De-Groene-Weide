@@ -6,6 +6,7 @@ import { InfoPage } from "@/components/InfoPage";
 import { WithPlaceholders } from "@/components/Placeholder";
 import { pageMetadata } from "@/lib/seo";
 import styles from "../info.module.css";
+import { TableWrap } from "@/components/TableWrap";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getPageLocale();
@@ -45,7 +46,7 @@ export default async function AccessibilityPage() {
       </ul>
 
       <h2>{t("terrainTitle")}</h2>
-      <div className="table-wrap">
+      <TableWrap label={t("terrainTitle")}>
         <table className="table">
           <thead>
             <tr>
@@ -68,7 +69,7 @@ export default async function AccessibilityPage() {
             ))}
           </tbody>
         </table>
-      </div>
+      </TableWrap>
       <p>
         <WithPlaceholders text={t("plotsNote")} />
       </p>

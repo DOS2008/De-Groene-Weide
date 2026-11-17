@@ -5,6 +5,7 @@ import { formatDate, addDays, todayAtCampsite } from "@/lib/dates";
 import { ActionForm, Submit } from "../ActionForm";
 import { createBlock, deleteBlock } from "../bookings/actions";
 import { PlotEditor } from "./PlotEditor";
+import { TableWrap } from "@/components/TableWrap";
 
 export const metadata: Metadata = { title: "Plekken" };
 
@@ -81,7 +82,7 @@ export default async function PlotsPage() {
         {current.length === 0 ? (
           <p>Er zijn geen plekken geblokkeerd.</p>
         ) : (
-          <div className="table-wrap">
+          <TableWrap label={"Geblokkeerde plekken"}>
             <table className="admin-table">
               <thead>
                 <tr>
@@ -116,7 +117,7 @@ export default async function PlotsPage() {
                 })}
               </tbody>
             </table>
-          </div>
+          </TableWrap>
         )}
       </section>
 

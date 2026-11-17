@@ -90,7 +90,18 @@ services:
     image: mcr.microsoft.com/playwright:v1.64.1-noble
     profiles: ["test"]
     working_dir: /work
-    command: ["npx", "playwright", "test"]
+    # Installs the packages into its own volume (Linux binaries never land in
+    # the host folder) and only reinstalls when package-lock.json changed.
+    # Extra arguments go to Playwright: ... run --rm e2e e2e/booking.spec.ts
+    entrypoint:
+      - sh
+      - -c
+      - >-
+        cmp -s package-lock.json node_modules/.e2e-lock ||
+        { npm ci --no-audit --no-fund && cp package-lock.json node_modules/.e2e-lock; } &&
+        npx playwright test "$$@"
+      - e2e
+    command: []
     environment:
       BASE_URL: http://web:3000
       MAILPIT_URL: http://mailpit:8025
@@ -100,6 +111,7 @@ services:
       CI: "1"
     volumes:
       - .:/work
+      - e2e-node-modules:/work/node_modules
     depends_on:
       - web
       - mailpit
@@ -112,3 +124,6 @@ services:
     environment:
       MP_SMTP_AUTH_ACCEPT_ANY: "1"
       MP_SMTP_AUTH_ALLOW_INSECURE: "1"
+
+volumes:
+  e2e-node-modules:

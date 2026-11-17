@@ -15,6 +15,7 @@ School project (HMW 2): **De Groene Weide Online**, a website plus admin panel f
 - [infra/supabase/](infra/supabase/) is an **unchanged** copy of the upstream Supabase `docker/` folder. Never edit it: put changes in `infra/supabase.override.yml` (dev and server) or `infra/supabase.prod.yml` (server only).
 - Server code reaches Supabase at `SUPABASE_URL` (`http://api-gw:8000`, inside Docker). The browser uses `NEXT_PUBLIC_SUPABASE_URL`.
 - `.env` is generated and never committed. New settings go in `.env.app.example`.
+- **Database:** migrations in `supabase/migrations/` (numbered, applied once each), seed in `supabase/seed/` (insert-if-missing, runs every time). Server code reads public data with `publicDb()`, the admin panel with `staffDb()` (the staff JWT, so RLS applies), jobs with `serviceDb()`. Loaders in `src/lib/data/` use `"use cache"` with a `cacheTag`; admin actions call `revalidateTag`.
 
 ### Commands
 
@@ -24,6 +25,9 @@ School project (HMW 2): **De Groene Weide Online**, a website plus admin panel f
 | Run dev with live reload | `docker compose up --watch` (site :3000, Supabase/Studio :8000, mail :8025) |
 | Lint / type check | `docker compose exec web npm run lint` · `docker compose exec web npm run typecheck` |
 | Unit tests (Vitest) | `docker compose exec web npm test` |
+| Apply migrations + seed | runs on every `docker compose up` (service `migrate`); by hand: `docker compose run --rm migrate` |
+| Map positions and distances | edit `src/content/map/terrain.svg`, then `npm run import-map` (writes `supabase/seed/03_map.sql`) |
+| Content seed from `src/content` | `npm run seed-content` (writes `supabase/seed/02_content.sql`) |
 | Stop / reset data | `docker compose down` · `docker compose down -v` |
 | Server deploy | `docker compose -f compose.prod.yaml up -d --build` (see README, "Deploying") |
 

@@ -64,3 +64,12 @@
     --gutter: 1rem;
   }
 }
+
+/* Site map (hi-fi Reserveren / Plattegrond) */
+:root {
+  --color-map-bg: #b9d7a8;
+  --color-taken-a: #cfd2cc;
+  --color-taken-b: #edeeea;
+  --color-taken-border: #9aa096;
+  --color-field-border: #9aa096;
+}

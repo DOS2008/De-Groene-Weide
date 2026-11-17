@@ -16,6 +16,27 @@ include:
     env_file: .env
 
 services:
+  # Applies supabase/migrations and supabase/seed, then exits. The website
+  # waits for it, so the schema is always up to date before the site starts.
+  migrate:
+    image: supabase/postgres:17.6.1.136
+    entrypoint: ["sh", "/scripts/migrate.sh"]
+    environment:
+      PGHOST: db
+      PGPORT: ${POSTGRES_PORT}
+      PGDATABASE: ${POSTGRES_DB}
+      PGUSER: postgres
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./supabase:/supabase:ro
+      - ./scripts/db:/scripts:ro
+    depends_on:
+      db:
+        condition: service_healthy
+      auth:
+        condition: service_healthy
+    restart: "no"
+
   web:
     image: groene-weide-web:prod
     build:
@@ -26,10 +47,16 @@ services:
         NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
         SITE_URL: ${SITE_URL}
     restart: unless-stopped
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
     expose:
       - "3000"
     environment:
       SUPABASE_URL: http://api-gw:8000
+      NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_PUBLIC_URL}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
       SITE_URL: ${SITE_URL}
       SMTP_HOST: ${SMTP_HOST}
       SMTP_PORT: ${SMTP_PORT}

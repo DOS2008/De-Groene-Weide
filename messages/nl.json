@@ -104,21 +104,10 @@
     "metaDescription": "Bekijk waar de plekken, het zwembad, de speelweide, de kippen en het sanitair liggen op De Groene Weide.",
     "eyebrow": "Plattegrond",
     "title": "Loop alvast over het erf",
-    "lead": "Zo ligt het terrein erbij. Verdwalen kan niet, de kippen wijzen de weg.",
+    "lead": "Klik op een plek of een voorziening. Verdwalen kan niet, de kippen wijzen de weg.",
     "cta": "Kies je data en reserveer",
-    "mapLabel": "Kaart van het terrein. Links Weide A met plekken T1 tot T20, daaronder de speelweide met tractor en Weide B met plekken T21 tot T40. In het midden de kippen, de oude melkstal met de kantine, het sanitair en de receptie met het winkeltje bij de ingang. Rechts de camperplaatsen C1 tot C12, het buitenzwembad en de safaritenten S1 tot S8.",
-    "draftNote": "Voorlopige tekening. De echte kaart volgt na de rondgang met Bert, en dan klik je hier op elke plek.",
-    "entrance": "Ingang",
-    "facilitiesTitle": "Voorzieningen",
-    "where": "Waar:",
-    "plotsTitle": "Plekken",
-    "plotsText": "Er zijn 60 genummerde plekken. Welke plek vrij is, zie je bij het reserveren.",
-    "plotsRange": "{prefix}1 – {prefix}{count}",
-    "plotCount": "{count} plekken",
-    "zoneA": "Weide A · T1–T20",
-    "zoneB": "Weide B · T21–T40",
-    "zoneC": "Camperplaatsen C1–C12",
-    "zoneS": "Safaritenten S1–S8"
+    "exploreNote": "Verkennen: je hebt nog geen data gekozen, dus alles is aan te klikken. Wil je weten wat vrij is? Kies eerst je data bij Reserveren.",
+    "plotCta": "Is deze plek vrij? Kies je data"
   },
   "book": {
     "metaTitle": "Reserveren",
@@ -309,11 +298,36 @@
     "partly": "deels",
     "unchecked": "niet gecontroleerd",
     "terrainRows": [
-      { "facility": "Sanitair", "wheelchair": "yes", "stroller": "yes", "notes": "Aangepaste douche en toilet" },
-      { "facility": "Kantine", "wheelchair": "yes", "stroller": "yes", "notes": "Hellingbaan bij de ingang" },
-      { "facility": "Zwembad", "wheelchair": "unchecked", "stroller": "yes", "notes": "[Bert controleert ter plekke]" },
-      { "facility": "Speelweide", "wheelchair": "partly", "stroller": "yes", "notes": "Gras, deels hobbelig" },
-      { "facility": "Winkeltje", "wheelchair": "yes", "stroller": "yes", "notes": "Drempelvrij" }
+      {
+        "facility": "Sanitair",
+        "wheelchair": "yes",
+        "stroller": "yes",
+        "notes": "Aangepaste douche en toilet"
+      },
+      {
+        "facility": "Kantine",
+        "wheelchair": "yes",
+        "stroller": "yes",
+        "notes": "Hellingbaan bij de ingang"
+      },
+      {
+        "facility": "Zwembad",
+        "wheelchair": "unchecked",
+        "stroller": "yes",
+        "notes": "[Bert controleert ter plekke]"
+      },
+      {
+        "facility": "Speelweide",
+        "wheelchair": "partly",
+        "stroller": "yes",
+        "notes": "Gras, deels hobbelig"
+      },
+      {
+        "facility": "Winkeltje",
+        "wheelchair": "yes",
+        "stroller": "yes",
+        "notes": "Drempelvrij"
+      }
     ],
     "plotsNote": "Bij het reserveren zie je per plek of hij vlak en rolstoeltoegankelijk is. We noemen een plek alleen toegankelijk als Bert hem zelf heeft gecontroleerd. Laatst gecontroleerd: [datum].",
     "faqTitle": "Vragen over toegankelijkheid",
@@ -322,8 +336,14 @@
         "q": "Kan ik een plek reserveren dicht bij het aangepaste sanitair?",
         "a": "Ja. Zeg het als je belt of mailt, dan zoekt Bert een vlakke plek dichtbij."
       },
-      { "q": "Mag mijn hulphond mee?", "a": "[Antwoord van Bert]" },
-      { "q": "Is er een rustige plek voor prikkelgevoelige gasten?", "a": "[Antwoord van Bert]" }
+      {
+        "q": "Mag mijn hulphond mee?",
+        "a": "[Antwoord van Bert]"
+      },
+      {
+        "q": "Is er een rustige plek voor prikkelgevoelige gasten?",
+        "a": "[Antwoord van Bert]"
+      }
     ],
     "reportText": "Werkt iets niet voor jou? Laat het ons weten, dan lossen we het op.",
     "reportCta": "Meld het ons"
@@ -354,12 +374,18 @@
         "q": "Hoe laat kan ik aankomen en moet ik vertrekken?",
         "a": "Aankomst vanaf [tijd], vertrek tot [tijd]. Later aankomen? Bel even, dan zetten we het hek open."
       },
-      { "q": "Zijn honden welkom?", "a": "[Antwoord van Bert]" },
+      {
+        "q": "Zijn honden welkom?",
+        "a": "[Antwoord van Bert]"
+      },
       {
         "q": "Heeft elke plek stroom?",
         "a": "Niet elke plek. De camperplaatsen hebben allemaal stroom; bij tenten en caravans verschilt het per plek. Vraag het als je reserveert."
       },
-      { "q": "Kan ik mijn reservering wijzigen of annuleren?", "a": "[Voorwaarden van Bert]" },
+      {
+        "q": "Kan ik mijn reservering wijzigen of annuleren?",
+        "a": "[Voorwaarden van Bert]"
+      },
       {
         "q": "Mogen de kinderen helpen op de boerderij?",
         "a": "Graag zelfs. Elke ochtend mogen ze mee de kippen voeren. Kijk in de agenda voor de rest."
@@ -433,5 +459,103 @@
     "text": "Er ging iets mis aan onze kant. Probeer het zo nog eens. Lukt het dan nog niet, bel of mail ons gerust.",
     "retry": "Probeer het opnieuw",
     "home": "Terug naar het erf"
+  },
+  "map": {
+    "regionLabel": "Kaart van het terrein",
+    "viewLabel": "Weergave",
+    "viewMap": "Kaart",
+    "viewList": "Lijst",
+    "zoomIn": "Inzoomen",
+    "zoomOut": "Uitzoomen",
+    "filterLabel": "Filter plekken",
+    "filterAll": "Alle plekken",
+    "filterElectricity": "Met stroom",
+    "filterWheelchair": "Rolstoel / kinderwagen",
+    "filterShade": "Veel schaduw",
+    "zoneTitle": {
+      "A": "Weide A · T1–T20",
+      "B": "Weide B · T21–T40",
+      "C": "Camperplaatsen C1–C12",
+      "S": "Safaritenten S1–S8"
+    },
+    "zone": {
+      "A": "Weide A",
+      "B": "Weide B",
+      "C": "Camperplaatsen",
+      "S": "Safaritenten"
+    },
+    "plotAria": "Plek {id}, {state}",
+    "state": {
+      "free": "vrij",
+      "taken": "bezet",
+      "blocked": "geblokkeerd",
+      "selected": "jouw keuze",
+      "tip": "tip van de kip",
+      "dimmed": "past niet bij het filter"
+    },
+    "legend": "Legenda",
+    "legendFree": "Vrij",
+    "legendTaken": "Bezet",
+    "legendBlocked": "Geblokkeerd",
+    "legendSelected": "Jouw keuze",
+    "legendTip": "Tip van de kip",
+    "type": {
+      "tent_caravan": "Tent / caravan",
+      "camper": "Camper",
+      "safari_tent": "Safaritent"
+    },
+    "detailLabel": "Uitleg",
+    "pickSomething": "Klik op een plek of een voorziening. Dan zie je hier wat er te weten is.",
+    "plotTitle": "Plek {id}",
+    "facilityKind": "Voorziening",
+    "plotKind": "Plek · {type}",
+    "electricity": "Stroom",
+    "surface": "Ondergrond",
+    "level": "Vlak",
+    "shade": "Schaduw",
+    "wheelchair": "Rolstoel / kinderwagen",
+    "maxPersons": "Max. personen",
+    "yes": "ja",
+    "no": "nee",
+    "levelNo": "licht hellend",
+    "surfaceValue": {
+      "grass": "gras",
+      "semi_paved": "halfverhard",
+      "paved": "verhard"
+    },
+    "shadeValue": {
+      "none": "weinig",
+      "some": "deels",
+      "lots": "veel"
+    },
+    "notChecked": "nog niet gecontroleerd",
+    "sampleNote": "Voorbeeldgegevens. De echte kenmerken volgen na de rondgang met Bert.",
+    "distancesTitle": "Lopen naar",
+    "metres": "{m} m",
+    "open": "Open:",
+    "when": "Wanneer:",
+    "access": "Toegankelijk:",
+    "where": "Waar:",
+    "photoMissing": "Foto volgt",
+    "close": "Sluiten",
+    "listCaption": "Alle plekken",
+    "colPlot": "Plek",
+    "colType": "Soort",
+    "colZone": "Waar",
+    "colFeatures": "Kenmerken",
+    "colStatus": "Status",
+    "colAction": "Actie",
+    "showDetails": "Bekijk",
+    "showPlot": "Bekijk plek {id}",
+    "facilitiesCaption": "Voorzieningen",
+    "showFacility": "Bekijk {name}",
+    "noMatches": "Geen plekken die bij dit filter passen.",
+    "keyboardHint": "Met de pijltjestoetsen ga je naar de plek ernaast.",
+    "empty": "De kaart kan nu niet laden. Probeer het straks opnieuw, of bel ons.",
+    "count": "{count, plural, one {# plek} other {# plekken}}",
+    "featureElectricity": "stroom",
+    "featureWheelchair": "rolstoel",
+    "featureLevel": "vlak",
+    "featureShade": "veel schaduw"
   }
 }

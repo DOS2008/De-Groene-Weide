@@ -18,6 +18,27 @@ include:
     env_file: .env
 
 services:
+  # Applies supabase/migrations and supabase/seed, then exits. The website
+  # waits for it, so the schema is always up to date before the site starts.
+  migrate:
+    image: supabase/postgres:17.6.1.136
+    entrypoint: ["sh", "/scripts/migrate.sh"]
+    environment:
+      PGHOST: db
+      PGPORT: ${POSTGRES_PORT}
+      PGDATABASE: ${POSTGRES_DB}
+      PGUSER: postgres
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./supabase:/supabase:ro
+      - ./scripts/db:/scripts:ro
+    depends_on:
+      db:
+        condition: service_healthy
+      auth:
+        condition: service_healthy
+    restart: "no"
+
   web:
     image: groene-weide-web:dev
     build:
@@ -25,12 +46,17 @@ services:
       target: dev
     ports:
       - "3000:3000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
     environment:
       # Server-side calls go over the internal Docker network.
       SUPABASE_URL: http://api-gw:8000
       # The browser talks to Supabase through the published port.
       NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_PUBLIC_URL}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
+      # Server only: used for jobs (reminders, retention) and staff invites.
+      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
       SITE_URL: ${SITE_URL}
       # All mail goes to Mailpit (http://localhost:8025), whatever the address.
       SMTP_HOST: mailpit
@@ -49,6 +75,7 @@ services:
             - .git/
             - infra/
             - docs/
+            - supabase/
         - action: rebuild
           path: package.json
         - action: rebuild

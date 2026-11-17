@@ -24,7 +24,7 @@ export type Facility = {
 
 export const facilities: Facility[] = [
   {
-    id: "kippen",
+    id: "chickens",
     icon: "chicken",
     surface: "stro",
     onHome: true,
@@ -50,7 +50,7 @@ export const facilities: Facility[] = [
     location_de: null,
   },
   {
-    id: "speelweide",
+    id: "playground",
     icon: "tractor",
     surface: "gras",
     onHome: true,
@@ -76,7 +76,7 @@ export const facilities: Facility[] = [
     location_de: null,
   },
   {
-    id: "zwembad",
+    id: "pool",
     icon: "pool",
     surface: "water",
     onHome: true,
@@ -102,7 +102,7 @@ export const facilities: Facility[] = [
     location_de: null,
   },
   {
-    id: "winkeltje",
+    id: "shop",
     icon: "shop",
     surface: "stro",
     onHome: false,
@@ -128,7 +128,7 @@ export const facilities: Facility[] = [
     location_de: null,
   },
   {
-    id: "kantine",
+    id: "canteen",
     icon: "barn",
     surface: "stro",
     onHome: true,
@@ -154,7 +154,7 @@ export const facilities: Facility[] = [
     location_de: null,
   },
   {
-    id: "sanitair",
+    id: "sanitary",
     icon: "shower",
     surface: "gras",
     onHome: false,

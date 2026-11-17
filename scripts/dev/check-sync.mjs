@@ -21,7 +21,7 @@ const hash = (buf) => createHash("md5").update(buf.toString("binary").replace(/\
 const local = new Map(files.map((f) => [f, hash(readFileSync(f))]));
 
 // One node process in the container hashes every file the same way.
-const script = `const fs=require("fs"),c=require("crypto");const out={};for(const f of JSON.parse(process.argv[1])){try{out[f]=c.createHash("md5").update(fs.readFileSync("/app/"+f).toString("binary").replace(/\r/g,"")).digest("hex")}catch{out[f]=null}}console.log(JSON.stringify(out))`;
+const script = `const fs=require("fs"),c=require("crypto");const out={};for(const f of JSON.parse(process.argv[1])){try{out[f]=c.createHash("md5").update(fs.readFileSync("/app/"+f).toString("binary").split(String.fromCharCode(13)).join("")).digest("hex")}catch{out[f]=null}}console.log(JSON.stringify(out))`;
 const remote = JSON.parse(
   execFileSync("docker", ["exec", container, "node", "-e", script, JSON.stringify(files)], { encoding: "utf8", maxBuffer: 1 << 24 }),
 );

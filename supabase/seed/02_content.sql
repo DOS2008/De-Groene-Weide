@@ -31,6 +31,17 @@ insert into public.jokes (id, active, text_nl, text_en, text_de) values
   ('weekend-eggs', true, 'Verse eieren bij het ontbijt? Onze kippen werken ook in het weekend.', 'Fresh eggs on a Sunday? Our hens don''t do days off.', 'Frische Eier am Sonntag? Unsere Hühner haben keinen freien Tag. Wir haben gefragt.')
 on conflict (id) do update set text_en = coalesce(jokes.text_en, excluded.text_en), text_de = coalesce(jokes.text_de, excluded.text_de);
 
+insert into public.about_blocks (id, kind, sort, is_chicken, label_nl, label_en, label_de, title_nl, title_en, title_de, body_nl, body_en, body_de) values
+  ('farm', 'milestone', 1, false, '[jaar]', '[year]', '[Jahr]', 'De boerderij', 'The farm', 'Der Hof', '[Korte tekst van Bert over het begin van de boerderij.]', '[Short text by Bert about how the farm began.]', '[Kurzer Text von Bert über die Anfänge des Hofes.]'),
+  ('last-cow', 'milestone', 2, false, '[jaar]', '[year]', '[Jahr]', 'De laatste koe', 'The last cow', 'Die letzte Kuh', '[Waarom Bert stopte met melken.]', '[Why Bert stopped milking.]', '[Warum Bert mit dem Melken aufgehört hat.]'),
+  ('first-tent', 'milestone', 3, false, '[jaar]', '[year]', '[Jahr]', 'De eerste tent', 'The first tent', 'Das erste Zelt', '[Hoe de camping begon.]', '[How the campsite began.]', '[Wie der Campingplatz angefangen hat.]'),
+  ('now', 'milestone', 4, false, 'Nu', 'Now', 'Heute', '60 plekken in de wei', '60 pitches in the meadow', '60 Plätze auf der Wiese', 'Tent, caravan, camper of safaritent. Open van 1 april tot en met 31 oktober.', 'Tent, caravan, motorhome or safari tent. Open from 1 April to 31 October.', 'Zelt, Wohnwagen, Wohnmobil oder Safarizelt. Geöffnet vom 1. April bis 31. Oktober.'),
+  ('team-bert', 'team', 100, false, 'Bert', 'Bert', 'Bert', '', '', '', 'Campingboer · vraag hem naar de tractor', 'Campsite farmer · ask him about the tractor', 'Campingbauer · frag ihn nach dem Traktor'),
+  ('team-reception', 'team', 101, false, '[Naam]', '[Name]', '[Name]', '', '', '', 'Receptie', 'Reception', 'Rezeption'),
+  ('team-animation', 'team', 102, false, '[Naam]', '[Name]', '[Name]', '', '', '', 'Animatie', 'Activities', 'Animation'),
+  ('team-chicken', 'team', 103, true, 'De kip', 'The chicken', 'Das Huhn', '', '', '', 'Gids, plekkenkenner, eierleverancier', 'Guide, pitch expert, egg supplier', 'Führerin, Platzexpertin, Eierlieferantin')
+on conflict (id) do update set label_en = coalesce(about_blocks.label_en, excluded.label_en), label_de = coalesce(about_blocks.label_de, excluded.label_de), title_en = coalesce(about_blocks.title_en, excluded.title_en), title_de = coalesce(about_blocks.title_de, excluded.title_de), body_en = coalesce(about_blocks.body_en, excluded.body_en), body_de = coalesce(about_blocks.body_de, excluded.body_de);
+
 insert into public.settings (key, value, public) values
   ('site', '{"name":"De Groene Weide","phone":null,"email":null,"address":null,"facebookUrl":null,"reception":{"weekdays":null,"weekend":null},"arrivalFrom":null,"departureUntil":null,"notice":null}'::jsonb, true),
   ('plekmatch_enabled', 'true'::jsonb, true),

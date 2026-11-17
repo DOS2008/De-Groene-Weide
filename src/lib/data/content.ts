@@ -4,6 +4,7 @@ import { events as fileEvents } from "@/content/events";
 import { facilities as fileFacilities, type Facility } from "@/content/facilities";
 import { jokes as fileJokes, type Joke } from "@/content/jokes";
 import { site as fileSite } from "@/content/site";
+import { milestones as fileMilestones, team as fileTeam } from "@/content/about";
 import type { CampEvent } from "@/lib/events";
 
 /**
@@ -33,7 +34,7 @@ export function routePlannerUrl(site: Site): string | null {
 
 type Row = Record<string, unknown>;
 
-function toEvent(r: Row): CampEvent {
+export function toEvent(r: Row): CampEvent {
   return {
     id: r.id as string,
     kind: r.kind as CampEvent["kind"],
@@ -108,7 +109,69 @@ export async function getTextOverrides(): Promise<{ key: string; nl: string | nu
   "use cache";
   cacheTag("texts");
   cacheLife("minutes");
-  const { data, error } = await publicDb().from("texts").select("key, value_nl, value_en, value_de");
-  if (error) return [];
-  return data.map((r) => ({ key: r.key, nl: r.value_nl, en: r.value_en, de: r.value_de }));
+  // Every page reads this (src/i18n/request.ts): without a database the
+  // standard texts simply stay.
+  try {
+    const { data, error } = await publicDb().from("texts").select("key, value_nl, value_en, value_de");
+    if (error) return [];
+    return data.map((r) => ({ key: r.key, nl: r.value_nl, en: r.value_en, de: r.value_de }));
+  } catch {
+    return [];
+  }
+}
+
+export type AboutBlock = {
+  id: string;
+  kind: "milestone" | "team";
+  isChicken: boolean;
+  photoPath: string | null;
+} & Record<`${"label" | "title" | "body"}_${"nl" | "en" | "de"}`, string | null>;
+
+/** Over ons: the timeline and the team (published blocks, in order). */
+export async function getAboutBlocks(): Promise<AboutBlock[]> {
+  "use cache";
+  cacheTag("about");
+  cacheLife("minutes");
+  const { data, error } = await publicDb().from("about_blocks").select("*").eq("status", "published").order("sort");
+  if (error || data.length === 0) {
+    return [
+      ...fileMilestones.map((m) => ({
+        id: m.id,
+        kind: "milestone" as const,
+        isChicken: false,
+        photoPath: null,
+        label_nl: m.year_nl,
+        label_en: m.year_en,
+        label_de: m.year_de,
+        title_nl: m.title_nl,
+        title_en: m.title_en,
+        title_de: m.title_de,
+        body_nl: m.text_nl,
+        body_en: m.text_en,
+        body_de: m.text_de,
+      })),
+      ...fileTeam.map((m) => ({
+        id: m.id,
+        kind: "team" as const,
+        isChicken: m.isChicken ?? false,
+        photoPath: null,
+        label_nl: m.name_nl,
+        label_en: m.name_en,
+        label_de: m.name_de,
+        title_nl: "",
+        title_en: "",
+        title_de: "",
+        body_nl: m.role_nl,
+        body_en: m.role_en,
+        body_de: m.role_de,
+      })),
+    ];
+  }
+  return data.map((r) => ({
+    id: r.id,
+    kind: r.kind,
+    isChicken: r.is_chicken,
+    photoPath: r.photo_path,
+    ...pickLocalized(r, ["label", "title", "body"]),
+  })) as AboutBlock[];
 }

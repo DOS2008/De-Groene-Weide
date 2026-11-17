@@ -4,7 +4,7 @@ import { expect, type Page } from "@playwright/test";
 import { totp } from "./totp";
 
 /** Service-role client for test setup only (creating and removing staff). */
-function service() {
+export function service() {
   return createClient(process.env.SUPABASE_URL ?? "http://localhost:8000", process.env.SUPABASE_SERVICE_ROLE_KEY!, {
     auth: { persistSession: false },
   });

@@ -13,6 +13,8 @@ import {
 } from "@/lib/contact";
 import { contactRecipient, sendMail } from "@/lib/mail";
 import { createRateLimit } from "@/lib/rate-limit";
+import { publicDb } from "@/lib/supabase/public";
+import { siteUrl } from "@/lib/seo";
 
 export type ContactState =
   | { status: "idle" }
@@ -51,6 +53,13 @@ export async function sendContactMessage(_prev: ContactState, form: FormData): P
   // The mail to Bert is always in Dutch; the admin side is Dutch only.
   const t = await getTranslations({ locale: "nl", namespace: "contact.form" });
 
+  // Stored for the inbox in the admin panel (F5.11). Guests may only insert;
+  // RLS keeps the messages away from everyone but Bert and the reception.
+  const { error: stored } = await publicDb()
+    .from("messages")
+    .insert({ name: values.name, email: values.email, subject: values.subject || null, body: values.message, locale });
+  if (stored) console.error("Contact message not stored:", stored.message);
+
   try {
     await sendMail({
       to: contactRecipient(),
@@ -62,11 +71,15 @@ export async function sendContactMessage(_prev: ContactState, form: FormData): P
         `Taal van de site: ${locale}`,
         "",
         values.message,
+        "",
+        `Ook te lezen en te beantwoorden in het beheer: ${siteUrl()}/admin/messages`,
       ].join("\n"),
     });
   } catch (error) {
     // Log the failure, never the message or the sender's details.
     console.error("Contact mail failed:", error instanceof Error ? error.message : error);
+    // Stored in the inbox, so Bert still sees it.
+    if (!stored) return { status: "sent" };
     return { status: "error", errors: {}, formError: "sendFailed", values };
   }
 

@@ -366,3 +366,254 @@
   padding: 0.5rem 0.75rem;
   border-radius: var(--radius-sm);
 }
+
+/* ---------------------------------------------------------------- Prio 5 screens */
+
+.admin-lang {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.875rem 1rem 1rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.admin-lang legend {
+  font-weight: 700;
+  padding: 0 0.25rem;
+}
+
+.admin-lang-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.75rem;
+}
+
+.admin-missing {
+  display: inline-block;
+  margin-left: 0.5rem;
+  border-radius: var(--radius-pill);
+  padding: 0.05rem 0.5rem;
+  background: var(--color-eigeel);
+  color: var(--color-inkt);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.admin-field textarea {
+  min-height: 6rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.admin-check {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: var(--tap-min);
+  font-weight: 700;
+  font-size: var(--font-size-small);
+}
+
+.admin-check input {
+  width: 1.375rem;
+  height: 1.375rem;
+  accent-color: var(--color-weidegroen);
+}
+
+.admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-tabs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: 0 1rem;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-border);
+  color: var(--color-inkt);
+  text-decoration: none;
+  font-size: var(--font-size-small);
+  font-weight: 700;
+}
+
+.admin-tabs a[aria-current="page"] {
+  background: var(--color-dark-green);
+  border-color: var(--color-dark-green);
+  color: var(--color-white);
+}
+
+.admin-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  align-items: center;
+}
+
+.admin-row-actions form {
+  display: inline-flex;
+}
+
+.admin-stat {
+  font: 800 2rem var(--font-heading);
+  color: var(--color-dark-green);
+  line-height: 1;
+}
+
+.admin-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-list > li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-list > li:last-child {
+  border-bottom: 0;
+}
+
+.admin-message {
+  white-space: pre-wrap;
+  background: var(--color-melk);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  margin: 0;
+}
+
+.admin-preview {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  background: var(--color-melk);
+}
+
+.admin-preview h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.admin-media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-media-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  background: var(--color-stro);
+}
+
+.admin-cal th,
+.admin-cal td {
+  padding: 0.25rem;
+  min-width: 4.5rem;
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.admin-cal tbody th {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admin-cal td a,
+.admin-cal td span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-inkt);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.admin-cal [data-cal="confirmed"] {
+  background: var(--color-plot-free);
+}
+
+.admin-cal [data-cal="requested"] {
+  background: var(--color-eigeel);
+}
+
+.admin-cal [data-cal="blocked"] {
+  background: repeating-linear-gradient(45deg, var(--color-stro), var(--color-stro) 6px, var(--color-white) 6px, var(--color-white) 12px);
+  color: var(--color-schuurbruin);
+}
+
+.admin-cal [data-cal="held"] {
+  background: var(--color-stro);
+}
+
+.admin-cal thead th[data-today] {
+  color: var(--color-dark-green);
+  text-decoration: underline;
+}
+
+.admin-diff {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.admin-diff del {
+  background: var(--color-stro);
+}
+
+.admin-diff ins {
+  background: var(--color-gras-licht);
+  text-decoration: none;
+}
+
+.admin-grow {
+  flex: 1 1 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-crop {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  background: var(--color-stro);
+}
+
+.admin-dl-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.admin-dl-row dd {
+  margin: 0;
+}

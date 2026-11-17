@@ -8,7 +8,7 @@ import { AUTH_COOKIE, supabaseAnonKey, supabaseServerUrl } from "./lib/supabase/
 const intl = createMiddleware(routing);
 
 /** Pages a staff member may see before passing 2FA. */
-const BEFORE_LOGIN = ["/admin/login"];
+const BEFORE_LOGIN = ["/admin/login", "/admin/welcome"];
 const BEFORE_2FA = ["/admin/2fa"];
 
 /**
@@ -46,7 +46,7 @@ async function adminGate(request: NextRequest) {
   }
   const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
   if (aal?.currentLevel !== "aal2") {
-    return BEFORE_2FA.some((p) => path.startsWith(p)) || path.startsWith("/admin/login")
+    return [...BEFORE_2FA, ...BEFORE_LOGIN].some((p) => path.startsWith(p))
       ? response
       : redirect("/admin/2fa");
   }

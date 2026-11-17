@@ -67,7 +67,7 @@ begin
 
   ---------------------------------------------------------------- seasonal
   perform pg_temp.act_as('00000000-0000-0000-0000-0000000000a4');
-  select count(*) into n from public.reservations;
+  select count(*) into n from public.reservations where id = '00000000-0000-0000-0000-00000000b001';
   assert n = 1, 'a seasonal worker reads reservations';
   update public.reservations set status = 'confirmed' where id = '00000000-0000-0000-0000-00000000b001';
   get diagnostics n = row_count;

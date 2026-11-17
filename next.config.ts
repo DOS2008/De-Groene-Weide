@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   // The e2e container reaches the dev server as http://web:3000.
   allowedDevOrigins: ["web"],
+  experimental: {
+    // Photo uploads in the admin panel (cropped and resized in the browser first).
+    serverActions: { bodySizeLimit: "11mb" },
+  },
 };
 
 export default withNextIntl(nextConfig);

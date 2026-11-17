@@ -26,7 +26,7 @@ export function LoginForm() {
         {pending ? "Even geduld…" : "Inloggen"}
       </button>
       <p className="admin-hint">
-        Wachtwoord vergeten of telefoon kwijt? Vraag Bert om je opnieuw uit te nodigen. Bert zelf: zie de
+        Wachtwoord vergeten of telefoon kwijt? Vraag Bert om een link voor een nieuw wachtwoord. Bert zelf: zie de
         handleiding, &ldquo;Toegang kwijt&rdquo;.
       </p>
     </form>

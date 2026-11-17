@@ -1,6 +1,8 @@
 import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { locale as rootLocale } from "next/root-params";
+import { getTextOverrides } from "@/lib/data/content";
+import { applyOverrides } from "@/lib/texts";
 import { routing } from "./routing";
 
 export default getRequestConfig(async ({ locale: explicit }) => {
@@ -19,6 +21,10 @@ export default getRequestConfig(async ({ locale: explicit }) => {
   return {
     locale,
     timeZone: "Europe/Amsterdam",
-    messages: (await import(`../../messages/${locale}.json`)).default,
+    // The standard texts, with what Bert published in "Pagina's & teksten".
+    messages: applyOverrides(
+      (await import(`../../messages/${locale}.json`)).default,
+      (await getTextOverrides()).map((o) => ({ key: o.key, value: o[locale] })),
+    ),
   };
 });

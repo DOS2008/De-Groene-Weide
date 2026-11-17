@@ -165,3 +165,80 @@ export async function deleteBlock(_: ActionState, form: FormData): Promise<Actio
   revalidatePath("/admin", "layout");
   return { ok: "De blokkade is weggehaald." };
 }
+
+/**
+ * Change a booking (other dates, another plot, more people, new contact
+ * details). The same constraint and trigger apply, so it can never overlap
+ * another booking or a block. The price is calculated again.
+ */
+export async function updateBooking(_: ActionState, form: FormData): Promise<ActionState> {
+  await requireStaff("admin", "reception");
+  const id = String(form.get("id") ?? "");
+  const text = (k: string, max: number) => String(form.get(k) ?? "").trim().slice(0, max);
+  const num = (k: string, min: number, max: number) => {
+    const n = Number(form.get(k));
+    return Number.isInteger(n) && n >= min && n <= max ? n : null;
+  };
+  const arrival = text("arrival", 10);
+  const departure = text("departure", 10);
+  const plotId = text("plot", 4).toUpperCase();
+  const adults = num("adults", 1, 20);
+  const children = num("children", 0, 20);
+  const dogs = num("dogs", 0, 5);
+  const accommodation = text("accommodation", 20);
+  const locale = text("locale", 2);
+  const name = text("name", 120);
+  const email = text("email", 200).toLowerCase();
+  const phone = text("phone", 30);
+  if (!isIsoDate(arrival) || !isIsoDate(departure) || departure <= arrival) return { error: "De vertrekdatum moet na de aankomstdatum liggen." };
+  if (adults === null || children === null || dogs === null) return { error: "Vul het aantal personen en honden in." };
+  if (!["tent", "caravan", "camper", "safari_tent"].includes(accommodation)) return { error: "Kies een soort verblijf." };
+  if (!["nl", "en", "de"].includes(locale)) return { error: "Kies een taal." };
+  if (!name) return { error: "Vul de naam van de gast in." };
+  if (!email && !phone) return { error: "Vul een e-mailadres of telefoonnummer in." };
+  if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { error: "Dat e-mailadres klopt niet." };
+
+  const [plots, prices] = await Promise.all([getPlots("nl"), getPriceInfo("nl")]);
+  const plot = plots.find((p) => p.id === plotId);
+  if (!plot) return { error: "Die plek bestaat niet." };
+  if (adults + children > plot.maxPersons) return { error: `Plek ${plot.id} is voor maximaal ${plot.maxPersons} personen.` };
+  const electricity = form.get("electricity") === "on";
+  const price = calculatePrice(
+    { priceGroupId: plot.priceGroupId, arrival, departure, adults, children, dogs, electricity },
+    prices,
+  ).total;
+
+  const db = await staffDb();
+  const { data, error } = await db
+    .from("reservations")
+    .update({
+      plot_id: plotId,
+      stay: `[${arrival},${departure})`,
+      adults,
+      children,
+      dogs,
+      accommodation,
+      electricity,
+      name,
+      email: email || null,
+      phone: phone || null,
+      remarks: text("remarks", 2000) || null,
+      locale,
+      price_total: price,
+    })
+    .eq("id", id)
+    .neq("status", "cancelled")
+    .select(BOOKING_COLUMNS)
+    .maybeSingle<BookingRow>();
+  if (error) return { error: dbErrorText(error.message) };
+  if (!data) return { error: "Een geannuleerde reservering kun je niet meer wijzigen, of dat mag jouw rol niet." };
+  if (form.get("notify") === "on" && data.email && data.status === "confirmed") {
+    await deliver(await guestMail("confirmed", toMailBooking(data, "confirmed")));
+  }
+  refreshAll();
+  return { ok: `${data.code} is gewijzigd.` };
+}
+
+function refreshAll() {
+  revalidatePath("/admin", "layout");
+}

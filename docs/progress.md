@@ -10,7 +10,7 @@ Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway t
 | 2 Clickable site map | Done | Yes (`9ae0583`) |
 | 3 Booking level 1 + minimal admin | Built. All database and e2e tests pass | Yes (`73a9ef8`) |
 | 4 English and German | Built. Native-speaker check still to do | Yes (`73a9ef8`) |
-| 5 Admin panel for content | Started: database, seed and loaders only, no admin screens | Yes (`73a9ef8`) |
+| 5 Admin panel for content | Built. All database, unit and e2e tests pass | Yes |
 | 6 Booking level 2 + launch hardening | Not started (the DB function already supports level 2) | – |
 | 7 Shoulds | Not started | – |
 | 8 Coulds | Skipped on purpose: only when Bert asks for them | – |
@@ -67,28 +67,40 @@ Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway t
 - The seed fills empty EN and DE columns without overwriting edits from the admin panel.
 - **Still to do:** native speakers check the texts and the humour (mvp.md, Prio 4 step 7).
 
-## Prio 5 – Admin panel for content (started)
+## Prio 5 – Admin panel for content
 
-Done:
-- `0003_content.sql`: `events`, `jokes`, `messages`, `texts` (overrides for UI texts), `media` with the `media` storage bucket, RLS, `staff_overview()` and the `missing_translations` view. Applied in dev.
-- The seed copies events, jokes and a `site` settings row (contact, reception hours, notice) from `src/content`.
-- `src/lib/data/content.ts`: cached loaders that return the same shapes as `src/content`, with the files as fallback. Home, Activities, Events, Contact, Reserveren, the footer and the notice banner now read through them.
+Every screen from mvp.md, Prio 5, in the order Bert uses them. All are Dutch, with NL, EN and DE side by side and a "Vertaling ontbreekt" label (`src/app/admin/LangFields.tsx`). The nav shows what the role may do; RLS decides.
 
-Not done:
-- All admin screens: events, settings, messages inbox, editing plots and facilities, prices and seasons, pages and texts, media, users and roles, the bookings calendar, and the Excel/CSV export.
-- The contact form doesn't store messages in `messages` yet.
-- UI text overrides aren't merged into next-intl yet.
-- Over ons still reads `src/content/about.ts`.
-- RLS tests for the new tables.
+- **Start (F5.2):** four quick actions (nieuw evenement, reservering toevoegen, plek blokkeren, mededeling plaatsen), bookings to confirm, new messages, and missing translations per section.
+- **Evenementen (F5.7):** list and week view, create, edit, copy (as a draft), once / daily / weekly with days to skip, draft or published, photo.
+- **Instellingen (F5.12):** notice banner, contact details and times, booking level 1/2, hold minutes, holds per visitor, min/max nights, free cancellation days, reminder days, Plekmatch on/off, retention, review link, Facebook page, and the jokes per language.
+- **Berichten (F5.11):** the contact form now also stores each message (`messages`). Inbox with new/done, reply by email from the panel (in a mail with the chicken), delete (admin only).
+- **Plekken (F5.5)** with filters, every feature editable, and the "gecontroleerd" toggle; a trigger records when and by whom. **Voorzieningen (F5.10):** text, photo, hours, access per facility. New facilities still come from the map drawing.
+- **Prijzen & seizoenen (F5.6):** price per night per group and period, extras, the peak period dates and names, season dates per year.
+- **Pagina's & teksten (F5.8):** every UI text of 12 pages, as a draft, with a before/after preview and Publiceren. A text must keep its `{placeholders}` (`src/lib/texts.ts`, unit tested). Published texts are merged into next-intl in `src/i18n/request.ts`. Over ons (timeline and team) moved to `about_blocks`.
+- **Foto's & media (F5.9):** upload with cropping in the browser (shape and position, resized to WebP), Dutch alt text required, shows where each photo is used, delete only when unused.
+- **Gebruikers & rollen (F5.13):** invite by email (own link, `/admin/welcome`), change role, revoke, reset 2FA, new password link, 2FA status. The database refuses to remove or demote the last admin.
+- **Reserveringen (F5.3, rest):** booking detail page with edit (same rules, price recalculated), a two-week calendar per plot, and a CSV download that Dutch Excel opens directly.
+
+Migration `0004_admin.sql`. Database tests `03_content_roles.sql` cover every new table per role.
+
+Fixed on the way:
+- **Guests couldn't call `auth_role()`.** Policies like `status = 'published' or has_role(...)` failed for guests as soon as a draft row existed, and the site silently fell back to `src/content`. Admin edits to events would never have shown. `0004` grants it to anon.
+- **The login rate limit counted per IP for password and code together**, so the sixth login from one address was refused. It now counts per account (10 per 15 minutes) with a cap of 60 per address.
+- `scripts/dev/check-sync.mjs` failed inside the container (a `
+` in the script became a real line break). It works now and is the way to sync while Compose Watch doesn't.
+- `02_roles.sql` assumed an empty reservations table.
+
+Noted: after a save, another visitor can see the old page once while the cache refreshes (seconds). The editor sees the change straight away.
 
 ## Tests and how far they are verified
 
-| Check | Command | Last result (17 November, evening) |
+| Check | Command | Last result (17 November, late evening) |
 | --- | --- | --- |
-| Database rules: double booking, holds, dates, blocks, phone booking, roles, 3-way race | `docker compose run --rm --entrypoint sh migrate /scripts/test.sh` | **All pass** |
-| Unit tests (pricing, booking rules, geometry, messages, earlier tests) | `docker compose exec web npm test` | **54/54 pass** |
+| Database rules: double booking, holds, dates, blocks, phone booking, roles, content roles, last admin, 3-way race | `docker compose run --rm --entrypoint sh migrate /scripts/test.sh` | **All pass** |
+| Unit tests (pricing, booking rules, geometry, messages, texts, CSV, earlier tests) | `docker compose exec web npm test` | **65/65 pass** |
 | Types / lint | `npm run typecheck` · `npm run lint` (in `web`) | **Clean** |
-| End-to-end (Playwright + axe) | `docker compose --profile test run --rm e2e` | **19/19 pass**: booking on a phone, EN and DE booking with email, two-browser race, invalid dates, admin phone booking, no admin without 2FA, Plattegrond hand-over, axe on all 11 public pages at phone width |
+| End-to-end (Playwright + axe) | `docker compose --profile test run --rm e2e` | **25/25 pass**: booking on a phone, EN and DE booking with email, two-browser race, invalid dates, admin phone booking, no admin without 2FA, Plattegrond hand-over, axe on all 11 public pages at phone width, plus the Prio 5 test tasks (post an event, block a plot, change a price), the inbox and reply, a role refusal and axe on 17 admin screens |
 
 Only the Playwright screenshots have been looked at. Nobody has clicked through the new screens in a real browser yet.
 
@@ -98,7 +110,8 @@ Only the Playwright screenshots have been looked at. Nobody has clicked through 
 - **Proxy matcher escaping:** it must read `.*\\..*`. With one backslash, only `/` runs through the proxy and every Dutch URL gives a 404. This cost a lot of time today and is now noted in CLAUDE.md.
 - Vitest doesn't run on the Windows host; run it in the container.
 - In dev mode the 404 page renders as Next's error document, so axe flags `html-has-lang`. Check this against a production build.
-- The admin nav only links to screens that exist (`ADMIN_ROUTES` in `src/app/admin/AdminShell.tsx`). Extend it as Prio 5 screens are added.
+- **Compose Watch didn't sync at all in this session** (`docker compose watch` said "Watch enabled" and copied nothing). `node scripts/dev/check-sync.mjs --fix` after each edit works.
+- In dev, the admin routes log `Date.now() while prerendering` from the Supabase client in `AdminShell`. It was there before Prio 5 (also on `/admin/2fa`), and `next build` passes.
 
 ## Fixed after the restart (17 November, evening)
 

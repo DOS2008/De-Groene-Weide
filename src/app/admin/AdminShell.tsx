@@ -20,11 +20,8 @@ function navFor(role: Role): NavItem[] {
     { href: "/admin/settings", label: "Instellingen", show: can.content(role) },
     { href: "/admin/users", label: "Gebruikers & rollen", show: can.content(role) },
   ];
-  return items.filter((i) => i.show && ADMIN_ROUTES.has(i.href)).map(({ href, label }) => ({ href, label }));
+  return items.filter((i) => i.show).map(({ href, label }) => ({ href, label }));
 }
-
-/** Screens that exist so far; the nav only links to these. */
-const ADMIN_ROUTES = new Set(["/admin", "/admin/bookings", "/admin/plots"]);
 
 export async function AdminShell({ children }: { children: React.ReactNode }) {
   const staff = await getStaff();

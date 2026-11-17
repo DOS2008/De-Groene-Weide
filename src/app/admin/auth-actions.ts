@@ -7,7 +7,12 @@ import { headers } from "next/headers";
 
 export type AuthState = { error?: string; qr?: string; secret?: string; factorId?: string };
 
-const loginLimit = createRateLimit({ limit: 10, windowMs: 15 * 60_000 });
+// Guessing is limited per account (10 tries per quarter), with a looser cap
+// per address so one office or campsite wifi can still log in several people.
+const accountLimit = createRateLimit({ limit: 10, windowMs: 15 * 60_000 });
+const addressLimit = createRateLimit({ limit: 60, windowMs: 15 * 60_000 });
+const codeLimit = createRateLimit({ limit: 10, windowMs: 15 * 60_000 });
+const TOO_MANY = "Te veel pogingen. Wacht een kwartier en probeer het opnieuw.";
 
 async function ip() {
   const h = await headers();
@@ -15,10 +20,10 @@ async function ip() {
 }
 
 export async function signIn(_: AuthState, form: FormData): Promise<AuthState> {
-  if (!loginLimit(await ip())) return { error: "Te veel pogingen. Wacht een kwartier en probeer het opnieuw." };
   const email = String(form.get("email") ?? "").trim();
   const password = String(form.get("password") ?? "");
   if (!email || !password) return { error: "Vul je e-mailadres en wachtwoord in." };
+  if (!addressLimit(await ip()) || !accountLimit(email.toLowerCase())) return { error: TOO_MANY };
   const db = await staffDb();
   const { error } = await db.auth.signInWithPassword({ email, password });
   if (error) return { error: "Dat e-mailadres of wachtwoord klopt niet." };
@@ -41,11 +46,12 @@ export async function startSetup(): Promise<AuthState> {
 }
 
 export async function verifyCode(_: AuthState, form: FormData): Promise<AuthState> {
-  if (!loginLimit(await ip())) return { error: "Te veel pogingen. Wacht een kwartier en probeer het opnieuw." };
   const code = String(form.get("code") ?? "").replace(/\s/g, "");
   const factorId = String(form.get("factorId") ?? "");
   if (!/^\d{6}$/.test(code)) return { error: "Vul de 6 cijfers uit je app in.", factorId };
   const db = await staffDb();
+  const { data: who } = await db.auth.getUser();
+  if (!addressLimit(await ip()) || !codeLimit(who.user?.id ?? "none")) return { error: TOO_MANY, factorId };
   const { error } = await db.auth.mfa.challengeAndVerify({ factorId, code });
   if (error) return { error: "Die code klopt niet of is verlopen. Probeer de nieuwe code.", factorId };
   redirect("/admin");

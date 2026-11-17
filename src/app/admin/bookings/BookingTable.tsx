@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { formatDate } from "@/lib/dates";
 import { sourceNames, statusNames, type BookingRow } from "@/lib/admin/bookings";
 import { ActionForm, Submit } from "../ActionForm";
@@ -29,7 +30,9 @@ export function BookingTable({ rows, canEdit }: { rows: BookingRow[]; canEdit: b
               <th scope="row">
                 <span className="admin-pill">{r.plot_id}</span>
                 <br />
-                <span className="admin-hint">{r.code}</span>
+                <Link href={`/admin/bookings/${r.id}`} className="admin-hint">
+                  {r.code}
+                </Link>
               </th>
               <td>
                 {r.name}

@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getPageLocale } from "@/i18n/locale";
 import { Link } from "@/i18n/navigation";
-import { milestones, team } from "@/content/about";
+import { getAboutBlocks } from "@/lib/data/content";
+import { mediaUrl } from "@/lib/supabase/env";
 import { Chicken } from "@/components/Chicken";
 import { PageIntro } from "@/components/PageIntro";
 import { WithPlaceholders } from "@/components/Placeholder";
-import { text } from "@/lib/localized";
 import { pageMetadata } from "@/lib/seo";
 import styles from "./about.module.css";
 
@@ -26,6 +26,11 @@ export default async function AboutPage() {
   const t = await getTranslations("about");
   const tc = await getTranslations("common");
   const values = t.raw("values") as { title: string; text: string }[];
+  const blocks = await getAboutBlocks();
+  // The language's own text, or Dutch while a translation is missing.
+  const say = (b: (typeof blocks)[number], f: "label" | "title" | "body") => b[`${f}_${locale}`] || b[`${f}_nl`] || "";
+  const milestones = blocks.filter((b) => b.kind === "milestone");
+  const team = blocks.filter((b) => b.kind === "team");
 
   return (
     <>
@@ -49,11 +54,11 @@ export default async function AboutPage() {
             {milestones.map((m) => (
               <li key={m.id} className={`card ${styles.milestone}`}>
                 <span className={styles.year}>
-                  <WithPlaceholders text={text(m, "year", locale)} />
+                  <WithPlaceholders text={say(m, "label")} />
                 </span>
-                <h3>{text(m, "title", locale)}</h3>
+                <h3>{say(m, "title")}</h3>
                 <p className="muted">
-                  <WithPlaceholders text={text(m, "text", locale)} />
+                  <WithPlaceholders text={say(m, "body")} />
                 </p>
               </li>
             ))}
@@ -82,12 +87,19 @@ export default async function AboutPage() {
             {team.map((m) => (
               <li key={m.id} className={`card ${styles.member}`}>
                 <div className={styles.memberPhoto} aria-hidden="true">
-                  {m.isChicken ? <Chicken size={110} /> : <span className="placeholder">[Foto]</span>}
+                  {m.isChicken ? (
+                    <Chicken size={110} />
+                  ) : m.photoPath ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- decorative, the name is the heading below
+                    <img src={mediaUrl(m.photoPath)!} alt="" width={110} height={110} loading="lazy" />
+                  ) : (
+                    <span className="placeholder">[Foto]</span>
+                  )}
                 </div>
                 <h3>
-                  <WithPlaceholders text={text(m, "name", locale)} />
+                  <WithPlaceholders text={say(m, "label")} />
                 </h3>
-                <p className="muted">{text(m, "role", locale)}</p>
+                <p className="muted">{say(m, "body")}</p>
               </li>
             ))}
           </ul>

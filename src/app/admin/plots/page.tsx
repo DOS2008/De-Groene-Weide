@@ -4,7 +4,7 @@ import { staffDb } from "@/lib/supabase/staff";
 import { formatDate, addDays, todayAtCampsite } from "@/lib/dates";
 import { ActionForm, Submit } from "../ActionForm";
 import { createBlock, deleteBlock } from "../bookings/actions";
-import { PlotEditor } from "./PlotEditor";
+import { PlotEditor, type PlotFilter } from "./PlotEditor";
 import { TableWrap } from "@/components/TableWrap";
 
 export const metadata: Metadata = { title: "Plekken" };
@@ -17,8 +17,9 @@ function nights(period: string) {
   return { from, last: addDays(to, -1) };
 }
 
-export default async function PlotsPage() {
+export default async function PlotsPage({ searchParams }: { searchParams: Promise<PlotFilter> }) {
   const staff = await requireStaff("admin", "reception", "seasonal");
+  const filter = await searchParams;
   const db = await staffDb();
   const today = todayAtCampsite();
   const [plots, blocks] = await Promise.all([
@@ -121,7 +122,7 @@ export default async function PlotsPage() {
         )}
       </section>
 
-      <PlotEditor plots={plots.data ?? []} canEdit={staff.role === "admin"} />
+      <PlotEditor plots={plots.data ?? []} canEdit={staff.role === "admin"} filter={filter} />
     </>
   );
 }

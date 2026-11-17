@@ -33,11 +33,25 @@ export default async function BookingsPage({ searchParams }: { searchParams: Pro
           <span className="eyebrow">Reserveringen</span>
           <h1>Reserveringen</h1>
         </div>
-        {can.editBookings(staff.role) && (
-          <Link href="/admin/bookings/new" className="btn btn-primary admin-btn-small">
-            Reservering toevoegen
+        <div className="admin-row-actions">
+          <Link href="/admin/bookings/calendar" className="btn btn-secondary admin-btn-small">
+            Kalender
           </Link>
-        )}
+          {can.editBookings(staff.role) && (
+            <>
+              <a
+                href={`/admin/bookings/export?van=${from}${isIsoDate(q.tot) ? `&tot=${q.tot}` : ""}`}
+                className="btn btn-secondary admin-btn-small"
+                download
+              >
+                Download voor Excel
+              </a>
+              <Link href="/admin/bookings/new" className="btn btn-primary admin-btn-small">
+                Reservering toevoegen
+              </Link>
+            </>
+          )}
+        </div>
       </div>
 
       <form className="admin-card admin-fields" role="search" aria-label="Filter reserveringen">

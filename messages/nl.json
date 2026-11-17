@@ -45,7 +45,8 @@
     "reception": "Receptie",
     "weekdays": "Ma – vr",
     "weekend": "Za – zo",
-    "season": "Seizoen"
+    "season": "Seizoen",
+    "review": "Was het fijn? Schrijf een review"
   },
   "cookies": {
     "title": "Koekjes? Alleen die van oma.",
@@ -56,7 +57,7 @@
     "needed": "Nodig om de site te laten werken",
     "neededHint": "Je cookiekeuze en de stand van de Rustknop. Staat altijd aan.",
     "extras": "Extra's van andere websites",
-    "extrasHint": "Bijvoorbeeld Facebook-berichten op de homepage. Die sturen gegevens naar Facebook.",
+    "extrasHint": "Bijvoorbeeld de foto's bij de Facebook-berichten op de homepage. Die komen van de servers van Facebook.",
     "readMore": "Lees de privacyverklaring",
     "saved": "Je keuze is bewaard."
   },
@@ -80,7 +81,12 @@
     "eventsFromSeason": "De camping is dicht tot 1 april. Dit staat er klaar voor de eerste dagen.",
     "findTitle": "Zo vind je ons",
     "findSeason": "Seizoen: 1 april t/m 31 oktober",
-    "findReception": "Receptie open"
+    "findReception": "Receptie open",
+    "facebookTitle": "Nieuws van het erf",
+    "facebookMore": "Lees verder op Facebook",
+    "facebookFallback": "Het laatste nieuws van het erf staat op onze Facebookpagina.",
+    "facebookFollow": "Naar onze Facebookpagina",
+    "facebookPhotosOff": "Foto's van Facebook staan uit. Zet 'Extra's' aan bij de cookie-instellingen om ze te zien."
   },
   "activities": {
     "metaTitle": "Terrein & activiteiten",
@@ -641,8 +647,8 @@
     "electricityYes": "Ja, graag",
     "electricityNo": "Nee, hoeft niet",
     "safariHasPower": "Safaritenten hebben altijd stroom.",
-    "matchTitle": "Plekmatch komt eraan",
-    "matchText": "Straks stelt de kip je vijf vragen en tipt ze de drie beste plekken. Tot die tijd kies je zelf op de kaart. Ook prima: jij kent je familie het best.",
+    "matchTitle": "Kies zelf je plekje",
+    "matchText": "Op de kaart zie je welke plekken nog vrij zijn. Jij kent je familie het best.",
     "matchSkip": "Kies zelf op de kaart",
     "summaryBar": "{nights} · {persons, plural, one {# persoon} other {# personen}} · {accommodation}",
     "change": "Wijzig",
@@ -766,5 +772,69 @@
     "cancelNeedsCheck": "Vink eerst aan dat je het zeker weet.",
     "contact": "Contact opnemen",
     "home": "Naar de homepage"
+  },
+  "plekmatch": {
+    "intro": "Vijf vragen, dan tipt de kip de drie beste plekjes die nog vrij zijn.",
+    "joke": "De kip kent elk grassprietje. Ze heeft ze zelf geteld.",
+    "progress": "Vraag {n} van {total}",
+    "back": "Vorige vraag",
+    "skip": "Sla over, ik kies zelf",
+    "loading": "De kip kijkt welke plekken vrij zijn…",
+    "q": {
+      "near": {
+        "title": "Waar wil je graag dichtbij zijn?",
+        "playground": "De speelweide",
+        "sanitary": "Het sanitair",
+        "pool": "Het zwembad",
+        "none": "Maakt niet uit"
+      },
+      "mood": {
+        "title": "Rust of reuring?",
+        "quiet": "Lekker rustig",
+        "lively": "Midden in de gezelligheid",
+        "none": "Maakt niet uit"
+      },
+      "shade": {
+        "title": "Hoeveel schaduw wil je?",
+        "lots": "Veel schaduw",
+        "some": "Een beetje",
+        "sun": "Liever zon",
+        "none": "Maakt niet uit"
+      },
+      "level": {
+        "title": "Moet de plek vlak zijn?",
+        "yes": "Ja, graag vlak",
+        "no": "Maakt niet uit"
+      },
+      "wheelchair": {
+        "title": "Heeft iemand een rolstoel of rollator nodig?",
+        "yes": "Ja",
+        "no": "Nee"
+      }
+    },
+    "resultsTitle": "{count, plural, one {De kip tipt deze plek} other {De kip tipt deze # plekken}}",
+    "pick": "Kies plek {id}",
+    "seeOnMap": "Bekijk de tips op de kaart",
+    "again": "Opnieuw beginnen",
+    "reason": {
+      "near": "{metres} m van {facility}",
+      "quiet": "Rustig, ver van de speelweide",
+      "lively": "Dicht bij de speelweide en de kantine",
+      "shadeLots": "Veel schaduw",
+      "shadeSome": "Een beetje schaduw",
+      "sun": "Lekker in de zon",
+      "level": "Een vlakke plek",
+      "accessible": "Gecontroleerd: geschikt voor een rolstoel",
+      "fits": "Ruim genoeg voor {persons} personen"
+    },
+    "nearTitle": "Precies wat je zoekt is niet meer vrij",
+    "nearClosest": "Het dichtst in de buurt komt plek {id}.",
+    "missesElectricity": "Let op: daar is geen stroom.",
+    "missesWheelchair": "Let op: die plek is niet gecontroleerd op rolstoeltoegang.",
+    "nearIdeal": "Plek {id} past wel precies. Die is vrij van {from} tot {to}.",
+    "nearIdealNone": "Een plek die precies past, is de komende maanden niet vrij. Bel of mail Bert, dan zoeken we samen.",
+    "tryDates": "Kies die data",
+    "noneAtAll": "Er is in deze periode geen plek vrij die past. Probeer andere data.",
+    "noIdeal": "Een plek die precies past, hebben we (nog) niet. Bel of mail Bert, dan zoeken we samen."
   }
 }

@@ -18,7 +18,7 @@ Voor Bert en de technische beheerder na de oplevering. Alle accounts staan **op 
 ## Waar staat wat
 
 - **Code:** deze repository. Opstarten en uitrollen: [README.md](../README.md), "Deploying".
-- **Geheimen:** `.env` op de server (nooit in git). Bevat de database-wachtwoorden, de Supabase-sleutels, `JOBS_SECRET` en `MANAGE_LINK_SECRET`. Verander `MANAGE_LINK_SECRET` niet: dan werken de links in mails die al verstuurd zijn niet meer.
+- **Geheimen:** `.env` op de server (nooit in git). Bevat de database-wachtwoorden, de Supabase-sleutels, `JOBS_SECRET`, `MANAGE_LINK_SECRET` en (optioneel) `FACEBOOK_PAGE_TOKEN` voor de Facebook-berichten op de homepage. Verander `MANAGE_LINK_SECRET` niet: dan werken de links in mails die al verstuurd zijn niet meer.
 - **Achtergrondtaken:** de service `cron` roept elke 15 minuten `/api/jobs` aan: mails die mislukten opnieuw versturen, herinneringen en bedankmails. In de database draait elke nacht `apply_retention()` (gegevens van gasten weg na de bewaartermijn) en elke minuut het opruimen van verlopen plekken.
 
 ## Reservekopieën

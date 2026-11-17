@@ -89,6 +89,31 @@ test("Bert changes a price; the booking page shows it", async ({ page, browser }
   }
 });
 
+test("Bert puts an old price back from the history", async ({ page }) => {
+  const staff = await createStaff("admin");
+  const db = service();
+  const { data: before } = await db.from("prices").select("price_per_night").eq("price_group_id", "camper").eq("period_id", "peak").single();
+  try {
+    await loginWithNewTotp(page, staff);
+    await page.goto("/admin/prices");
+    await page.getByLabel("Camper, Hoogseizoen (juli en augustus)").fill("44,00");
+    await page.getByRole("button", { name: "Prijzen opslaan" }).click();
+    await expect(page.getByText(/De prijzen zijn opgeslagen/)).toBeVisible();
+
+    await page.goto("/admin/history?toon=prijzen");
+    const entry = page.getByRole("listitem").filter({ hasText: "Prijs camper:peak gewijzigd door Test admin" }).first();
+    await expect(entry).toBeVisible();
+    page.once("dialog", (d) => d.accept());
+    await entry.getByRole("button", { name: /Zet terug/ }).click();
+    await expect(page.getByText(/Teruggezet/)).toBeVisible();
+    const { data: after } = await db.from("prices").select("price_per_night").eq("price_group_id", "camper").eq("period_id", "peak").single();
+    expect(after?.price_per_night ?? null).toBe(before?.price_per_night ?? null);
+  } finally {
+    await db.from("prices").update({ price_per_night: before?.price_per_night ?? null }).eq("price_group_id", "camper").eq("period_id", "peak");
+    await removeStaff(staff);
+  }
+});
+
 test("a contact message lands in the inbox and the reply reaches the guest", async ({ page, browser }) => {
   const guestEmail = `gast-${Date.now()}@example.nl`;
   const guest = await (await browser.newContext()).newPage();
@@ -151,6 +176,7 @@ const adminPages = [
   "/admin/pages?pagina=about",
   "/admin/media",
   "/admin/users",
+  "/admin/history",
 ];
 
 async function axe(page: Page) {

@@ -427,3 +427,54 @@
   text-align: center;
   color: var(--color-muted);
 }
+
+/* Plekmatch: big answer buttons, one per row on a phone. */
+.answers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+}
+
+.tips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--color-melk);
+  border: 2px solid var(--color-eigeel);
+}
+
+.tipStar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--color-eigeel);
+  color: var(--color-inkt);
+  font-size: 1.25rem;
+  flex: none;
+}
+
+.tipText {
+  flex: 1 1 12rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.tipText strong {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+}

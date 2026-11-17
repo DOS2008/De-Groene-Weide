@@ -17,7 +17,8 @@ const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
-  `img-src 'self' data: blob: ${supabase}`.trim(),
+  // Facebook photos (fbcdn) only load after the visitor allowed "extras".
+  `img-src 'self' data: blob: ${supabase} https://*.fbcdn.net`.replace(/\s+/g, " "),
   "font-src 'self'",
   `connect-src 'self'${dev ? " ws: wss:" : ""}`,
   "frame-ancestors 'none'",

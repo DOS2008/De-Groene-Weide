@@ -12,6 +12,7 @@ import { Fact, Missing } from "@/components/Placeholder";
 import { kindSurface, recurrenceText } from "@/components/events/format";
 import { nextOfEach } from "@/lib/events";
 import { jokeOfTheDay } from "@/lib/jokes";
+import { FacebookNews } from "@/components/facebook/FacebookNews";
 import { text } from "@/lib/localized";
 import { firstOpenDay } from "@/lib/season";
 import { pageMetadata, siteUrl } from "@/lib/seo";
@@ -164,6 +165,8 @@ export default async function HomePage() {
           </ul>
         </div>
       </section>
+
+      <FacebookNews locale={locale} />
 
       <section className={`container section ${styles.find}`} aria-labelledby="find-title">
         <RouteDrawing />

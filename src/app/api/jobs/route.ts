@@ -1,5 +1,6 @@
 import { timingSafeEqual } from "node:crypto";
 import { retryOutbox } from "@/lib/jobs/outbox";
+import { sendFarewells, sendReminders } from "@/lib/jobs/guest-mails";
 
 /**
  * Background jobs, called every 15 minutes by the `cron` service in
@@ -27,4 +28,6 @@ export async function POST(request: Request) {
 
 const jobs: Record<string, () => Promise<unknown>> = {
   mailRetries: () => retryOutbox(),
+  reminders: () => sendReminders(),
+  farewells: () => sendFarewells(),
 };

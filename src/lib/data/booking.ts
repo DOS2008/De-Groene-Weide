@@ -6,6 +6,8 @@ import { localize } from "./map";
 
 export type BookingRules = {
   bookingLevel: 1 | 2;
+  /** Plekmatch in step 3 (Instellingen → Overig). */
+  plekmatch: boolean;
   holdMinutes: number;
   maxHolds: number;
   minNights: number;
@@ -22,6 +24,7 @@ export type PriceInfo = PriceTable & {
 
 const defaults: BookingRules = {
   bookingLevel: 1,
+  plekmatch: true,
   holdMinutes: 15,
   maxHolds: 2,
   minNights: 1,
@@ -50,6 +53,7 @@ export async function getBookingRules(): Promise<BookingRules> {
   };
   return {
     bookingLevel: get("booking_level", 1) >= 2 ? 2 : 1,
+    plekmatch: settings.data.find((s) => s.key === "plekmatch_enabled")?.value !== false,
     holdMinutes: get("hold_minutes", 15),
     maxHolds: get("max_holds_per_visitor", 2),
     minNights: get("min_nights", 1),

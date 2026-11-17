@@ -1,12 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { getSite } from "@/lib/data/content";
+import { getReviewUrl, getSite } from "@/lib/data/content";
 import { Fact, Missing } from "@/components/Placeholder";
 import { CookieSettingsButton } from "./CookieBanner";
 import styles from "./SiteFooter.module.css";
 
 export async function SiteFooter() {
-  const site = await getSite();
+  const [site, review] = await Promise.all([getSite(), getReviewUrl()]);
   const t = await getTranslations("footer");
   const tc = await getTranslations("common");
   const tm = await getTranslations("meta");
@@ -61,6 +61,14 @@ export async function SiteFooter() {
             <li>
               <CookieSettingsButton className={styles.linkButton} />
             </li>
+            {review && (
+              <li>
+                <a href={review} rel="noopener" target="_blank">
+                  {t("review")}
+                  <span className="visually-hidden"> ({tc("newWindow")})</span>
+                </a>
+              </li>
+            )}
             <li>
               {site.facebookUrl ? (
                 <a href={site.facebookUrl} rel="noopener">

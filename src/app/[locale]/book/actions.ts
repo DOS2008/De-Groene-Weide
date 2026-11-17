@@ -259,3 +259,26 @@ export async function submitBooking(input: BookingInput): Promise<SubmitResult> 
 
   return { status: result.status, code: result.code!, email: booking.email! };
 }
+
+const matchLimit = createRateLimit({ limit: 60, windowMs: 10 * 60_000 });
+
+/** Anonymous Plekmatch count: "shown" or "picked". No answers, no person. */
+export async function countPlekmatch(event: "shown" | "picked"): Promise<void> {
+  if (event !== "shown" && event !== "picked") return;
+  if (!matchLimit(await clientIp())) return;
+  const { error } = await publicDb().rpc("plekmatch_count", { p_event: event });
+  if (error) console.error("plekmatch_count:", error.message);
+}
+
+/** Near-match: when is this plot next free for as many nights? */
+export async function nextFreeStay(plotId: string, nights: number, from: string): Promise<{ arrival: string; departure: string } | null> {
+  if (!/^[TCS]\d{1,2}$/.test(plotId) || !Number.isInteger(nights) || nights < 1 || nights > 60 || !isIsoDate(from)) return null;
+  if (!matchLimit(await clientIp())) return null;
+  const { data, error } = await publicDb().rpc("next_free_stay", { p_plot: plotId, p_nights: nights, p_from: from });
+  if (error) {
+    console.error("next_free_stay:", error.message);
+    return null;
+  }
+  const row = (data as { arrival: string; departure: string }[])[0];
+  return row ?? null;
+}

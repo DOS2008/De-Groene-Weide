@@ -10,6 +10,10 @@ import { formatDate } from "@/lib/dates";
 import { CancelForm } from "./CancelForm";
 import styles from "./manage.module.css";
 
+// One guest's own booking: nothing to prerender, it always renders per
+// request (like the catch-all 404).
+export const instant = false;
+
 /** A guest's own booking: never indexed, never in the sitemap. */
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("manage");

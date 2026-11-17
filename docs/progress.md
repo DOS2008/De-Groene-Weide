@@ -1,6 +1,6 @@
-# Build progress – 17 November 2026
+# Build progress – 18 November 2026
 
-Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway through Prio 5. Prio 2 is in `9ae0583`, and Prio 3, 4 and the start of Prio 5 are in `73a9ef8`, both on `feature/implementation-roadmap`. All checks pass (see *Tests*).
+Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Prio 2 to 7 are built, on `feature/implementation-roadmap`: Prio 2 in `9ae0583`, Prio 3 and 4 in `73a9ef8`, Prio 5 in `db14d63`, Prio 6 in `759db9b`, Prio 7 in the commit after it. What's left needs Bert or real users (see *Next steps*). All checks pass (see *Tests*).
 
 ## Summary
 
@@ -10,9 +10,9 @@ Where the build of Prio 2 to 8 ([mvp.md](mvp.md)) stands. Work stopped partway t
 | 2 Clickable site map | Done | Yes (`9ae0583`) |
 | 3 Booking level 1 + minimal admin | Built. All database and e2e tests pass | Yes (`73a9ef8`) |
 | 4 English and German | Built. Native-speaker check still to do | Yes (`73a9ef8`) |
-| 5 Admin panel for content | Built. All database, unit and e2e tests pass | Yes |
-| 6 Booking level 2 + launch hardening | Built. Manual checks with Bert and real users still to do | Yes |
-| 7 Shoulds | Not started | – |
+| 5 Admin panel for content | Built. All database, unit and e2e tests pass | Yes (`db14d63`) |
+| 6 Booking level 2 + launch hardening | Built. Manual checks with Bert and real users still to do | Yes (`759db9b`) |
+| 7 Shoulds | Built. Facebook needs Bert's page token to show posts | Yes |
 | 8 Coulds | Skipped on purpose: only when Bert asks for them | – |
 
 ## Prio 2 – Clickable site map (committed)
@@ -107,14 +107,28 @@ Noted: after a save, another visitor can see the old page once while the cache r
 
 Not done, because it needs people: the NVDA/VoiceOver pass, user test round 2, the practice session with Bert, the spending limit with the host, and Bert's answers (cancellation conditions, retention period, level at launch).
 
+## Prio 7 – Shoulds
+
+- **Plekmatch (F7.1)** in step 3 (`src/app/[locale]/book/Plekmatch.tsx`, rules in `src/lib/plekmatch.ts` with 10 unit tests). Five questions as big buttons (near what, quiet or lively, shade, level, wheelchair), progress, back, focus on each question. Requirements filter first (free, type, persons, electricity, wheelchair only for `checked` plots), then the preferences are scored from `plot_distances`. The top 3 show with one reason each and as stars on the map. When nothing fits: the closest similar free plot, what it misses, and when the ideal plot is free next (`next_free_stay`). Only anonymous day counts are stored (`plekmatch_stats`, shown in Instellingen). On/off in Instellingen.
+- **Reminder mail (F7.2):** the jobs endpoint sends it `reminder_days_before` days ahead, in the guest's language, with the route, arrival times and the manage link. Each booking is claimed before sending, so it goes out once.
+- **Audit log and version history (F7.3):** triggers on 15 tables write who, what and when with old and new values to `audit_log`. Guests' names, emails, phones and remarks are left out, and holds aren't logged. *Geschiedenis* in the admin panel, with *Zet terug* for texts, Over ons, events, facilities, jokes, settings, prices and blocks. The log follows the retention period.
+- **Review button (F7.5):** in the footer when Bert sets the link, and in the farewell mail (from 11:00 on the day of departure, with the chicken question).
+- **Facebook (F7.4):** "Nieuws van het erf" on the homepage, fetched on the server through the Graph API (`FACEBOOK_PAGE_TOKEN` in `.env`, page ID in Instellingen), cached for an hour. No Facebook script. Photos come from Facebook's servers, so they only show after the visitor turns on "Extra's" in the cookie settings. Without a token, or when Facebook fails, it links to the page.
+
+Fixed: the manage page (Prio 6) broke `next build`, because the header's `usePathname()` can't be prerendered for an unknown token. It is now a blocking route (`export const instant = false`, like the catch-all 404); `next build` passes.
+
+Not tested end to end: the farewell mail (it needs a departure in the last three days, and it's outside the season now) and Facebook with a real token.
+
+Prio 8 (Coulds) is not built, on purpose: only when Bert asks for one.
+
 ## Tests and how far they are verified
 
-| Check | Command | Last result (17 November, late evening) |
+| Check | Command | Last result (18 November) |
 | --- | --- | --- |
-| Database rules: double booking, holds, dates, blocks, phone booking, roles, content roles, last admin, manage link, retention, level 2, 3-way race | `docker compose run --rm --entrypoint sh migrate /scripts/test.sh` | **All pass** |
-| Unit tests (pricing, booking rules, geometry, messages, texts, CSV, earlier tests) | `docker compose exec web npm test` | **67/67 pass** |
+| Database rules: double booking, holds, dates, blocks, phone booking, roles, content roles, last admin, manage link, retention, level 2, audit log, Plekmatch counts, next free stay, 3-way race | `docker compose run --rm --entrypoint sh migrate /scripts/test.sh` | **All pass** |
+| Unit tests (pricing, booking rules, geometry, messages, texts, CSV, earlier tests) | `docker compose exec web npm test` | **79/79 pass** |
 | Types / lint | `npm run typecheck` · `npm run lint` (in `web`) | **Clean** |
-| End-to-end (Playwright + axe) | `docker compose --profile test run --rm e2e` | **27/27 pass**: booking on a phone, EN and DE booking with email, two-browser race, invalid dates, admin phone booking, no admin without 2FA, Plattegrond hand-over, axe on all 11 public pages at phone width, plus the Prio 5 test tasks (post an event, block a plot, change a price), the inbox and reply, a role refusal, axe and 320 px reflow on 17 admin screens and all public pages, and level 2 with cancelling through the manage link |
+| End-to-end (Playwright + axe) | `docker compose --profile test run --rm e2e` | **31/31 pass**: booking on a phone, EN and DE booking with email, two-browser race, invalid dates, admin phone booking, no admin without 2FA, Plattegrond hand-over, axe on all 11 public pages at phone width, plus the Prio 5 test tasks (post an event, block a plot, change a price), the inbox and reply, a role refusal, axe and 320 px reflow on 17 admin screens and all public pages, level 2 with cancelling through the manage link, Plekmatch (tips and the wheelchair rule), the reminder job and restoring from the history |
 
 Only the Playwright screenshots have been looked at. Nobody has clicked through the new screens in a real browser yet.
 
@@ -140,6 +154,7 @@ After the machine restart the stack started normally and every check ran. The fi
 
 ## Next steps
 
-1. Prio 5 admin screens, in the order given in mvp.md.
-2. Prio 6: the booking level switch in settings, the manage link page (`manageLinkParagraph` is a stub), security headers, a retention job, and backup and restore.
-3. Prio 7: Plekmatch (the `Plekmatch` slot in `BookingFlow` is ready), the reminder email, the audit log, the review button and Facebook.
+1. With Bert: the open answers in [handover.md](handover.md) ("Nog nodig van Bert"), the terrain walk-through (numbering, features, `checked`), prices and texts.
+2. Native speakers check EN and DE, including the new Plekmatch, manage page and Facebook texts.
+3. The manual accessibility pass (NVDA + Firefox, VoiceOver + Safari) and user test round 2 with the four test groups.
+4. Set up the server (README, "Deploying"), run the restore test there and fill in the accounts table in handover.md.

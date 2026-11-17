@@ -45,7 +45,8 @@
     "reception": "Rezeption",
     "weekdays": "Mo – Fr",
     "weekend": "Sa – So",
-    "season": "Saison"
+    "season": "Saison",
+    "review": "Hat es dir gefallen? Schreib eine Bewertung"
   },
   "cookies": {
     "title": "Kekse? Nur aus dem Hofladen.",
@@ -56,7 +57,7 @@
     "needed": "Notwendig, damit die Website funktioniert",
     "neededHint": "Deine Cookie-Auswahl und ob die Ruhetaste an ist. Immer an.",
     "extras": "Extras von anderen Websites",
-    "extrasHint": "Zum Beispiel Facebook-Beiträge auf der Startseite. Dabei werden Daten an Facebook gesendet.",
+    "extrasHint": "Zum Beispiel die Fotos zu den Facebook-Beiträgen auf der Startseite. Sie kommen von den Servern von Facebook.",
     "readMore": "Datenschutzerklärung lesen",
     "saved": "Deine Auswahl ist gespeichert."
   },
@@ -80,7 +81,12 @@
     "eventsFromSeason": "Der Campingplatz ist bis zum 1. April geschlossen. Das steht für die ersten Tage bereit.",
     "findTitle": "So findest du uns",
     "findSeason": "Saison: 1. April bis 31. Oktober",
-    "findReception": "Rezeption geöffnet"
+    "findReception": "Rezeption geöffnet",
+    "facebookTitle": "Neues vom Hof",
+    "facebookMore": "Weiterlesen auf Facebook",
+    "facebookFallback": "Die neuesten Nachrichten vom Hof stehen auf unserer Facebook-Seite.",
+    "facebookFollow": "Zu unserer Facebook-Seite",
+    "facebookPhotosOff": "Fotos von Facebook sind ausgeschaltet. Schalte in den Cookie-Einstellungen „Extras“ ein, um sie zu sehen."
   },
   "activities": {
     "metaTitle": "Gelände & Aktivitäten",
@@ -641,8 +647,8 @@
     "electricityYes": "Ja, bitte",
     "electricityNo": "Nein, danke",
     "safariHasPower": "Safarizelte haben immer Strom.",
-    "matchTitle": "Der Platzfinder kommt bald",
-    "matchText": "Bald stellt dir das Huhn fünf Fragen und empfiehlt die drei besten Plätze. Bis dahin wählst du selbst auf dem Plan. Auch gut: Du kennst deine Familie am besten.",
+    "matchTitle": "Such dir selbst dein Plätzchen aus",
+    "matchText": "Auf dem Plan siehst du, welche Plätze noch frei sind. Du kennst deine Familie am besten.",
     "matchSkip": "Selbst auf dem Plan wählen",
     "summaryBar": "{nights} · {persons, plural, one {# Person} other {# Personen}} · {accommodation}",
     "change": "Ändern",
@@ -766,5 +772,69 @@
     "cancelNeedsCheck": "Bitte setz zuerst das Häkchen, dass du dir sicher bist.",
     "contact": "Kontakt aufnehmen",
     "home": "Zur Startseite"
+  },
+  "plekmatch": {
+    "intro": "Fünf Fragen, dann tippt das Huhn die drei besten Plätze, die noch frei sind.",
+    "joke": "Das Huhn wohnt seit Jahren auf der Wiese. Mehr Ortskenntnis geht nicht.",
+    "progress": "Frage {n} von {total}",
+    "back": "Vorherige Frage",
+    "skip": "Überspringen, ich wähle selbst",
+    "loading": "Das Huhn schaut nach, welche Plätze frei sind…",
+    "q": {
+      "near": {
+        "title": "Wo möchtest du gern in der Nähe sein?",
+        "playground": "Bei der Spielwiese",
+        "sanitary": "Beim Sanitärgebäude",
+        "pool": "Beim Freibad",
+        "none": "Egal"
+      },
+      "mood": {
+        "title": "Ruhe oder Trubel?",
+        "quiet": "Schön ruhig",
+        "lively": "Mittendrin",
+        "none": "Egal"
+      },
+      "shade": {
+        "title": "Wie viel Schatten möchtest du?",
+        "lots": "Viel Schatten",
+        "some": "Ein bisschen",
+        "sun": "Lieber Sonne",
+        "none": "Egal"
+      },
+      "level": {
+        "title": "Muss der Platz eben sein?",
+        "yes": "Ja, bitte eben",
+        "no": "Egal"
+      },
+      "wheelchair": {
+        "title": "Braucht jemand einen Rollstuhl oder Rollator?",
+        "yes": "Ja",
+        "no": "Nein"
+      }
+    },
+    "resultsTitle": "{count, plural, one {Das Huhn tippt diesen Platz} other {Das Huhn tippt diese # Plätze}}",
+    "pick": "Platz {id} wählen",
+    "seeOnMap": "Tipps auf dem Plan ansehen",
+    "again": "Von vorn anfangen",
+    "reason": {
+      "near": "{metres} m bis {facility}",
+      "quiet": "Ruhig, weit weg von der Spielwiese",
+      "lively": "Nah an Spielwiese und Kantine",
+      "shadeLots": "Viel Schatten",
+      "shadeSome": "Ein bisschen Schatten",
+      "sun": "Schön sonnig",
+      "level": "Ein ebener Platz",
+      "accessible": "Geprüft: für Rollstühle geeignet",
+      "fits": "Platz genug für {persons} Personen"
+    },
+    "nearTitle": "Genau das, was du suchst, ist nicht mehr frei",
+    "nearClosest": "Am nächsten kommt Platz {id}.",
+    "missesElectricity": "Achtung: Dort gibt es keinen Strom.",
+    "missesWheelchair": "Achtung: Dieser Platz ist nicht auf Rollstuhltauglichkeit geprüft.",
+    "nearIdeal": "Platz {id} passt genau. Er ist frei vom {from} bis {to}.",
+    "nearIdealNone": "Ein Platz, der genau passt, ist in den nächsten Monaten nicht frei. Ruf Bert an oder schreib ihm, dann suchen wir gemeinsam.",
+    "tryDates": "Diese Daten wählen",
+    "noneAtAll": "In diesem Zeitraum ist kein passender Platz frei. Versuch es mit anderen Daten.",
+    "noIdeal": "Einen Platz, der genau passt, haben wir (noch) nicht. Ruf Bert an oder schreib ihm, dann suchen wir gemeinsam."
   }
 }

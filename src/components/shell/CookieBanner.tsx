@@ -40,6 +40,15 @@ export function readConsent(): Consent | null {
   }
 }
 
+/** True once this visitor allowed "extras" (e.g. Facebook photos). */
+export function useExtrasConsent(): boolean {
+  return useSyncExternalStore(
+    subscribe,
+    () => readConsent()?.extras ?? false,
+    () => false,
+  );
+}
+
 /**
  * Cookie banner. Non-essential extras are off by default and only switch
  * on after an explicit choice. Not modal: the page stays usable.

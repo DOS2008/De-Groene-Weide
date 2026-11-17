@@ -32,7 +32,7 @@ export async function toPlotStep(page: Page, stay: { arrival: string; departure:
   await page.getByRole("button", { name: "Volgende" }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Met wie kom je?" })).toBeVisible();
   await page.getByRole("button", { name: "Volgende" }).click();
-  await page.getByRole("button", { name: "Kies zelf op de kaart" }).click();
+  await page.getByRole("button", { name: "Sla over, ik kies zelf" }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Kies je plekje in de wei" })).toBeVisible();
 }
 

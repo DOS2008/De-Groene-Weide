@@ -127,6 +127,8 @@ services:
       # The admin tests create and remove their own staff accounts.
       SUPABASE_URL: http://api-gw:8000
       SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+      # The jobs test calls /api/jobs like the cron service does.
+      JOBS_SECRET: ${JOBS_SECRET}
       CI: "1"
     volumes:
       - .:/work

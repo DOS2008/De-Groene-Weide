@@ -19,6 +19,7 @@ function navFor(role: Role): NavItem[] {
     { href: "/admin/messages", label: "Berichten", show: can.messages(role) },
     { href: "/admin/settings", label: "Instellingen", show: can.content(role) },
     { href: "/admin/users", label: "Gebruikers & rollen", show: can.content(role) },
+    { href: "/admin/history", label: "Geschiedenis", show: can.content(role) },
   ];
   return items.filter((i) => i.show).map(({ href, label }) => ({ href, label }));
 }

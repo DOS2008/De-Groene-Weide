@@ -175,3 +175,16 @@ export async function getAboutBlocks(): Promise<AboutBlock[]> {
     ...pickLocalized(r, ["label", "title", "body"]),
   })) as AboutBlock[];
 }
+
+/** Bert's Google review link (Instellingen → Overig), or null. */
+export async function getReviewUrl(): Promise<string | null> {
+  "use cache";
+  cacheTag("settings");
+  cacheLife("minutes");
+  try {
+    const { data } = await publicDb().from("settings").select("value").eq("key", "review_url").maybeSingle();
+    return typeof data?.value === "string" && data.value.startsWith("https://") ? data.value : null;
+  } catch {
+    return null;
+  }
+}

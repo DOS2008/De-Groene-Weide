@@ -81,8 +81,8 @@ test("the Plattegrond hands the chosen plot over to booking", async ({ page }) =
 });
 
 for (const lang of [
-  { path: "/en/book", next: "Next", group: "Who's coming?", skip: "Choose on the map myself", map: "Choose your spot in the meadow", list: "List", pick: "View pitch T18", held: /Held for another \d+:\d\d/, toDetails: "Continue to your details", name: "Name", email: "Email address", rules: "Send request", done: /Your request is in/, subject: /request for pitch T18/ },
-  { path: "/de/buchen", next: "Weiter", group: "Mit wem kommst du?", skip: "Selbst auf dem Plan wählen", map: "Such dir dein Plätzchen auf der Wiese aus", list: "Liste", pick: "Platz T18 ansehen", held: /Noch \d+:\d\d festgehalten/, toDetails: "Weiter zu deinen Angaben", name: "Name", email: "E-Mail-Adresse", rules: "Anfrage senden", done: /Deine Anfrage ist da/, subject: /Anfrage für Platz T18/ },
+  { path: "/en/book", next: "Next", group: "Who's coming?", skip: "Skip, I'll choose myself", map: "Choose your spot in the meadow", list: "List", pick: "View pitch T18", held: /Held for another \d+:\d\d/, toDetails: "Continue to your details", name: "Name", email: "Email address", rules: "Send request", done: /Your request is in/, subject: /request for pitch T18/ },
+  { path: "/de/buchen", next: "Weiter", group: "Mit wem kommst du?", skip: "Überspringen, ich wähle selbst", map: "Such dir dein Plätzchen auf der Wiese aus", list: "Liste", pick: "Platz T18 ansehen", held: /Noch \d+:\d\d festgehalten/, toDetails: "Weiter zu deinen Angaben", name: "Name", email: "E-Mail-Adresse", rules: "Anfrage senden", done: /Deine Anfrage ist da/, subject: /Anfrage für Platz T18/ },
 ]) {
   test(`the booking flow and email work in ${lang.path.slice(1, 3).toUpperCase()}`, async ({ page }) => {
     const stay = randomStay();
@@ -109,3 +109,49 @@ for (const lang of [
     await expectMail(email, lang.subject);
   });
 }
+
+test("Plekmatch asks five questions and tips three free plots, shown as stars", async ({ page }) => {
+  const stay = randomStay();
+  await page.goto(`/reserveren?aankomst=${stay.arrival}&vertrek=${stay.departure}`);
+  await page.waitForLoadState("networkidle");
+  await page.getByRole("button", { name: "Volgende", exact: true }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Met wie kom je?" })).toBeVisible();
+  await page.getByRole("button", { name: "Volgende", exact: true }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Welke plek past bij jou?" })).toBeVisible();
+
+  for (const [question, answer] of [
+    ["Waar wil je graag dichtbij zijn?", "De speelweide"],
+    ["Rust of reuring?", "Lekker rustig"],
+    ["Hoeveel schaduw wil je?", "Veel schaduw"],
+    ["Moet de plek vlak zijn?", "Ja, graag vlak"],
+    ["Heeft iemand een rolstoel of rollator nodig?", "Nee"],
+  ]) {
+    await expect(page.getByRole("heading", { level: 2, name: question })).toBeFocused();
+    await page.getByRole("button", { name: answer, exact: true }).click();
+  }
+  await expect(page.getByRole("heading", { level: 2, name: "De kip tipt deze 3 plekken" })).toBeFocused();
+  const picks = page.getByRole("button", { name: /^Kies plek [TCS]\d+$/ });
+  await expect(picks).toHaveCount(3);
+  const first = (await picks.first().textContent())!.replace("Kies plek ", "");
+  await picks.first().click();
+
+  await expect(page.getByRole("heading", { level: 1, name: "Kies je plekje in de wei" })).toBeVisible();
+  await expect(page.getByText(/Nog \d+:\d\d vastgehouden/)).toBeVisible();
+  await page.getByRole("button", { name: "Lijst" }).click();
+  await expect(page.getByRole("button", { name: `Bekijk plek ${first}` })).toBeVisible();
+});
+
+test("Plekmatch never tips an unchecked plot as wheelchair accessible", async ({ page }) => {
+  const stay = randomStay();
+  await page.goto(`/reserveren?aankomst=${stay.arrival}&vertrek=${stay.departure}`);
+  await page.waitForLoadState("networkidle");
+  await page.getByRole("button", { name: "Volgende", exact: true }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Met wie kom je?" })).toBeVisible();
+  await page.getByRole("button", { name: "Volgende", exact: true }).click();
+  for (let i = 0; i < 4; i++) await page.getByRole("button", { name: "Maakt niet uit", exact: true }).click();
+  await page.getByRole("button", { name: "Ja", exact: true }).click();
+  // Until the walk-through every plot is unchecked, so none counts as accessible.
+  await expect(page.getByRole("heading", { level: 2, name: "Precies wat je zoekt is niet meer vrij" })).toBeVisible();
+  await expect(page.getByText("Let op: die plek is niet gecontroleerd op rolstoeltoegang.")).toBeVisible();
+  await expect(page.getByText(/Een plek die precies past, hebben we \(nog\) niet/)).toBeVisible();
+});

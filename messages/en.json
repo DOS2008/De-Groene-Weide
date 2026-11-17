@@ -45,7 +45,8 @@
     "reception": "Reception",
     "weekdays": "Mon – Fri",
     "weekend": "Sat – Sun",
-    "season": "Season"
+    "season": "Season",
+    "review": "Enjoyed your stay? Write a review"
   },
   "cookies": {
     "title": "Cookies? Only the ones from the farm shop.",
@@ -56,7 +57,7 @@
     "needed": "Needed for the site to work",
     "neededHint": "Your cookie choice and whether calm mode is on. Always on.",
     "extras": "Extras from other websites",
-    "extrasHint": "For example Facebook posts on the homepage. These send data to Facebook.",
+    "extrasHint": "For example the photos with the Facebook posts on the homepage. They come from Facebook's servers.",
     "readMore": "Read the privacy statement",
     "saved": "Your choice has been saved."
   },
@@ -80,7 +81,12 @@
     "eventsFromSeason": "The campsite is closed until 1 April. This is ready for the first days.",
     "findTitle": "How to find us",
     "findSeason": "Season: 1 April to 31 October",
-    "findReception": "Reception open"
+    "findReception": "Reception open",
+    "facebookTitle": "News from the farmyard",
+    "facebookMore": "Read more on Facebook",
+    "facebookFallback": "The latest news from the farmyard is on our Facebook page.",
+    "facebookFollow": "Go to our Facebook page",
+    "facebookPhotosOff": "Facebook photos are switched off. Turn on 'Extras' in the cookie settings to see them."
   },
   "activities": {
     "metaTitle": "Site & activities",
@@ -641,8 +647,8 @@
     "electricityYes": "Yes, please",
     "electricityNo": "No, thanks",
     "safariHasPower": "Safari tents always have electricity.",
-    "matchTitle": "Pitch match is on its way",
-    "matchText": "Soon the chicken will ask you five questions and suggest the three best pitches. Until then, choose on the map yourself. That's fine too: you know your family best.",
+    "matchTitle": "Choose your own spot",
+    "matchText": "The map shows which pitches are still free. You know your family best.",
     "matchSkip": "Choose on the map myself",
     "summaryBar": "{nights} · {persons, plural, one {# person} other {# people}} · {accommodation}",
     "change": "Change",
@@ -766,5 +772,69 @@
     "cancelNeedsCheck": "Please tick the box first to confirm you're sure.",
     "contact": "Get in touch",
     "home": "To the homepage"
+  },
+  "plekmatch": {
+    "intro": "Five questions, then the chicken tips the three best spots that are still free.",
+    "joke": "Our chicken has never once been wrong. According to the chicken.",
+    "progress": "Question {n} of {total}",
+    "back": "Previous question",
+    "skip": "Skip, I'll choose myself",
+    "loading": "The chicken is checking which pitches are free…",
+    "q": {
+      "near": {
+        "title": "What would you like to be close to?",
+        "playground": "The play meadow",
+        "sanitary": "The toilets and showers",
+        "pool": "The pool",
+        "none": "Doesn't matter"
+      },
+      "mood": {
+        "title": "Peace and quiet, or in the thick of it?",
+        "quiet": "Nice and quiet",
+        "lively": "In the thick of it",
+        "none": "Doesn't matter"
+      },
+      "shade": {
+        "title": "How much shade would you like?",
+        "lots": "Lots of shade",
+        "some": "A little",
+        "sun": "Sun, please",
+        "none": "Doesn't matter"
+      },
+      "level": {
+        "title": "Does the pitch need to be level?",
+        "yes": "Yes, level please",
+        "no": "Doesn't matter"
+      },
+      "wheelchair": {
+        "title": "Does anyone need a wheelchair or rollator?",
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "resultsTitle": "{count, plural, one {The chicken tips this pitch} other {The chicken tips these # pitches}}",
+    "pick": "Choose pitch {id}",
+    "seeOnMap": "See the tips on the map",
+    "again": "Start again",
+    "reason": {
+      "near": "{metres} m from {facility}",
+      "quiet": "Quiet, far from the play meadow",
+      "lively": "Close to the play meadow and the canteen",
+      "shadeLots": "Lots of shade",
+      "shadeSome": "A little shade",
+      "sun": "Lovely and sunny",
+      "level": "A level pitch",
+      "accessible": "Checked: suitable for a wheelchair",
+      "fits": "Room enough for {persons} people"
+    },
+    "nearTitle": "Exactly what you're after is no longer free",
+    "nearClosest": "The closest match is pitch {id}.",
+    "missesElectricity": "Please note: it has no electricity.",
+    "missesWheelchair": "Please note: that pitch hasn't been checked for wheelchair access.",
+    "nearIdeal": "Pitch {id} fits exactly. It's free from {from} to {to}.",
+    "nearIdealNone": "A pitch that fits exactly isn't free in the coming months. Call or email Bert and we'll find something together.",
+    "tryDates": "Choose those dates",
+    "noneAtAll": "No suitable pitch is free in this period. Try other dates.",
+    "noIdeal": "We don't have a pitch that fits exactly (yet). Call or email Bert and we'll find something together."
   }
 }

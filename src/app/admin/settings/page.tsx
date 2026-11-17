@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { requireStaff } from "@/lib/admin/staff";
 import { staffDb } from "@/lib/supabase/staff";
+import { addDays, todayAtCampsite } from "@/lib/dates";
 import { ActionForm, Submit } from "../ActionForm";
 import { LangFields } from "../LangFields";
 import { deleteJoke, saveBookingSettings, saveContact, saveJoke, saveNotice, saveOtherSettings } from "./actions";
@@ -27,10 +28,14 @@ const languages = [
 export default async function SettingsPage() {
   await requireStaff("admin");
   const db = await staffDb();
-  const [{ data: settings }, { data: jokes }] = await Promise.all([
+  const since = addDays(todayAtCampsite(), -30);
+  const [{ data: settings }, { data: jokes }, { data: stats }] = await Promise.all([
     db.from("settings").select("key, value"),
     db.from("jokes").select("*").order("created_at"),
+    db.from("plekmatch_stats").select("shown, picked").gte("day", since),
   ]);
+  const shown = (stats ?? []).reduce((n, r) => n + r.shown, 0);
+  const picked = (stats ?? []).reduce((n, r) => n + r.picked, 0);
   const get = (k: string) => settings?.find((s) => s.key === k)?.value;
   const site = (get("site") ?? {}) as Site;
   const n = (k: string, d: number) => String(get(k) ?? d);
@@ -154,6 +159,10 @@ export default async function SettingsPage() {
             <input type="checkbox" name="plekmatch_enabled" defaultChecked={get("plekmatch_enabled") !== false} />
             Plekmatch aan (de kip helpt gasten een plek kiezen)
           </label>
+          <p className="admin-hint">
+            Afgelopen 30 dagen: {shown} keer tips getoond, {picked} keer een tip gekozen. Alleen deze aantallen worden bewaard,
+            nooit de antwoorden of wie het was.
+          </p>
           <div className="admin-fields">
             <NumberField
               id="retention_months"

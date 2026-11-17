@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, type ComponentType, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -21,6 +21,7 @@ import {
   type PlotStatusMap,
 } from "./actions";
 import { Countdown } from "./Countdown";
+import { Plekmatch } from "./Plekmatch";
 import styles from "./flow.module.css";
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7;
@@ -36,15 +37,6 @@ type Props = {
   prices: PriceInfo;
   /** Price list and season info, shown under step 1. */
   info: ReactNode;
-  /** Plekmatch (Prio 7) renders in step 3 when switched on. */
-  Plekmatch?: ComponentType<PlekmatchProps>;
-};
-
-export type PlekmatchProps = {
-  wish: { accommodation: Accommodation; persons: number; electricity: boolean };
-  status: PlotStatusMap | null;
-  onPick: (plotId: string, tips: Record<string, string>) => void;
-  onSkip: () => void;
 };
 
 function int(v: string | null, fallback: number, min: number, max: number) {
@@ -52,7 +44,7 @@ function int(v: string | null, fallback: number, min: number, max: number) {
   return Number.isInteger(n) && n >= min && n <= max ? n : fallback;
 }
 
-export function BookingFlow({ plots, facilities, rules, prices, info, Plekmatch }: Props) {
+export function BookingFlow({ plots, facilities, rules, prices, info }: Props) {
   const t = useTranslations("booking");
   const tm = useTranslations("map");
   const locale = useLocale();
@@ -297,17 +289,26 @@ export function BookingFlow({ plots, facilities, rules, prices, info, Plekmatch 
       )}
 
       {step === 3 &&
-        (Plekmatch ? (
+        (rules.plekmatch ? (
           <Plekmatch
+            plots={plots}
+            facilities={facilities}
             wish={wish}
             status={status}
+            arrival={arrival}
+            departure={departure}
             onPick={(plotId, newTips) => {
               setTips(newTips);
               const plot = plotById(plotId);
               if (plot) void choose(plot);
               go(4);
             }}
-            onSkip={() => go(4)}
+            onSkip={(newTips) => {
+              if (newTips) setTips(newTips);
+              go(4);
+            }}
+            onDates={(a, d) => update({ aankomst: a, vertrek: d, stap: 3 })}
+            onBack={() => go(2)}
           />
         ) : (
           <section className={`card ${styles.match}`}>

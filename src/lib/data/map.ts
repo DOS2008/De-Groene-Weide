@@ -23,6 +23,9 @@ export type MapPlot = {
   checked: boolean;
   photoUrl: string | null;
   note: string | null;
+  /** Centre on the drawing, for "nearest plot" questions. */
+  mapX: number;
+  mapY: number;
   /** Metres to each facility, from the drawing. */
   distances: Record<string, number>;
 };
@@ -64,6 +67,8 @@ function toPlot(r: Row, locale: AnyLocale, distances: Record<string, number>): M
     checked: r.checked as boolean,
     photoUrl: mediaUrl(r.photo_path as string | null),
     note: note || null,
+    mapX: Number(r.map_x ?? 0),
+    mapY: Number(r.map_y ?? 0),
     distances,
   };
 }

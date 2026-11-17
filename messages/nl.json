@@ -112,23 +112,6 @@
   "book": {
     "metaTitle": "Reserveren",
     "metaDescription": "Prijzen, seizoen en zo reserveer je een plek op De Groene Weide: tent, caravan, camper of safaritent.",
-    "eyebrow": "Reserveren",
-    "title": "Boek je plekje in de wei",
-    "lead": "Binnenkort kies je hier zelf je plek op de kaart. Tot die tijd reserveer je makkelijk per telefoon of e-mail.",
-    "joke": "Hoor je gekakel op de achtergrond? Dan heb je het goede nummer.",
-    "howTitle": "Zo reserveer je",
-    "howText": "Bel of mail ons. Geef je data door, met hoeveel je komt en wat voor plek je zoekt. Bert bevestigt je plek zo snel mogelijk.",
-    "call": "Bel ons",
-    "mail": "Mail ons",
-    "orForm": "Of stuur een bericht via het contactformulier.",
-    "needTitle": "Dit vragen we je",
-    "need": [
-      "Je naam, e-mailadres en telefoonnummer",
-      "Je aankomst- en vertrekdatum",
-      "Met hoeveel personen je komt",
-      "Tent, caravan, camper of safaritent",
-      "Eventuele wensen, zoals stroom of een vlakke plek"
-    ],
     "seasonTitle": "Seizoen en tijden",
     "seasonOpen": "Open",
     "arrival": "Aankomst",
@@ -138,8 +121,6 @@
     "pricesTitle": "Prijzen per nacht",
     "plotType": "Soort plek",
     "plots": "Plekken",
-    "maxPersons": "Max. personen",
-    "price": "Prijs per nacht",
     "extrasTitle": "Bijkomende kosten",
     "rulesTitle": "Goed om te weten",
     "rulesText": "Op het erf gelden een paar huisregels, zodat iedereen goed slaapt. De kippen ook.",
@@ -431,7 +412,7 @@
       {
         "title": "Cookies en wat er in je browser staat",
         "paragraphs": [
-          "We gebruiken geen trackingcookies. In je browser bewaren we alleen je cookiekeuze en de stand van de Rustknop. Die zijn nodig om de site te laten werken en blijven op je eigen apparaat.",
+          "We gebruiken geen trackingcookies. In je browser bewaren we alleen je cookiekeuze en de stand van de Rustknop. Die zijn nodig om de site te laten werken en blijven op je eigen apparaat. Terwijl je reserveert, onthoudt een noodzakelijke cookie welke plek voor je wordt vastgehouden.",
           "Extra's van andere websites, zoals Facebook-berichten, staan uit tot jij ze aanzet. Je kunt je keuze altijd wijzigen via Cookie-instellingen onderaan elke pagina.",
           "Bezoekersstatistieken meten we nu niet. Gaan we dat doen, dan zonder cookies en zonder dat we je kunnen herkennen."
         ]
@@ -491,7 +472,8 @@
       "blocked": "geblokkeerd",
       "selected": "jouw keuze",
       "tip": "tip van de kip",
-      "dimmed": "past niet bij het filter"
+      "dimmed": "past niet bij het filter",
+      "unsuitable": "past niet bij je groep"
     },
     "legend": "Legenda",
     "legendFree": "Vrij",
@@ -556,6 +538,199 @@
     "featureElectricity": "stroom",
     "featureWheelchair": "rolstoel",
     "featureLevel": "vlak",
-    "featureShade": "veel schaduw"
+    "featureShade": "veel schaduw",
+    "legendUnsuitable": "Past niet bij je groep"
+  },
+  "email": {
+    "greeting": "Hallo {name},",
+    "signoff": "Tot gauw op het erf!\nBert en de kippen van De Groene Weide",
+    "summaryTitle": "Je reservering",
+    "code": "Reserveringsnummer: {code}",
+    "plot": "Plek: {plot}",
+    "dates": "Aankomst: {arrival}\nVertrek: {departure} ({nights, plural, one {# nacht} other {# nachten}})",
+    "persons": "Personen: {adults, plural, one {# volwassene} other {# volwassenen}}{children, plural, =0 {} one {, # kind} other {, # kinderen}}",
+    "price": "Prijs: {price}",
+    "priceUnknown": "Prijs: volgt van Bert",
+    "manage": "Je reservering bekijken of annuleren: {url}",
+    "contactUs": "Vragen? Antwoord gewoon op deze mail.",
+    "requested": {
+      "subject": "We hebben je aanvraag voor plek {plot} ontvangen",
+      "intro": "Tok tok! Je aanvraag is binnen. Bert kijkt ernaar en bevestigt je plek zo snel mogelijk. Tot dan houden we de plek voor je vrij."
+    },
+    "confirmed": {
+      "subject": "Je plek {plot} is bevestigd",
+      "intro": "Goed nieuws: je plek is bevestigd. De kippen weten ervan en de wei ligt klaar."
+    },
+    "cancelled": {
+      "subject": "Je reservering {code} is geannuleerd",
+      "intro": "Je reservering is geannuleerd. Jammer! Wil je toch komen? Je bent altijd welkom om opnieuw te boeken."
+    },
+    "reminder": {
+      "subject": "Nog {days, plural, one {# dag} other {# dagen}} en dan ben je op De Groene Weide",
+      "intro": "Bijna zover! Hieronder staat je reservering nog een keer. De kippen zijn al aan het oefenen met hun welkomstlied.",
+      "route": "Route: {url}",
+      "arrivalTimes": "Aankomst vanaf {from}, vertrek tot {until}."
+    },
+    "farewell": {
+      "subject": "Bedankt voor je verblijf op De Groene Weide",
+      "intro": "Bedankt dat je er was! We hopen dat je lekker hebt geslapen, ondanks de haan.",
+      "review": "Vond je het fijn? Een review helpt Bert enorm: {url}",
+      "question": "Hoe was het? Antwoord met 1 tot 5 kippen."
+    },
+    "notice": {
+      "subject": "Nieuwe aanvraag: plek {plot}, {arrival}",
+      "intro": "Er is een nieuwe reservering binnengekomen op de website.",
+      "confirmed": "Status: direct bevestigd (niveau 2).",
+      "requested": "Status: wacht op jouw bevestiging. Bevestig in het beheer: {url}",
+      "contact": "Gast: {name}, {email}{phone}",
+      "remarks": "Opmerkingen: {remarks}",
+      "language": "Taal: {locale}"
+    }
+  },
+  "booking": {
+    "stepOf": "Reserveren · stap {step} van 7",
+    "stepsLabel": "Stappen",
+    "steps": [
+      "Datum",
+      "Personen & verblijf",
+      "Plekmatch",
+      "Plek kiezen",
+      "Gegevens",
+      "Controleren",
+      "Bevestiging"
+    ],
+    "stepDone": "klaar",
+    "stepCurrent": "huidige stap",
+    "titles": [
+      "Wanneer kom je?",
+      "Met wie kom je?",
+      "Welke plek past bij jou?",
+      "Kies je plekje in de wei",
+      "Wie mogen we verwachten?",
+      "Klopt alles?",
+      "Tok! Je aanvraag is binnen"
+    ],
+    "titleConfirmed": "Tok! Je plek is geboekt",
+    "announce": "Stap {step} van 7: {title}",
+    "next": "Volgende",
+    "back": "Terug",
+    "arrival": "Aankomst",
+    "departure": "Vertrek",
+    "arrivalHint": "Het seizoen loopt van 1 april tot en met 31 oktober.",
+    "nights": "{count, plural, one {# nacht} other {# nachten}}",
+    "minNights": "Minimaal {count, plural, one {# nacht} other {# nachten}}.",
+    "adults": "Volwassenen",
+    "children": "Kinderen (tot 12 jaar)",
+    "dogs": "Honden",
+    "fewer": "Eén minder: {what}",
+    "more": "Eén meer: {what}",
+    "accommodation": "Waar slaap je in?",
+    "accommodationValue": {
+      "tent": "Tent",
+      "caravan": "Caravan",
+      "camper": "Camper",
+      "safari_tent": "Safaritent"
+    },
+    "accommodationHint": {
+      "tent": "Op het gras in Weide A of B",
+      "caravan": "Op het gras in Weide A of B",
+      "camper": "Halfverharde camperplaats",
+      "safari_tent": "Ingerichte tent met bedden"
+    },
+    "electricity": "Heb je stroom nodig?",
+    "electricityYes": "Ja, graag",
+    "electricityNo": "Nee, hoeft niet",
+    "safariHasPower": "Safaritenten hebben altijd stroom.",
+    "matchTitle": "Plekmatch komt eraan",
+    "matchText": "Straks stelt de kip je vijf vragen en tipt ze de drie beste plekken. Tot die tijd kies je zelf op de kaart. Ook prima: jij kent je familie het best.",
+    "matchSkip": "Kies zelf op de kaart",
+    "summaryBar": "{nights} · {persons, plural, one {# persoon} other {# personen}} · {accommodation}",
+    "change": "Wijzig",
+    "unsuitable": "past niet bij je groep",
+    "loadingMap": "De kaart haalt de vrije plekken op…",
+    "mapError": "We konden niet ophalen welke plekken vrij zijn. Probeer het opnieuw.",
+    "retry": "Opnieuw proberen",
+    "holding": "De kip houdt plek {id} voor je vast…",
+    "heldFor": "De kip houdt deze plek <strong>{minutes} minuten</strong> voor je vast.",
+    "toDetails": "Verder naar je gegevens",
+    "pickFirst": "Kies eerst een vrije plek op de kaart of in de lijst.",
+    "notThisPlot": "Deze plek past niet bij je groep. Kies een plek met het juiste soort verblijf.",
+    "holdStatus": {
+      "taken": "Net te laat: iemand anders koos plek {id} een tel eerder. Kies een andere plek.",
+      "blocked": "Plek {id} is in deze periode niet te boeken.",
+      "too_many_holds": "Je houdt al {max} plekken vast. Rond eerst een reservering af of wacht een kwartier.",
+      "rate_limited": "Rustig aan, de kip kan het niet bijhouden. Probeer het over een paar minuten opnieuw.",
+      "error": "Er ging iets mis. Probeer het opnieuw of bel ons."
+    },
+    "countdown": "Nog {time} vastgehouden",
+    "countdownWarning": "Let op: nog 2 minuten, dan komt plek {id} weer vrij.",
+    "expired": "Je 15 minuten zijn om, dus plek {id} is weer vrijgegeven. Kies opnieuw een plek: misschien is hij nog vrij.",
+    "priceFor": "Prijs voor {nights}",
+    "priceUnknown": "Prijs volgt",
+    "name": "Naam",
+    "email": "E-mailadres",
+    "phone": "Telefoonnummer",
+    "phoneHint": "Handig als we je op de dag zelf willen bellen.",
+    "optional": "(niet verplicht)",
+    "remarks": "Opmerkingen",
+    "remarksHint": "Bijvoorbeeld: we komen pas laat aan. Zet hier geen namen of leeftijden van kinderen.",
+    "privacyNote": "We gebruiken je gegevens alleen voor deze reservering. Betalen gaat niet via de website.",
+    "required": "Vul dit veld in.",
+    "emailInvalid": "Vul een geldig e-mailadres in, zoals naam@voorbeeld.nl.",
+    "reviewTitle": "Je reservering",
+    "reviewStay": "Verblijf",
+    "reviewPlot": "Plek",
+    "reviewGuests": "Gasten",
+    "reviewContact": "Contact",
+    "persons": "{adults, plural, one {# volwassene} other {# volwassenen}}{children, plural, =0 {} one {, # kind} other {, # kinderen}}{dogs, plural, =0 {} one {, # hond} other {, # honden}}",
+    "withElectricity": "met stroom",
+    "priceTitle": "Prijs",
+    "priceNights": "{nights, plural, one {# nacht} other {# nachten}} {period}",
+    "priceExtra": "{name} ({quantity} ×)",
+    "total": "Totaal",
+    "priceNote": "Betalen doe je op de camping. Bert bevestigt de prijs in zijn mail.",
+    "houseRules": "Ik heb de <link>huisregels</link> gelezen en ga ermee akkoord.",
+    "houseRulesRequired": "Vink aan dat je de huisregels hebt gelezen.",
+    "submitRequest": "Verstuur aanvraag",
+    "submitBook": "Boek deze plek",
+    "submitting": "Even geduld, de kip rent naar Bert…",
+    "takenTitle": "Oei, plek {id} is net weggekaapt",
+    "takenText": "Iemand anders was een tel sneller. Deze plekken lijken erop en zijn nog vrij:",
+    "takenNone": "Er is geen vergelijkbare plek meer vrij in deze periode. Kies andere data of bel ons.",
+    "pickAlternative": "Kies plek {id}",
+    "submitError": {
+      "expired": "Je plek werd niet meer vastgehouden. Kies opnieuw een plek.",
+      "rate_limited": "Je hebt het al vaak geprobeerd. Wacht een paar minuten.",
+      "invalid": "Controleer je gegevens nog even.",
+      "error": "Er ging iets mis bij het versturen. Probeer het opnieuw of bel ons."
+    },
+    "doneRequested": "Bert kijkt zo snel mogelijk naar je aanvraag en bevestigt je plek per mail. Tot die tijd houden we plek {plot} voor je vrij.",
+    "doneConfirmed": "Je plek {plot} is geboekt. De bevestiging staat in je mail.",
+    "doneCode": "Je reserveringsnummer",
+    "doneMail": "We stuurden een mail naar {email}. Niks gezien? Kijk even in je spam, de kip landt daar soms.",
+    "doneNext": "Wat nu?",
+    "doneSteps": [
+      "Bewaar je reserveringsnummer.",
+      "Wil je iets wijzigen of annuleren? Neem contact met ons op.",
+      "Kom tussen de aankomsttijden. De kippen staan klaar."
+    ],
+    "doneHome": "Terug naar home",
+    "doneEvents": "Bekijk de evenementen",
+    "phoneAlternative": "Liever bellen of mailen? Dat kan ook.",
+    "joke": "Hoor je gekakel op de achtergrond? Dan zit je goed.",
+    "errors": {
+      "departure_before_arrival": "Je vertrekdatum moet na je aankomstdatum liggen.",
+      "outside_season": "Dan zijn we dicht. We zijn open van 1 april tot en met 31 oktober.",
+      "arrival_on_last_day": "Op 31 oktober sluiten we. Kies een eerdere aankomstdatum.",
+      "stay_crosses_season_end": "Je verblijf loopt over het einde van het seizoen. De laatste vertrekdag is 31 oktober.",
+      "too_few_nights": "Je blijft te kort. Kies minimaal {min, plural, one {# nacht} other {# nachten}}.",
+      "too_many_nights": "Online boek je maximaal {max} nachten. Langer blijven? Bel of mail ons.",
+      "arrival_in_past": "Die datum is al geweest. Kies een datum vanaf vandaag.",
+      "too_many_persons": "Met zoveel personen past deze plek niet. Kies een grotere plek.",
+      "name_required": "Vul je naam in.",
+      "email_invalid": "Vul een geldig e-mailadres in.",
+      "adults_required": "Er moet minimaal één volwassene mee."
+    },
+    "phoneAlternativeLink": "Naar de contactpagina"
   }
 }

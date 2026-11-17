@@ -1,0 +1,41 @@
+.switcher ul {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  display: flex;
+  gap: 2px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--tap-min);
+  min-height: 36px;
+  padding: 0 0.5rem;
+  border-radius: var(--radius-pill);
+  color: var(--color-inkt);
+  font-weight: 700;
+  font-size: var(--font-size-small);
+  text-decoration: none;
+}
+
+.link:hover {
+  background: var(--color-gras-licht);
+  color: var(--color-inkt);
+}
+
+.link[aria-current="true"] {
+  background: var(--color-weidegroen);
+  color: var(--color-white);
+}
+
+/* The pill sits in a 44px-tall row; each link is 44px wide. */
+@media (pointer: coarse) {
+  .link {
+    min-height: var(--tap-min);
+  }
+}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getPageLocale } from "@/i18n/locale";
 import { Link } from "@/i18n/navigation";
-import { facilities } from "@/content/facilities";
+import { getFacilityContent } from "@/lib/data/content";
 import { Chicken } from "@/components/Chicken";
 import { FacilityTile } from "@/components/FacilityTile";
 import { FacilityIconFor } from "@/components/icons";
@@ -24,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ActivitiesPage() {
+  const facilities = await getFacilityContent();
   const locale = await getPageLocale();
   const t = await getTranslations("activities");
   const tc = await getTranslations("common");

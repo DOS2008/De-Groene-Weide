@@ -84,6 +84,26 @@ services:
           path: next.config.ts
           target: /app/next.config.ts
 
+  # End-to-end tests (Playwright + axe) against the running stack:
+  #   docker compose --profile test run --rm e2e
+  e2e:
+    image: mcr.microsoft.com/playwright:v1.64.1-noble
+    profiles: ["test"]
+    working_dir: /work
+    command: ["npx", "playwright", "test"]
+    environment:
+      BASE_URL: http://web:3000
+      MAILPIT_URL: http://mailpit:8025
+      # The admin tests create and remove their own staff accounts.
+      SUPABASE_URL: http://api-gw:8000
+      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+      CI: "1"
+    volumes:
+      - .:/work
+    depends_on:
+      - web
+      - mailpit
+
   mailpit:
     image: axllent/mailpit:v1.33
     restart: unless-stopped

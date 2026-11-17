@@ -1,0 +1,728 @@
+{
+  "meta": {
+    "siteName": "De Groene Weide",
+    "titleTemplate": "%s – De Groene Weide",
+    "defaultTitle": "De Groene Weide – Familiencamping auf dem Bauernhof",
+    "defaultDescription": "Camping auf Berts Bauernhof in den Niederlanden. Hühner, eine Spielwiese mit Traktor, ein Freibad und der alte Melkstall. Geöffnet vom 1. April bis 31. Oktober."
+  },
+  "common": {
+    "skipToContent": "Zum Inhalt",
+    "bookCta": "Buch dein Plätzchen auf der Wiese",
+    "routeCta": "Route planen",
+    "messageCta": "Nachricht senden",
+    "viewOnMap": "Auf dem Lageplan ansehen",
+    "season": "1. April bis 31. Oktober",
+    "placeholder": "Folgt noch",
+    "newWindow": "öffnet eine andere Website"
+  },
+  "nav": {
+    "label": "Hauptmenü",
+    "home": "Start",
+    "activities": "Gelände & Aktivitäten",
+    "siteMap": "Lageplan",
+    "book": "Buchen",
+    "events": "Veranstaltungen",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "openMenu": "Menü",
+    "closeMenu": "Schließen"
+  },
+  "calm": {
+    "label": "Ruhetaste",
+    "long": "Ruhetaste: Bewegung und Ton aus",
+    "on": "Die Ruhetaste ist an. Bewegung und Ton sind aus.",
+    "off": "Die Ruhetaste ist aus."
+  },
+  "footer": {
+    "tagline": "Camping auf Berts Bauernhof",
+    "navLabel": "Fußzeile",
+    "accessibility": "Barrierefreiheit",
+    "houseRules": "Hausordnung & FAQ",
+    "privacy": "Datenschutz & Cookies",
+    "cookieSettings": "Cookie-Einstellungen",
+    "facebook": "Folge uns auf Facebook",
+    "address": "Adresse",
+    "reception": "Rezeption",
+    "weekdays": "Mo – Fr",
+    "weekend": "Sa – So",
+    "season": "Saison"
+  },
+  "cookies": {
+    "title": "Kekse? Nur aus dem Hofladen.",
+    "text": "Wir nutzen nur, was die Website zum Funktionieren braucht. Besuche zählen wir ohne Cookies. Extras wie Facebook-Beiträge bleiben aus, bis du sie einschaltest.",
+    "onlyNeeded": "Nur notwendige",
+    "choose": "Selbst auswählen",
+    "save": "Auswahl speichern",
+    "needed": "Notwendig, damit die Website funktioniert",
+    "neededHint": "Deine Cookie-Auswahl und ob die Ruhetaste an ist. Immer an.",
+    "extras": "Extras von anderen Websites",
+    "extrasHint": "Zum Beispiel Facebook-Beiträge auf der Startseite. Dabei werden Daten an Facebook gesendet.",
+    "readMore": "Datenschutzerklärung lesen",
+    "saved": "Deine Auswahl ist gespeichert."
+  },
+  "home": {
+    "metaTitle": "Familiencamping auf dem Bauernhof",
+    "badge": "Familiencamping · 1. April – 31. Oktober",
+    "title": "Erlebe echtes Landleben",
+    "lead": "Zwischen Hühnern, Traktor und dem alten Melkstall. Such dir deinen Platz selbst aus und wach mit Gegacker auf.",
+    "illustration": "Gezeichneter Hof mit Hügeln, dem alten Melkstall, einem Gatter und einem Huhn",
+    "jokeLabel": "Witz des Tages",
+    "activitiesEyebrow": "Gelände & Aktivitäten",
+    "activitiesTitle": "Was kann man hier machen?",
+    "activitiesMore": "Alles über das Gelände",
+    "plotsEyebrow": "60 Plätze",
+    "plotsTitle": "Ein Platz, der zu euch passt",
+    "plotsText": "Zelt, Wohnwagen, Wohnmobil oder Safarizelt. Auf dem Lageplan siehst du, wo alles liegt, vom Hühnerstall bis zum Freibad.",
+    "plotsCta": "Zum Lageplan",
+    "eventsEyebrow": "Veranstaltungen",
+    "eventsTitle": "Demnächst auf dem Hof",
+    "eventsAll": "Ganzer Kalender",
+    "eventsFromSeason": "Der Campingplatz ist bis zum 1. April geschlossen. Das steht für die ersten Tage bereit.",
+    "findTitle": "So findest du uns",
+    "findSeason": "Saison: 1. April bis 31. Oktober",
+    "findReception": "Rezeption geöffnet"
+  },
+  "activities": {
+    "metaTitle": "Gelände & Aktivitäten",
+    "metaDescription": "Hühner füttern, auf dem Traktor spielen, im Freibad schwimmen und Kaffee im alten Melkstall. Alles zu Fuß von deinem Platz aus erreichbar.",
+    "eyebrow": "Gelände & Aktivitäten",
+    "title": "Was kann man hier machen?",
+    "lead": "Eier sammeln, auf den Traktor klettern, im Freibad abkühlen oder einfach nichts tun. Alles ist zu Fuß von deinem Platz aus erreichbar.",
+    "onThisPage": "Auf dieser Seite",
+    "chickenQuote": "„Ich bin hier die Chefin. Bert sieht das anders, aber Bert legt ja auch keine Eier.“",
+    "when": "Wann:",
+    "open": "Geöffnet:",
+    "access": "Barrierefrei:",
+    "accessTitle": "Mit Rollstuhl oder Kinderwagen?",
+    "accessText": "Bei jeder Einrichtung steht, wie barrierefrei sie ist. Bert prüft alles vor Ort.",
+    "accessCta": "Mehr zur Barrierefreiheit",
+    "ctaTitle": "Lust bekommen?",
+    "ctaText": "Such dir selbst deinen Platz aus, nah an dem, was dir am meisten Spaß macht."
+  },
+  "siteMap": {
+    "metaTitle": "Lageplan",
+    "metaDescription": "Sieh dir an, wo auf De Groene Weide die Plätze, das Freibad, die Spielwiese, die Hühner und die Sanitäranlagen liegen.",
+    "eyebrow": "Lageplan",
+    "title": "Mach schon mal einen Rundgang über den Hof",
+    "lead": "Klick auf einen Platz oder eine Einrichtung. Verlaufen geht nicht, die Hühner zeigen dir den Weg.",
+    "cta": "Daten wählen und buchen",
+    "exploreNote": "Erkunden: Du hast noch keine Daten gewählt, also ist alles anklickbar. Du willst wissen, was frei ist? Wähle zuerst deine Daten unter Buchen.",
+    "plotCta": "Ist dieser Platz frei? Daten wählen"
+  },
+  "book": {
+    "metaTitle": "Buchen",
+    "metaDescription": "Preise, Saison und so buchst du einen Platz auf De Groene Weide: Zelt, Wohnwagen, Wohnmobil oder Safarizelt.",
+    "seasonTitle": "Saison und Zeiten",
+    "seasonOpen": "Geöffnet",
+    "arrival": "Anreise",
+    "departure": "Abreise",
+    "arrivalFrom": "ab {time}",
+    "departureUntil": "bis {time}",
+    "pricesTitle": "Preise pro Nacht",
+    "plotType": "Art des Platzes",
+    "plots": "Plätze",
+    "extrasTitle": "Zusätzliche Kosten",
+    "rulesTitle": "Gut zu wissen",
+    "rulesText": "Auf dem Hof gelten ein paar Regeln, damit alle gut schlafen. Die Hühner auch.",
+    "rulesCta": "Zur Hausordnung"
+  },
+  "events": {
+    "metaTitle": "Veranstaltungen",
+    "metaDescription": "Was los ist auf De Groene Weide: Hühner füttern, Traktorfahrten, Schwimmen, Pfannkuchen und Lagerfeuer. Pro Tag und pro Woche.",
+    "eyebrow": "Veranstaltungen",
+    "title": "Was ist los auf dem Hof?",
+    "lead": "Mitmachen ist kostenlos, wenn nichts anderes dabeisteht. Der Hahn fängt um sechs an, wir etwas später.",
+    "toolbar": "Kalender einstellen",
+    "week": "Woche",
+    "day": "Tag",
+    "viewLabel": "Ansicht",
+    "prevWeek": "Vorige Woche",
+    "nextWeek": "Nächste Woche",
+    "prevDay": "Voriger Tag",
+    "nextDay": "Nächster Tag",
+    "weekOf": "Woche vom {date}",
+    "ageLabel": "Alter",
+    "age": {
+      "all": "Alle",
+      "toddlers": "0–4 Jahre",
+      "kids": "4–12 Jahre",
+      "adults": "Erwachsene"
+    },
+    "ageText": {
+      "all": "alle Altersgruppen",
+      "toddlers": "0–4 Jahre",
+      "kids": "4–12 Jahre",
+      "adults": "Erwachsene"
+    },
+    "kind": {
+      "animals": "Tiere",
+      "play": "Spielen & Traktor",
+      "pool": "Freibad",
+      "food": "Melkstall & Essen"
+    },
+    "legend": "Legende",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "closed": "Geschlossen",
+    "closedDay": "Der Campingplatz ist an diesem Tag geschlossen. Die Saison läuft vom 1. April bis 31. Oktober.",
+    "closedWeek": "Der Campingplatz ist in dieser Woche geschlossen. Die Saison läuft vom 1. April bis 31. Oktober.",
+    "nothing": "Keine Aktivitäten",
+    "nothingForAge": "Keine Aktivitäten für diese Altersgruppe.",
+    "toFirstWeek": "Zur ersten Woche der Saison",
+    "everyDay": "Jeden Tag",
+    "everyWeekday": "Jeden {weekday}",
+    "sampleNote": "Beispielkalender. Bert und das Animationsteam tragen die echten Aktivitäten bald ein."
+  },
+  "about": {
+    "metaTitle": "Über uns",
+    "metaDescription": "Die Geschichte von Bert, vom Milchbauern zum Campingbauern, und das Team von De Groene Weide.",
+    "eyebrow": "Über uns",
+    "title": "Vom Milchbauern zum Campingbauern",
+    "lead": "Bert hat auf diesem Hof [Anzahl] Jahre lang Kühe gemolken. Heute melkt er höchstens noch die Sonne. Die Kühe sind weg, die Hühner und der Traktor sind geblieben, und der Hof gehört euch.",
+    "photo": "Foto von Bert auf dem Hof beim alten Melkstall",
+    "storyTitle": "Die Geschichte des Hofes",
+    "valuesTitle": "Wofür wir stehen",
+    "values": [
+      {
+        "title": "Echtes Landleben",
+        "text": "Kein Freizeitpark. Dafür Hühner, Matsch, ein Traktor und der Duft von Heu."
+      },
+      {
+        "title": "Ruhe für alle",
+        "text": "Großzügige Plätze, stille Abende und eine Website mit Ruhetaste."
+      },
+      {
+        "title": "Willkommen, wie du bist",
+        "text": "Mit Rollstuhl, Kinderwagen oder Hund. Wir sagen ehrlich, was geht und was nicht."
+      }
+    ],
+    "teamTitle": "Das Team",
+    "ctaTitle": "Erlebe es selbst",
+    "ctaText": "Such dir deinen Platz auf der Wiese aus, oder stell uns zuerst eine Frage.",
+    "ctaQuestion": "Frage stellen"
+  },
+  "contact": {
+    "metaTitle": "Kontakt",
+    "metaDescription": "Ruf an, schreib eine E-Mail oder eine Nachricht an De Groene Weide. Mit Adresse, Anfahrt und den Öffnungszeiten der Rezeption.",
+    "eyebrow": "Kontakt",
+    "title": "Frag einfach",
+    "lead": "Bert liest jede Nachricht und antwortet meist innerhalb eines Tages. Es sei denn, der Traktor braucht ihn gerade dringender.",
+    "directTitle": "Direkter Kontakt",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "address": "Adresse",
+    "receptionTitle": "Rezeption geöffnet",
+    "weekdays": "Mo – Fr",
+    "weekend": "Sa – So",
+    "arrival": "Anreise",
+    "arrivalFrom": "ab {time}",
+    "season": "Saison: 1. April bis 31. Oktober",
+    "routeTitle": "Anfahrt",
+    "routeText": "Der Campingplatz liegt auf dem Bauernhof. Folge den Schildern mit dem Huhn.",
+    "faqText": "Vielleicht steht deine Antwort schon bei den häufigen Fragen: Hunde, Anreisezeiten, Strom und mehr.",
+    "faqCta": "Zu den Fragen",
+    "form": {
+      "title": "Nachricht senden",
+      "name": "Name",
+      "email": "E-Mail-Adresse",
+      "emailHint": "Dorthin schicken wir unsere Antwort.",
+      "subject": "Worum geht es?",
+      "optional": "(optional)",
+      "message": "Deine Nachricht",
+      "messageHint": "Geht es um eine Buchung? Dann schreib deine Daten und die Art des Platzes dazu.",
+      "website": "Dieses Feld bitte leer lassen",
+      "privacy": "Wir nutzen deine Daten nur, um deine Frage zu beantworten. Kein Newsletter, kein Theater.",
+      "privacyLink": "Datenschutzerklärung",
+      "submit": "Nachricht senden",
+      "sending": "Wird gesendet…",
+      "spamNote": "Spamschutz ohne Cookies oder Rätsel.",
+      "sentTitle": "Gesendet!",
+      "sentText": "Danke für deine Nachricht. Bert antwortet so schnell wie möglich.",
+      "errorSummary": "Da ist etwas schiefgegangen. Bitte prüfe die Felder unten.",
+      "errors": {
+        "nameRequired": "Bitte gib deinen Namen ein.",
+        "nameTooLong": "Dein Name ist zu lang. Höchstens 100 Zeichen.",
+        "emailRequired": "Bitte gib deine E-Mail-Adresse ein.",
+        "emailInvalid": "Das sieht nicht nach einer E-Mail-Adresse aus. Zum Beispiel: name@beispiel.de",
+        "subjectTooLong": "Der Betreff ist zu lang. Höchstens 150 Zeichen.",
+        "messageRequired": "Bitte schreib deine Nachricht.",
+        "messageTooShort": "Deine Nachricht ist sehr kurz. Bitte schreib mindestens 10 Zeichen.",
+        "messageTooLong": "Deine Nachricht ist zu lang. Höchstens 5000 Zeichen.",
+        "rateLimited": "Du hast gerade schon ein paar Nachrichten geschickt. Versuch es in einer Viertelstunde noch einmal oder ruf uns an.",
+        "sendFailed": "Das Senden hat nicht geklappt. Versuch es später noch einmal, oder ruf an oder schreib uns eine E-Mail."
+      }
+    }
+  },
+  "infoPages": {
+    "navLabel": "Informationen"
+  },
+  "accessibility": {
+    "metaTitle": "Barrierefreiheit",
+    "metaDescription": "Was mit Rollstuhl, Kinderwagen oder einer Beeinträchtigung auf De Groene Weide möglich ist und wie barrierefrei diese Website ist.",
+    "eyebrow": "Informationen",
+    "title": "Barrierefreiheit",
+    "lead": "Alle sollen den Hof erleben können. Hier steht ehrlich, was geht und was nicht, auf der Website und auf dem Gelände.",
+    "siteTitle": "Auf dieser Website",
+    "site": [
+      "Alles funktioniert mit der Tastatur. Mit der Tab-Taste springst du zur nächsten Schaltfläche oder zum nächsten Link.",
+      "Die Ruhetaste oben schaltet Bewegung und Ton aus. Ist auf deinem Gerät „Bewegung reduzieren“ eingeschaltet, machen wir das automatisch.",
+      "Zum Lageplan gibt es immer eine Liste als Alternative. Jeder Platz hat einen Namen für Screenreader.",
+      "Farben auf dem Plan haben auch ein Muster oder Zeichen, damit du sie auch ohne Farbe unterscheiden kannst.",
+      "Wir folgen der Richtlinie WCAG 2.2, Stufe AA."
+    ],
+    "terrainTitle": "Auf dem Gelände",
+    "facility": "Einrichtung",
+    "wheelchair": "Rollstuhl",
+    "stroller": "Kinderwagen",
+    "notes": "Hinweise",
+    "yes": "ja",
+    "partly": "teilweise",
+    "unchecked": "nicht geprüft",
+    "terrainRows": [
+      {
+        "facility": "Sanitär",
+        "wheelchair": "yes",
+        "stroller": "yes",
+        "notes": "Barrierefreie Dusche und Toilette"
+      },
+      {
+        "facility": "Kantine",
+        "wheelchair": "yes",
+        "stroller": "yes",
+        "notes": "Rampe am Eingang"
+      },
+      {
+        "facility": "Freibad",
+        "wheelchair": "unchecked",
+        "stroller": "yes",
+        "notes": "[Bert prüft das vor Ort]"
+      },
+      {
+        "facility": "Spielwiese",
+        "wheelchair": "partly",
+        "stroller": "yes",
+        "notes": "Rasen, teils uneben"
+      },
+      {
+        "facility": "Hofladen",
+        "wheelchair": "yes",
+        "stroller": "yes",
+        "notes": "Stufenlos"
+      }
+    ],
+    "plotsNote": "Beim Buchen siehst du bei jedem Platz, ob er eben und rollstuhlgerecht ist. Wir nennen einen Platz nur barrierefrei, wenn Bert ihn selbst geprüft hat. Zuletzt geprüft: [Datum].",
+    "faqTitle": "Fragen zur Barrierefreiheit",
+    "faq": [
+      {
+        "q": "Kann ich einen Platz nah an den barrierefreien Sanitäranlagen buchen?",
+        "a": "Ja. Sag es beim Buchen oder schreib uns, dann sucht Bert dir einen ebenen Platz in der Nähe."
+      },
+      {
+        "q": "Darf mein Assistenzhund mitkommen?",
+        "a": "[Antwort von Bert]"
+      },
+      {
+        "q": "Gibt es einen ruhigen Platz für reizempfindliche Gäste?",
+        "a": "[Antwort von Bert]"
+      }
+    ],
+    "reportText": "Funktioniert etwas für dich nicht? Sag uns Bescheid, dann beheben wir es.",
+    "reportCta": "Problem melden"
+  },
+  "houseRules": {
+    "metaTitle": "Hausordnung & FAQ",
+    "metaDescription": "Die Hausordnung von De Groene Weide und Antworten auf häufige Fragen zu Hunden, Anreise, Strom und mehr.",
+    "eyebrow": "Informationen",
+    "title": "Hausordnung & häufige Fragen",
+    "lead": "Ein paar Absprachen, damit alle gut schlafen. Die Hühner gehen um acht auf die Stange, du darfst länger aufbleiben.",
+    "rulesTitle": "Hausordnung",
+    "rules": [
+      "Ruhe auf dem Gelände von [Uhrzeit] bis [Uhrzeit].",
+      "Über den Hof nur im Schritttempo fahren. Hühner und Kinder haben Vorfahrt.",
+      "Hunde sind [willkommen/nicht willkommen], an der Leine und weg von den Hühnern.",
+      "Lass die Tore zur Wiese geschlossen. Was drinnen ist, will drinnen bleiben.",
+      "Kinder unter [Alter] schwimmen nur mit einem Erwachsenen.",
+      "Müll trennen kannst du am [Ort]. Glas, Plastik und Restmüll."
+    ],
+    "rulesNote": "Die genauen Regeln und Zeiten folgen von Bert.",
+    "faqTitle": "Häufige Fragen",
+    "faq": [
+      {
+        "q": "Wann ist der Campingplatz geöffnet?",
+        "a": "Vom 1. April bis 31. Oktober. Im Winter ruhen sich die Wiese und Bert aus."
+      },
+      {
+        "q": "Wann kann ich anreisen und wann muss ich abreisen?",
+        "a": "Anreise ab [Uhrzeit], Abreise bis [Uhrzeit]. Du kommst später? Ruf kurz an, dann lassen wir das Tor offen."
+      },
+      {
+        "q": "Sind Hunde willkommen?",
+        "a": "[Antwort von Bert]"
+      },
+      {
+        "q": "Hat jeder Platz Strom?",
+        "a": "Nicht jeder Platz. Alle Wohnmobilplätze haben Strom; bei Zelten und Wohnwagen kommt es auf den Platz an. Das siehst du beim Buchen."
+      },
+      {
+        "q": "Kann ich meine Buchung ändern oder stornieren?",
+        "a": "[Bedingungen von Bert]"
+      },
+      {
+        "q": "Dürfen die Kinder auf dem Hof mithelfen?",
+        "a": "Sehr gern sogar. Jeden Morgen dürfen sie beim Hühnerfüttern helfen. Den Rest findest du im Kalender."
+      }
+    ],
+    "moreText": "Deine Frage ist nicht dabei?",
+    "moreCta": "Stell deine Frage"
+  },
+  "privacy": {
+    "metaTitle": "Datenschutz & Cookies",
+    "metaDescription": "Welche Daten De Groene Weide verwendet, warum, wie lange wir sie aufbewahren und welche Cookies die Website nutzt.",
+    "eyebrow": "Informationen",
+    "title": "Datenschutz & Cookies",
+    "lead": "Wir fragen nur, was wir wirklich brauchen, und verkaufen nichts weiter. Außer Eiern, im Hofladen.",
+    "updated": "Zuletzt aktualisiert: [Datum]",
+    "sections": [
+      {
+        "title": "Wer sind wir?",
+        "paragraphs": [
+          "De Groene Weide ist der Campingplatz auf Berts Bauernhof, [Adresse]. Fragen zu deinen Daten stellst du über die Kontaktseite oder per E-Mail an [E-Mail-Adresse]."
+        ]
+      },
+      {
+        "title": "Welche Daten verwenden wir?",
+        "paragraphs": [
+          "Schickst du eine Nachricht über das Kontaktformular, verwenden wir deinen Namen, deine E-Mail-Adresse und deine Nachricht, um deine Frage zu beantworten. Mehr nicht.",
+          "Buchst du, fragen wir nach Name, E-Mail-Adresse, Telefonnummer, Anzahl der Personen, Art der Unterkunft und eventuellen Anmerkungen. Zahlungsdaten speichern wir auf dieser Website nie.",
+          "Wir fragen und speichern keine Daten über Kinder."
+        ]
+      },
+      {
+        "title": "Wie lange bewahren wir sie auf?",
+        "paragraphs": [
+          "Nachrichten bewahren wir [Zeitraum] auf. Buchungen bewahren wir so lange auf, wie das Gesetz es für die Buchhaltung verlangt: [Zeitraum]."
+        ]
+      },
+      {
+        "title": "Wo liegen deine Daten?",
+        "paragraphs": [
+          "Die Website und alle Daten liegen auf einem Server in der Europäischen Union. E-Mails versenden wir über einen europäischen Maildienst."
+        ]
+      },
+      {
+        "title": "Cookies und was in deinem Browser gespeichert wird",
+        "paragraphs": [
+          "Wir verwenden keine Tracking-Cookies. In deinem Browser speichern wir nur deine Cookie-Auswahl und ob die Ruhetaste an ist. Das ist nötig, damit die Website funktioniert, und bleibt auf deinem eigenen Gerät. Während du buchst, merkt sich ein notwendiges Cookie, welcher Platz für dich reserviert ist.",
+          "Extras von anderen Websites, wie Facebook-Beiträge, bleiben aus, bis du sie einschaltest. Du kannst deine Auswahl jederzeit über die Cookie-Einstellungen unten auf jeder Seite ändern.",
+          "Besucherstatistiken erfassen wir derzeit nicht. Wenn wir damit anfangen, dann ohne Cookies und ohne dich erkennen zu können."
+        ]
+      },
+      {
+        "title": "Deine Rechte",
+        "paragraphs": [
+          "Du kannst jederzeit fragen, welche Daten wir von dir haben, und verlangen, dass wir sie berichtigen oder löschen. Schick uns eine Nachricht, dann erledigen wir das innerhalb eines Monats.",
+          "Bist du nicht einverstanden damit, wie wir mit deinen Daten umgehen? Dann kannst du dich bei der niederländischen Datenschutzbehörde (Autoriteit Persoonsgegevens) beschweren."
+        ]
+      }
+    ]
+  },
+  "notFound": {
+    "metaTitle": "Seite nicht gefunden",
+    "eyebrow": "Fehler 404",
+    "title": "Diese Seite ist auf und davon. Wie der Hahn, wenn das Tor offen steht.",
+    "text": "Die Seite, die du suchst, steht nicht mehr auf der Wiese. Vielleicht ist sie umgezogen, oder jemand hat das Gatter offen gelassen.",
+    "home": "Zurück zum Hof",
+    "map": "Zum Lageplan"
+  },
+  "error": {
+    "eyebrow": "Hoppla",
+    "title": "Der Traktor springt gerade nicht an.",
+    "text": "Bei uns ist etwas schiefgegangen. Versuch es gleich noch einmal. Klappt es dann immer noch nicht, ruf uns gern an oder schreib uns.",
+    "retry": "Noch einmal versuchen",
+    "home": "Zurück zum Hof"
+  },
+  "map": {
+    "regionLabel": "Plan des Geländes",
+    "viewLabel": "Ansicht",
+    "viewMap": "Plan",
+    "viewList": "Liste",
+    "zoomIn": "Vergrößern",
+    "zoomOut": "Verkleinern",
+    "filterLabel": "Plätze filtern",
+    "filterAll": "Alle Plätze",
+    "filterElectricity": "Mit Strom",
+    "filterWheelchair": "Rollstuhl / Kinderwagen",
+    "filterShade": "Viel Schatten",
+    "zoneTitle": {
+      "A": "Wiese A · T1–T20",
+      "B": "Wiese B · T21–T40",
+      "C": "Wohnmobilplätze C1–C12",
+      "S": "Safarizelte S1–S8"
+    },
+    "zone": {
+      "A": "Wiese A",
+      "B": "Wiese B",
+      "C": "Wohnmobilplätze",
+      "S": "Safarizelte"
+    },
+    "plotAria": "Platz {id}, {state}",
+    "state": {
+      "free": "frei",
+      "taken": "belegt",
+      "blocked": "gesperrt",
+      "selected": "deine Wahl",
+      "tip": "Tipp vom Huhn",
+      "dimmed": "passt nicht zum Filter",
+      "unsuitable": "passt nicht zu deiner Gruppe"
+    },
+    "legend": "Legende",
+    "legendFree": "Frei",
+    "legendTaken": "Belegt",
+    "legendBlocked": "Gesperrt",
+    "legendSelected": "Deine Wahl",
+    "legendTip": "Tipp vom Huhn",
+    "type": {
+      "tent_caravan": "Zelt / Wohnwagen",
+      "camper": "Wohnmobil",
+      "safari_tent": "Safarizelt"
+    },
+    "detailLabel": "Details",
+    "pickSomething": "Klick auf einen Platz oder eine Einrichtung, dann siehst du hier alles Wichtige.",
+    "plotTitle": "Platz {id}",
+    "facilityKind": "Einrichtung",
+    "plotKind": "Platz · {type}",
+    "electricity": "Strom",
+    "surface": "Untergrund",
+    "level": "Eben",
+    "shade": "Schatten",
+    "wheelchair": "Rollstuhl / Kinderwagen",
+    "maxPersons": "Max. Personen",
+    "yes": "ja",
+    "no": "nein",
+    "levelNo": "leicht abschüssig",
+    "surfaceValue": {
+      "grass": "Rasen",
+      "semi_paved": "halbbefestigt",
+      "paved": "befestigt"
+    },
+    "shadeValue": {
+      "none": "wenig",
+      "some": "teilweise",
+      "lots": "viel"
+    },
+    "notChecked": "noch nicht geprüft",
+    "sampleNote": "Beispieldaten. Die echten Merkmale folgen nach dem Rundgang mit Bert.",
+    "distancesTitle": "Fußweg bis",
+    "metres": "{m} m",
+    "open": "Geöffnet:",
+    "when": "Wann:",
+    "access": "Barrierefrei:",
+    "where": "Wo:",
+    "photoMissing": "Foto folgt",
+    "close": "Schließen",
+    "listCaption": "Alle Plätze",
+    "colPlot": "Platz",
+    "colType": "Art",
+    "colZone": "Wo",
+    "colFeatures": "Merkmale",
+    "colStatus": "Status",
+    "colAction": "Aktion",
+    "showDetails": "Ansehen",
+    "showPlot": "Platz {id} ansehen",
+    "facilitiesCaption": "Einrichtungen",
+    "showFacility": "{name} ansehen",
+    "noMatches": "Keine Plätze passen zu diesem Filter.",
+    "keyboardHint": "Mit den Pfeiltasten gehst du zum Platz daneben.",
+    "empty": "Der Plan kann gerade nicht laden. Versuch es später noch einmal oder ruf uns an.",
+    "count": "{count, plural, one {# Platz} other {# Plätze}}",
+    "featureElectricity": "Strom",
+    "featureWheelchair": "Rollstuhl",
+    "featureLevel": "eben",
+    "featureShade": "viel Schatten",
+    "legendUnsuitable": "Passt nicht zu deiner Gruppe"
+  },
+  "email": {
+    "greeting": "Hallo {name},",
+    "signoff": "Bis bald auf dem Hof!\nBert und die Hühner von De Groene Weide",
+    "summaryTitle": "Deine Buchung",
+    "code": "Buchungsnummer: {code}",
+    "plot": "Platz: {plot}",
+    "dates": "Anreise: {arrival}\nAbreise: {departure} ({nights, plural, one {# Nacht} other {# Nächte}})",
+    "persons": "Personen: {adults, plural, one {# Erwachsener} other {# Erwachsene}}{children, plural, =0 {} one {, # Kind} other {, # Kinder}}",
+    "price": "Preis: {price}",
+    "priceUnknown": "Preis: teilt Bert dir mit",
+    "manage": "Buchung ansehen oder stornieren: {url}",
+    "contactUs": "Fragen? Antworte einfach auf diese E-Mail.",
+    "requested": {
+      "subject": "Wir haben deine Anfrage für Platz {plot} erhalten",
+      "intro": "Gack gack! Deine Anfrage ist da. Bert schaut sie sich an und bestätigt deinen Platz so schnell wie möglich. Bis dahin halten wir den Platz für dich frei."
+    },
+    "confirmed": {
+      "subject": "Dein Platz {plot} ist bestätigt",
+      "intro": "Gute Nachricht: Dein Platz ist bestätigt. Die Hühner wissen Bescheid und die Wiese ist bereit."
+    },
+    "cancelled": {
+      "subject": "Deine Buchung {code} ist storniert",
+      "intro": "Deine Buchung ist storniert. Schade! Du möchtest doch kommen? Du kannst jederzeit neu buchen."
+    },
+    "reminder": {
+      "subject": "Noch {days, plural, one {# Tag} other {# Tage}}, dann bist du auf De Groene Weide",
+      "intro": "Bald ist es so weit! Hier ist deine Buchung noch einmal. Die Hühner üben schon ihr Begrüßungslied.",
+      "route": "Anfahrt: {url}",
+      "arrivalTimes": "Anreise ab {from}, Abreise bis {until}."
+    },
+    "farewell": {
+      "subject": "Danke für deinen Aufenthalt auf De Groene Weide",
+      "intro": "Danke, dass du da warst! Wir hoffen, du hast gut geschlafen, trotz des Hahns.",
+      "review": "Hat es dir gefallen? Eine Bewertung hilft Bert sehr: {url}",
+      "question": "Wie war es? Antworte mit 1 bis 5 Hühnern."
+    },
+    "notice": {
+      "subject": "Nieuwe aanvraag: plek {plot}, {arrival}",
+      "intro": "Er is een nieuwe reservering binnengekomen op de website.",
+      "confirmed": "Status: direct bevestigd (niveau 2).",
+      "requested": "Status: wacht op jouw bevestiging. Bevestig in het beheer: {url}",
+      "contact": "Gast: {name}, {email}{phone}",
+      "remarks": "Opmerkingen: {remarks}",
+      "language": "Taal: {locale}"
+    }
+  },
+  "booking": {
+    "stepOf": "Buchen · Schritt {step} von 7",
+    "stepsLabel": "Schritte",
+    "steps": ["Datum", "Personen & Unterkunft", "Platzfinder", "Platz wählen", "Angaben", "Prüfen", "Bestätigung"],
+    "stepDone": "erledigt",
+    "stepCurrent": "aktueller Schritt",
+    "titles": [
+      "Wann kommst du?",
+      "Mit wem kommst du?",
+      "Welcher Platz passt zu dir?",
+      "Such dir dein Plätzchen auf der Wiese aus",
+      "Wen dürfen wir erwarten?",
+      "Stimmt alles?",
+      "Gack! Deine Anfrage ist da"
+    ],
+    "titleConfirmed": "Gack! Dein Platz ist gebucht",
+    "announce": "Schritt {step} von 7: {title}",
+    "next": "Weiter",
+    "back": "Zurück",
+    "arrival": "Anreise",
+    "departure": "Abreise",
+    "arrivalHint": "Die Saison läuft vom 1. April bis 31. Oktober.",
+    "nights": "{count, plural, one {# Nacht} other {# Nächte}}",
+    "minNights": "Mindestens {count, plural, one {# Nacht} other {# Nächte}}.",
+    "adults": "Erwachsene",
+    "children": "Kinder (bis 12 Jahre)",
+    "dogs": "Hunde",
+    "fewer": "Einer weniger: {what}",
+    "more": "Einer mehr: {what}",
+    "accommodation": "Worin schläfst du?",
+    "accommodationValue": {
+      "tent": "Zelt",
+      "caravan": "Wohnwagen",
+      "camper": "Wohnmobil",
+      "safari_tent": "Safarizelt"
+    },
+    "accommodationHint": {
+      "tent": "Auf dem Rasen in Wiese A oder B",
+      "caravan": "Auf dem Rasen in Wiese A oder B",
+      "camper": "Halbbefestigter Wohnmobilplatz",
+      "safari_tent": "Eingerichtetes Zelt mit Betten"
+    },
+    "electricity": "Brauchst du Strom?",
+    "electricityYes": "Ja, bitte",
+    "electricityNo": "Nein, danke",
+    "safariHasPower": "Safarizelte haben immer Strom.",
+    "matchTitle": "Der Platzfinder kommt bald",
+    "matchText": "Bald stellt dir das Huhn fünf Fragen und empfiehlt die drei besten Plätze. Bis dahin wählst du selbst auf dem Plan. Auch gut: Du kennst deine Familie am besten.",
+    "matchSkip": "Selbst auf dem Plan wählen",
+    "summaryBar": "{nights} · {persons, plural, one {# Person} other {# Personen}} · {accommodation}",
+    "change": "Ändern",
+    "unsuitable": "passt nicht zu deiner Gruppe",
+    "loadingMap": "Der Plan holt die freien Plätze…",
+    "mapError": "Wir konnten nicht abrufen, welche Plätze frei sind. Bitte versuch es noch einmal.",
+    "retry": "Noch einmal versuchen",
+    "holding": "Das Huhn hält Platz {id} für dich fest…",
+    "heldFor": "Das Huhn hält diesen Platz <strong>{minutes} Minuten</strong> für dich fest.",
+    "toDetails": "Weiter zu deinen Angaben",
+    "pickFirst": "Wähle zuerst einen freien Platz auf dem Plan oder in der Liste.",
+    "notThisPlot": "Dieser Platz passt nicht zu deiner Gruppe. Wähle einen Platz für deine Art von Unterkunft.",
+    "holdStatus": {
+      "taken": "Knapp verpasst: Jemand anderes hat Platz {id} einen Moment früher gewählt. Bitte wähle einen anderen Platz.",
+      "blocked": "Platz {id} kann in diesem Zeitraum nicht gebucht werden.",
+      "too_many_holds": "Du hältst schon {max} Plätze fest. Schließ zuerst eine Buchung ab oder warte eine Viertelstunde.",
+      "rate_limited": "Langsam, das Huhn kommt nicht hinterher. Versuch es in ein paar Minuten noch einmal.",
+      "error": "Da ist etwas schiefgegangen. Versuch es noch einmal oder ruf uns an."
+    },
+    "countdown": "Noch {time} festgehalten",
+    "countdownWarning": "Achtung: noch 2 Minuten, dann wird Platz {id} wieder frei.",
+    "expired": "Deine 15 Minuten sind um, Platz {id} ist wieder freigegeben. Wähle erneut einen Platz: Vielleicht ist er noch frei.",
+    "priceFor": "Preis für {nights}",
+    "priceUnknown": "Preis folgt",
+    "name": "Name",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefonnummer",
+    "phoneHint": "Praktisch, falls wir dich am Anreisetag anrufen müssen.",
+    "optional": "(optional)",
+    "remarks": "Anmerkungen",
+    "remarksHint": "Zum Beispiel: Wir kommen erst spät an. Bitte keine Namen oder Alter von Kindern eintragen.",
+    "privacyNote": "Wir verwenden deine Daten nur für diese Buchung. Bezahlt wird nicht über die Website.",
+    "required": "Bitte füll dieses Feld aus.",
+    "emailInvalid": "Bitte gib eine gültige E-Mail-Adresse ein, zum Beispiel name@beispiel.de.",
+    "reviewTitle": "Deine Buchung",
+    "reviewStay": "Aufenthalt",
+    "reviewPlot": "Platz",
+    "reviewGuests": "Gäste",
+    "reviewContact": "Kontakt",
+    "persons": "{adults, plural, one {# Erwachsener} other {# Erwachsene}}{children, plural, =0 {} one {, # Kind} other {, # Kinder}}{dogs, plural, =0 {} one {, # Hund} other {, # Hunde}}",
+    "withElectricity": "mit Strom",
+    "priceTitle": "Preis",
+    "priceNights": "{nights, plural, one {# Nacht} other {# Nächte}} {period}",
+    "priceExtra": "{name} ({quantity} ×)",
+    "total": "Gesamt",
+    "priceNote": "Bezahlt wird auf dem Campingplatz. Bert bestätigt den Preis in seiner E-Mail.",
+    "houseRules": "Ich habe die <link>Hausordnung</link> gelesen und bin einverstanden.",
+    "houseRulesRequired": "Bitte bestätige, dass du die Hausordnung gelesen hast.",
+    "submitRequest": "Anfrage senden",
+    "submitBook": "Diesen Platz buchen",
+    "submitting": "Einen Moment, das Huhn rennt zu Bert…",
+    "takenTitle": "Oje, Platz {id} ist gerade weg",
+    "takenText": "Jemand anderes war einen Moment schneller. Diese Plätze sind ähnlich und noch frei:",
+    "takenNone": "In diesem Zeitraum ist kein ähnlicher Platz mehr frei. Wähle andere Daten oder ruf uns an.",
+    "pickAlternative": "Platz {id} wählen",
+    "submitError": {
+      "expired": "Dein Platz wurde nicht mehr festgehalten. Bitte wähle erneut einen Platz.",
+      "rate_limited": "Du hast es schon oft versucht. Bitte warte ein paar Minuten.",
+      "invalid": "Bitte prüfe deine Angaben noch einmal.",
+      "error": "Beim Senden ist etwas schiefgegangen. Versuch es noch einmal oder ruf uns an."
+    },
+    "doneRequested": "Bert schaut sich deine Anfrage so schnell wie möglich an und bestätigt deinen Platz per E-Mail. Bis dahin halten wir Platz {plot} für dich frei.",
+    "doneConfirmed": "Dein Platz {plot} ist gebucht. Die Bestätigung ist in deinem Postfach.",
+    "doneCode": "Deine Buchungsnummer",
+    "doneMail": "Wir haben eine E-Mail an {email} geschickt. Nichts angekommen? Schau im Spam-Ordner nach, das Huhn landet manchmal dort.",
+    "doneNext": "Wie geht es weiter?",
+    "doneSteps": [
+      "Bewahre deine Buchungsnummer auf.",
+      "Du möchtest etwas ändern oder stornieren? Nimm Kontakt mit uns auf.",
+      "Komm innerhalb der Anreisezeiten. Die Hühner warten schon."
+    ],
+    "doneHome": "Zurück zur Startseite",
+    "doneEvents": "Zu den Veranstaltungen",
+    "phoneAlternative": "Lieber anrufen oder mailen? Geht auch.",
+    "joke": "Hörst du im Hintergrund Gegacker? Dann bist du hier richtig.",
+    "errors": {
+      "departure_before_arrival": "Dein Abreisedatum muss nach deinem Anreisedatum liegen.",
+      "outside_season": "Da haben wir geschlossen. Wir sind vom 1. April bis 31. Oktober geöffnet.",
+      "arrival_on_last_day": "Am 31. Oktober schließen wir. Bitte wähle ein früheres Anreisedatum.",
+      "stay_crosses_season_end": "Dein Aufenthalt geht über das Saisonende hinaus. Der letzte Abreisetag ist der 31. Oktober.",
+      "too_few_nights": "Das ist zu kurz. Bitte wähle mindestens {min, plural, one {# Nacht} other {# Nächte}}.",
+      "too_many_nights": "Online buchst du höchstens {max} Nächte. Länger bleiben? Ruf an oder schreib uns.",
+      "arrival_in_past": "Dieses Datum ist schon vorbei. Bitte wähle ein Datum ab heute.",
+      "too_many_persons": "Für so viele Personen ist dieser Platz zu klein. Wähle einen größeren Platz.",
+      "name_required": "Bitte gib deinen Namen ein.",
+      "email_invalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+      "adults_required": "Mindestens ein Erwachsener muss mitkommen."
+    },
+    "phoneAlternativeLink": "Zur Kontaktseite"
+  }
+}

@@ -2,8 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { getPageLocale } from "@/i18n/locale";
 import { Link } from "@/i18n/navigation";
 import type { AnyLocale } from "@/i18n/routing";
-import { events } from "@/content/events";
-import { site } from "@/content/site";
+import { getEvents, getSite } from "@/lib/data/content";
 import { ChevronLeftIcon, ChevronRightIcon, EventIconFor } from "@/components/icons";
 import { kindSurface } from "@/components/events/format";
 import { addDays, eachDay, formatDate, isIsoDate, startOfWeek, type IsoDate } from "@/lib/dates";
@@ -26,6 +25,7 @@ function capitalize(s: string) {
 }
 
 export async function Agenda({ searchParams }: { searchParams: Promise<AgendaQuery> }) {
+  const [events, site] = await Promise.all([getEvents(), getSite()]);
   const query = await searchParams;
   const locale = await getPageLocale();
   const t = await getTranslations("events");

@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "import-map": "tsx scripts/import-map.ts",
-    "seed-content": "tsx scripts/seed-content.ts"
+    "seed-content": "tsx scripts/seed-content.ts",
+    "e2e": "playwright test",
+    "create-staff": "tsx scripts/create-staff.ts"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
@@ -22,6 +24,8 @@
     "react-dom": "19.3.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
     "@types/node": "24.19.2",
     "@types/nodemailer": "8.0.2",
     "@types/react": "^19",

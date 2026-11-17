@@ -10,12 +10,20 @@ export function sqlValue(v: SqlScalar): string {
   return `'${v.replace(/'/g, "''")}'`;
 }
 
-/** insert … on conflict do nothing: rows edited in the admin panel stay. */
+/**
+ * insert … on conflict: rows edited in the admin panel stay as they are.
+ * Translation columns (*_en, *_de) that are still empty get filled in, so a
+ * new language arrives in an existing database without overwriting edits.
+ */
 export function insert(table: string, rows: Row[], conflict: string): string {
   if (rows.length === 0) return "";
   const cols = Object.keys(rows[0]);
   const values = rows.map((r) => `  (${cols.map((c) => sqlValue(r[c])).join(", ")})`).join(",\n");
-  return `insert into public.${table} (${cols.join(", ")}) values\n${values}\non conflict (${conflict}) do nothing;\n`;
+  const fill = cols.filter((c) => /_(en|de)$/.test(c));
+  const onConflict = fill.length
+    ? `do update set ${fill.map((c) => `${c} = coalesce(${table}.${c}, excluded.${c})`).join(", ")}`
+    : "do nothing";
+  return `insert into public.${table} (${cols.join(", ")}) values\n${values}\non conflict (${conflict}) ${onConflict};\n`;
 }
 
 /** Copies field_nl, field_en and field_de from a content object. */

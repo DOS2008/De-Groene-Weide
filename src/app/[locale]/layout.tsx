@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Atkinson_Hyperlegible, Bricolage_Grotesque } from "next/font/google";
 import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -11,22 +10,9 @@ import { CookieBanner } from "@/components/shell/CookieBanner";
 import { NoticeBanner } from "@/components/shell/NoticeBanner";
 import { SiteFooter } from "@/components/shell/SiteFooter";
 import { SiteHeader } from "@/components/shell/SiteHeader";
+import { body, heading } from "../fonts";
 import "../globals.css";
 
-// Self-hosted by next/font at build time: no request to Google from the browser.
-const heading = Bricolage_Grotesque({
-  subsets: ["latin", "latin-ext"],
-  weight: ["600", "800"],
-  variable: "--font-bricolage",
-  display: "swap",
-});
-
-const body = Atkinson_Hyperlegible({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "700"],
-  variable: "--font-atkinson",
-  display: "swap",
-});
 
 // Applies the Rustknop before the first paint, so nothing moves first.
 const calmScript = `try{if(localStorage.getItem(${JSON.stringify(CALM_KEY)})==="1")document.documentElement.dataset.calm="true"}catch(e){}`;

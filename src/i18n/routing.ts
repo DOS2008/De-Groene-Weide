@@ -8,7 +8,7 @@ export type AnyLocale = (typeof allLocales)[number];
  * Languages that are live. EN and DE stay off until their translation is
  * complete (docs/mvp.md, Prio 4). Turning one on is a change to this list.
  */
-const enabledLocales = ["nl"] as const satisfies readonly AnyLocale[];
+const enabledLocales = ["nl", "en", "de"] as const satisfies readonly AnyLocale[];
 type EnabledLocale = (typeof enabledLocales)[number];
 
 /**

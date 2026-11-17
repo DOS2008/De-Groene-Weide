@@ -1,0 +1,728 @@
+{
+  "meta": {
+    "siteName": "De Groene Weide",
+    "titleTemplate": "%s – De Groene Weide",
+    "defaultTitle": "De Groene Weide – family camping on the farm",
+    "defaultDescription": "Camping on Bert's farm in the Netherlands. Chickens, a play meadow with a tractor, an outdoor pool and the old milking parlour. Open from 1 April to 31 October."
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "bookCta": "Book your spot in the meadow",
+    "routeCta": "Plan your route",
+    "messageCta": "Send a message",
+    "viewOnMap": "View on the site map",
+    "season": "1 April to 31 October",
+    "placeholder": "To be added",
+    "newWindow": "opens another website"
+  },
+  "nav": {
+    "label": "Main menu",
+    "home": "Home",
+    "activities": "Site & activities",
+    "siteMap": "Site map",
+    "book": "Book",
+    "events": "Events",
+    "about": "About us",
+    "contact": "Contact",
+    "openMenu": "Menu",
+    "closeMenu": "Close"
+  },
+  "calm": {
+    "label": "Calm mode",
+    "long": "Calm mode: motion and sound off",
+    "on": "Calm mode is on. Motion and sound are off.",
+    "off": "Calm mode is off."
+  },
+  "footer": {
+    "tagline": "Camping on Bert's farm",
+    "navLabel": "Footer",
+    "accessibility": "Accessibility",
+    "houseRules": "House rules & FAQ",
+    "privacy": "Privacy & cookies",
+    "cookieSettings": "Cookie settings",
+    "facebook": "Follow us on Facebook",
+    "address": "Address",
+    "reception": "Reception",
+    "weekdays": "Mon – Fri",
+    "weekend": "Sat – Sun",
+    "season": "Season"
+  },
+  "cookies": {
+    "title": "Cookies? Only the ones from the farm shop.",
+    "text": "We only use what the site needs to work. We count visits without cookies. Extras such as Facebook posts stay off until you switch them on.",
+    "onlyNeeded": "Only necessary",
+    "choose": "Let me choose",
+    "save": "Save my choice",
+    "needed": "Needed for the site to work",
+    "neededHint": "Your cookie choice and whether calm mode is on. Always on.",
+    "extras": "Extras from other websites",
+    "extrasHint": "For example Facebook posts on the homepage. These send data to Facebook.",
+    "readMore": "Read the privacy statement",
+    "saved": "Your choice has been saved."
+  },
+  "home": {
+    "metaTitle": "Family camping on the farm",
+    "badge": "Family campsite · 1 April – 31 October",
+    "title": "Experience real farm life",
+    "lead": "Among the chickens, the tractor and the old milking parlour. Pick your own spot and wake up to clucking.",
+    "illustration": "Drawing of the farmyard with hills, the old milking parlour, a gate and a chicken",
+    "jokeLabel": "Joke of the day",
+    "activitiesEyebrow": "Site & activities",
+    "activitiesTitle": "What is there to do?",
+    "activitiesMore": "All about the site",
+    "plotsEyebrow": "60 pitches",
+    "plotsTitle": "A spot that suits you",
+    "plotsText": "Tent, caravan, motorhome or safari tent. The site map shows where everything is, from the chicken coop to the pool.",
+    "plotsCta": "View the site map",
+    "eventsEyebrow": "Events",
+    "eventsTitle": "Coming up on the farm",
+    "eventsAll": "Full calendar",
+    "eventsFromSeason": "The campsite is closed until 1 April. This is ready for the first days.",
+    "findTitle": "How to find us",
+    "findSeason": "Season: 1 April to 31 October",
+    "findReception": "Reception open"
+  },
+  "activities": {
+    "metaTitle": "Site & activities",
+    "metaDescription": "Feed the chickens, play on the tractor, swim in the outdoor pool and have coffee in the old milking parlour. All within walking distance of your pitch.",
+    "eyebrow": "Site & activities",
+    "title": "What is there to do?",
+    "lead": "Collect eggs, climb on the tractor, cool off in the pool or simply do nothing. Everything is within walking distance of your pitch.",
+    "onThisPage": "On this page",
+    "chickenQuote": "“I run this farm. Bert just hasn't noticed yet.”",
+    "when": "When:",
+    "open": "Open:",
+    "access": "Accessibility:",
+    "accessTitle": "Wheelchair or pushchair?",
+    "accessText": "Each facility says how accessible it is. Bert checks everything on site.",
+    "accessCta": "Read about accessibility",
+    "ctaTitle": "Fancy it?",
+    "ctaText": "Pick your own spot, close to what you like best."
+  },
+  "siteMap": {
+    "metaTitle": "Site map",
+    "metaDescription": "See where the pitches, the pool, the play meadow, the chickens and the toilets are at De Groene Weide.",
+    "eyebrow": "Site map",
+    "title": "Take a walk around the farm",
+    "lead": "Click a pitch or a facility. You can't get lost: the chickens show you the way.",
+    "cta": "Choose your dates and book",
+    "exploreNote": "Exploring: you haven't chosen any dates yet, so everything can be clicked. Want to know what's free? Choose your dates under Book first.",
+    "plotCta": "Is this pitch free? Choose your dates"
+  },
+  "book": {
+    "metaTitle": "Book",
+    "metaDescription": "Prices, season and how to book a pitch at De Groene Weide: tent, caravan, motorhome or safari tent.",
+    "seasonTitle": "Season and times",
+    "seasonOpen": "Open",
+    "arrival": "Arrival",
+    "departure": "Departure",
+    "arrivalFrom": "from {time}",
+    "departureUntil": "until {time}",
+    "pricesTitle": "Prices per night",
+    "plotType": "Type of pitch",
+    "plots": "Pitches",
+    "extrasTitle": "Additional costs",
+    "rulesTitle": "Good to know",
+    "rulesText": "There are a few house rules on the farm, so that everyone sleeps well. The chickens too.",
+    "rulesCta": "Read the house rules"
+  },
+  "events": {
+    "metaTitle": "Events",
+    "metaDescription": "What's on at De Groene Weide: feeding the chickens, tractor rides, swimming, pancakes and campfires. By day and by week.",
+    "eyebrow": "Events",
+    "title": "What's on at the farm?",
+    "lead": "Joining in is free unless it says otherwise. The rooster starts at six; we start a little later.",
+    "toolbar": "Calendar settings",
+    "week": "Week",
+    "day": "Day",
+    "viewLabel": "View",
+    "prevWeek": "Previous week",
+    "nextWeek": "Next week",
+    "prevDay": "Previous day",
+    "nextDay": "Next day",
+    "weekOf": "Week of {date}",
+    "ageLabel": "Age",
+    "age": {
+      "all": "Everyone",
+      "toddlers": "0–4 years",
+      "kids": "4–12 years",
+      "adults": "Adults"
+    },
+    "ageText": {
+      "all": "all ages",
+      "toddlers": "0–4 years",
+      "kids": "4–12 years",
+      "adults": "adults"
+    },
+    "kind": {
+      "animals": "Animals",
+      "play": "Play & tractor",
+      "pool": "Pool",
+      "food": "Milking parlour & food"
+    },
+    "legend": "Key",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "closed": "Closed",
+    "closedDay": "The campsite is closed on this day. The season runs from 1 April to 31 October.",
+    "closedWeek": "The campsite is closed this week. The season runs from 1 April to 31 October.",
+    "nothing": "No activities",
+    "nothingForAge": "No activities for this age group.",
+    "toFirstWeek": "Go to the first week of the season",
+    "everyDay": "Every day",
+    "everyWeekday": "Every {weekday}",
+    "sampleNote": "Example calendar. Bert and the activities team will add the real activities soon."
+  },
+  "about": {
+    "metaTitle": "About us",
+    "metaDescription": "The story of Bert, from dairy farmer to campsite farmer, and the team at De Groene Weide.",
+    "eyebrow": "About us",
+    "title": "From dairy farmer to campsite farmer",
+    "lead": "Bert milked cows on this farm for [number] years. These days the only thing he milks is the sunshine. The cows have gone, the chickens and the tractor have stayed, and the farmyard is yours.",
+    "photo": "Photo of Bert in the farmyard by the old milking parlour",
+    "storyTitle": "The story of the farm",
+    "valuesTitle": "What we stand for",
+    "values": [
+      {
+        "title": "Real farm life",
+        "text": "No theme park. Just chickens, mud, a tractor and the smell of hay."
+      },
+      {
+        "title": "Peace and quiet for everyone",
+        "text": "Spacious pitches, quiet evenings and a website with a calm mode."
+      },
+      {
+        "title": "Welcome as you are",
+        "text": "With a wheelchair, a pushchair or a dog. We tell you honestly what is and isn't possible."
+      }
+    ],
+    "teamTitle": "The team",
+    "ctaTitle": "Come and see for yourself",
+    "ctaText": "Pick your spot in the meadow, or ask us a question first.",
+    "ctaQuestion": "Ask a question"
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Call, email or send a message to De Groene Weide. With our address, directions and reception opening hours.",
+    "eyebrow": "Contact",
+    "title": "Just ask",
+    "lead": "Bert reads every message and usually replies within a day. Unless the tractor needs him more.",
+    "directTitle": "Get in touch",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "receptionTitle": "Reception open",
+    "weekdays": "Mon – Fri",
+    "weekend": "Sat – Sun",
+    "arrival": "Arrival",
+    "arrivalFrom": "from {time}",
+    "season": "Season: 1 April to 31 October",
+    "routeTitle": "Directions",
+    "routeText": "The campsite is on the farm. Follow the signs with the chicken.",
+    "faqText": "Your answer may already be in the frequently asked questions: dogs, arrival times, electricity and more.",
+    "faqCta": "See the questions",
+    "form": {
+      "title": "Send a message",
+      "name": "Name",
+      "email": "Email address",
+      "emailHint": "This is where we'll send our reply.",
+      "subject": "What is it about?",
+      "optional": "(optional)",
+      "message": "Your message",
+      "messageHint": "Is it about a booking? Then add your dates and the type of pitch.",
+      "website": "Leave this field empty",
+      "privacy": "We only use your details to answer your question. No newsletter, no fuss.",
+      "privacyLink": "Privacy statement",
+      "submit": "Send your message",
+      "sending": "Sending…",
+      "spamNote": "Spam protection without cookies or puzzles.",
+      "sentTitle": "Sent!",
+      "sentText": "Thank you for your message. Bert will reply as soon as he can.",
+      "errorSummary": "Something went wrong. Please check the fields below.",
+      "errors": {
+        "nameRequired": "Please enter your name.",
+        "nameTooLong": "Your name is too long. Use at most 100 characters.",
+        "emailRequired": "Please enter your email address.",
+        "emailInvalid": "That doesn't look like an email address. For example: name@example.com",
+        "subjectTooLong": "The subject is too long. Use at most 150 characters.",
+        "messageRequired": "Please write your message.",
+        "messageTooShort": "Your message is very short. Please write at least 10 characters.",
+        "messageTooLong": "Your message is too long. Use at most 5000 characters.",
+        "rateLimited": "You've just sent a few messages. Please try again in 15 minutes, or give us a call.",
+        "sendFailed": "Sending didn't work. Please try again later, or call or email us."
+      }
+    }
+  },
+  "infoPages": {
+    "navLabel": "Information"
+  },
+  "accessibility": {
+    "metaTitle": "Accessibility",
+    "metaDescription": "What is and isn't possible with a wheelchair, a pushchair or a disability at De Groene Weide, and how this website is accessible.",
+    "eyebrow": "Information",
+    "title": "Accessibility",
+    "lead": "Everyone should be able to enjoy the farm. Here we tell you honestly what is and isn't possible, on the website and on the site itself.",
+    "siteTitle": "On this website",
+    "site": [
+      "Everything works with the keyboard. Press Tab to jump to the next button or link.",
+      "The calm mode button at the top turns off motion and sound. If 'reduce motion' is on for your device, we do this automatically.",
+      "The site map always comes with a list as an alternative. Every pitch has a name for screen readers.",
+      "Colours on the map also have a pattern or symbol, so you can tell them apart without colour.",
+      "We follow the WCAG 2.2 guideline, level AA."
+    ],
+    "terrainTitle": "On the site",
+    "facility": "Facility",
+    "wheelchair": "Wheelchair",
+    "stroller": "Pushchair",
+    "notes": "Notes",
+    "yes": "yes",
+    "partly": "partly",
+    "unchecked": "not checked",
+    "terrainRows": [
+      {
+        "facility": "Toilets and showers",
+        "wheelchair": "yes",
+        "stroller": "yes",
+        "notes": "Accessible shower and toilet"
+      },
+      {
+        "facility": "Canteen",
+        "wheelchair": "yes",
+        "stroller": "yes",
+        "notes": "Ramp at the entrance"
+      },
+      {
+        "facility": "Pool",
+        "wheelchair": "unchecked",
+        "stroller": "yes",
+        "notes": "[Bert will check on site]"
+      },
+      {
+        "facility": "Play meadow",
+        "wheelchair": "partly",
+        "stroller": "yes",
+        "notes": "Grass, partly bumpy"
+      },
+      {
+        "facility": "Farm shop",
+        "wheelchair": "yes",
+        "stroller": "yes",
+        "notes": "Step-free"
+      }
+    ],
+    "plotsNote": "When you book, you can see for each pitch whether it is level and wheelchair accessible. We only call a pitch accessible if Bert has checked it himself. Last checked: [date].",
+    "faqTitle": "Questions about accessibility",
+    "faq": [
+      {
+        "q": "Can I book a pitch close to the accessible toilets and showers?",
+        "a": "Yes. Mention it when you book or get in touch, and Bert will find you a level pitch nearby."
+      },
+      {
+        "q": "Can my assistance dog come along?",
+        "a": "[Answer from Bert]"
+      },
+      {
+        "q": "Is there a quiet pitch for guests who are sensitive to noise and busyness?",
+        "a": "[Answer from Bert]"
+      }
+    ],
+    "reportText": "Is something not working for you? Let us know and we'll fix it.",
+    "reportCta": "Tell us"
+  },
+  "houseRules": {
+    "metaTitle": "House rules & FAQ",
+    "metaDescription": "The house rules of De Groene Weide and answers to frequently asked questions about dogs, arrival, electricity and more.",
+    "eyebrow": "Information",
+    "title": "House rules & frequently asked questions",
+    "lead": "A few agreements so that everyone sleeps well. The chickens go to roost at eight; you're allowed to stay up later.",
+    "rulesTitle": "House rules",
+    "rules": [
+      "Quiet on the site from [time] to [time].",
+      "Drive at walking pace across the farmyard. Chickens and children have right of way.",
+      "Dogs are [welcome/not welcome], on a lead and away from the chickens.",
+      "Keep the meadow gates closed. What's inside wants to stay inside.",
+      "Children under [age] only swim with an adult.",
+      "You can separate your rubbish at the [place]. Glass, plastic and the rest."
+    ],
+    "rulesNote": "The exact rules and times will follow from Bert.",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "When is the campsite open?",
+        "a": "From 1 April to 31 October. In winter both the meadow and Bert get some rest."
+      },
+      {
+        "q": "What time can I arrive, and when do I need to leave?",
+        "a": "Arrival from [time], departure by [time]. Arriving later? Give us a call and we'll leave the gate open."
+      },
+      {
+        "q": "Are dogs welcome?",
+        "a": "[Answer from Bert]"
+      },
+      {
+        "q": "Does every pitch have electricity?",
+        "a": "Not every pitch. All motorhome pitches have electricity; for tents and caravans it depends on the pitch. You'll see it when you book."
+      },
+      {
+        "q": "Can I change or cancel my booking?",
+        "a": "[Conditions from Bert]"
+      },
+      {
+        "q": "Can the children help out on the farm?",
+        "a": "We'd love them to. Every morning they can help feed the chickens. See the calendar for the rest."
+      }
+    ],
+    "moreText": "Is your question not listed?",
+    "moreCta": "Ask your question"
+  },
+  "privacy": {
+    "metaTitle": "Privacy & cookies",
+    "metaDescription": "Which data De Groene Weide uses, why, how long we keep it and which cookies the site uses.",
+    "eyebrow": "Information",
+    "title": "Privacy & cookies",
+    "lead": "We only ask for what we really need, and we don't sell anything on. Apart from eggs, in the farm shop.",
+    "updated": "Last updated: [date]",
+    "sections": [
+      {
+        "title": "Who are we?",
+        "paragraphs": [
+          "De Groene Weide is the campsite on Bert's farm, [address]. Questions about your data can be asked through the contact page or by email to [email address]."
+        ]
+      },
+      {
+        "title": "Which data do we use?",
+        "paragraphs": [
+          "If you send a message through the contact form, we use your name, your email address and your message to answer your question. Nothing more.",
+          "If you book, we ask for your name, email address, phone number, the number of people, the type of accommodation and any remarks. We never store payment details on this website.",
+          "We do not ask for or store any data about children."
+        ]
+      },
+      {
+        "title": "How long do we keep it?",
+        "paragraphs": [
+          "We keep messages for [period]. We keep bookings for as long as the law requires for our accounts: [period]."
+        ]
+      },
+      {
+        "title": "Where is your data stored?",
+        "paragraphs": [
+          "The website and all data are on a server in the European Union. We send email through a European email service."
+        ]
+      },
+      {
+        "title": "Cookies and what is stored in your browser",
+        "paragraphs": [
+          "We don't use tracking cookies. In your browser we only store your cookie choice and whether calm mode is on. They are needed for the site to work and stay on your own device. While you are booking, an essential cookie remembers which pitch is being held for you.",
+          "Extras from other websites, such as Facebook posts, stay off until you switch them on. You can always change your choice through Cookie settings at the bottom of every page.",
+          "We don't measure visitor statistics at the moment. If we start, it will be without cookies and without being able to recognise you."
+        ]
+      },
+      {
+        "title": "Your rights",
+        "paragraphs": [
+          "You can always ask which data we hold about you, and ask us to correct or delete it. Send us a message and we'll sort it out within a month.",
+          "Don't agree with how we handle your data? You can file a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens)."
+        ]
+      }
+    ]
+  },
+  "notFound": {
+    "metaTitle": "Page not found",
+    "eyebrow": "Error 404",
+    "title": "This sheep has wandered off.",
+    "text": "The page you're looking for isn't in the meadow any more. Maybe it moved, or someone left the gate open.",
+    "home": "Back to the farmyard",
+    "map": "View the site map"
+  },
+  "error": {
+    "eyebrow": "Oops",
+    "title": "The tractor won't start right now.",
+    "text": "Something went wrong on our side. Please try again in a moment. If it still doesn't work, feel free to call or email us.",
+    "retry": "Try again",
+    "home": "Back to the farmyard"
+  },
+  "map": {
+    "regionLabel": "Map of the site",
+    "viewLabel": "View",
+    "viewMap": "Map",
+    "viewList": "List",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "filterLabel": "Filter pitches",
+    "filterAll": "All pitches",
+    "filterElectricity": "With electricity",
+    "filterWheelchair": "Wheelchair / pushchair",
+    "filterShade": "Lots of shade",
+    "zoneTitle": {
+      "A": "Meadow A · T1–T20",
+      "B": "Meadow B · T21–T40",
+      "C": "Motorhome pitches C1–C12",
+      "S": "Safari tents S1–S8"
+    },
+    "zone": {
+      "A": "Meadow A",
+      "B": "Meadow B",
+      "C": "Motorhome pitches",
+      "S": "Safari tents"
+    },
+    "plotAria": "Pitch {id}, {state}",
+    "state": {
+      "free": "free",
+      "taken": "taken",
+      "blocked": "blocked",
+      "selected": "your choice",
+      "tip": "the chicken's tip",
+      "dimmed": "doesn't match the filter",
+      "unsuitable": "doesn't suit your group"
+    },
+    "legend": "Key",
+    "legendFree": "Free",
+    "legendTaken": "Taken",
+    "legendBlocked": "Blocked",
+    "legendSelected": "Your choice",
+    "legendTip": "The chicken's tip",
+    "type": {
+      "tent_caravan": "Tent / caravan",
+      "camper": "Motorhome",
+      "safari_tent": "Safari tent"
+    },
+    "detailLabel": "Details",
+    "pickSomething": "Click a pitch or a facility to see what you need to know about it here.",
+    "plotTitle": "Pitch {id}",
+    "facilityKind": "Facility",
+    "plotKind": "Pitch · {type}",
+    "electricity": "Electricity",
+    "surface": "Surface",
+    "level": "Level",
+    "shade": "Shade",
+    "wheelchair": "Wheelchair / pushchair",
+    "maxPersons": "Max. people",
+    "yes": "yes",
+    "no": "no",
+    "levelNo": "slight slope",
+    "surfaceValue": {
+      "grass": "grass",
+      "semi_paved": "semi-paved",
+      "paved": "paved"
+    },
+    "shadeValue": {
+      "none": "little",
+      "some": "some",
+      "lots": "lots"
+    },
+    "notChecked": "not checked yet",
+    "sampleNote": "Example details. The real features will follow after the walk round the site with Bert.",
+    "distancesTitle": "Walking distance to",
+    "metres": "{m} m",
+    "open": "Open:",
+    "when": "When:",
+    "access": "Accessibility:",
+    "where": "Where:",
+    "photoMissing": "Photo to follow",
+    "close": "Close",
+    "listCaption": "All pitches",
+    "colPlot": "Pitch",
+    "colType": "Type",
+    "colZone": "Where",
+    "colFeatures": "Features",
+    "colStatus": "Status",
+    "colAction": "Action",
+    "showDetails": "View",
+    "showPlot": "View pitch {id}",
+    "facilitiesCaption": "Facilities",
+    "showFacility": "View {name}",
+    "noMatches": "No pitches match this filter.",
+    "keyboardHint": "Use the arrow keys to move to the next pitch.",
+    "empty": "The map can't load right now. Please try again later, or give us a call.",
+    "count": "{count, plural, one {# pitch} other {# pitches}}",
+    "featureElectricity": "electricity",
+    "featureWheelchair": "wheelchair",
+    "featureLevel": "level",
+    "featureShade": "lots of shade",
+    "legendUnsuitable": "Doesn't suit your group"
+  },
+  "email": {
+    "greeting": "Hello {name},",
+    "signoff": "See you soon on the farm!\nBert and the chickens of De Groene Weide",
+    "summaryTitle": "Your booking",
+    "code": "Booking number: {code}",
+    "plot": "Pitch: {plot}",
+    "dates": "Arrival: {arrival}\nDeparture: {departure} ({nights, plural, one {# night} other {# nights}})",
+    "persons": "Guests: {adults, plural, one {# adult} other {# adults}}{children, plural, =0 {} one {, # child} other {, # children}}",
+    "price": "Price: {price}",
+    "priceUnknown": "Price: Bert will let you know",
+    "manage": "View or cancel your booking: {url}",
+    "contactUs": "Any questions? Just reply to this email.",
+    "requested": {
+      "subject": "We've received your request for pitch {plot}",
+      "intro": "Cluck cluck! Your request is in. Bert will look at it and confirm your pitch as soon as he can. Until then we're keeping the pitch free for you."
+    },
+    "confirmed": {
+      "subject": "Your pitch {plot} is confirmed",
+      "intro": "Good news: your pitch is confirmed. The chickens have been told and the meadow is ready."
+    },
+    "cancelled": {
+      "subject": "Your booking {code} has been cancelled",
+      "intro": "Your booking has been cancelled. What a pity! Changed your mind? You're always welcome to book again."
+    },
+    "reminder": {
+      "subject": "{days, plural, one {# more day} other {# more days}} until you're at De Groene Weide",
+      "intro": "Almost time! Here is your booking once more. The chickens are already rehearsing their welcome song.",
+      "route": "Directions: {url}",
+      "arrivalTimes": "Arrival from {from}, departure by {until}."
+    },
+    "farewell": {
+      "subject": "Thank you for staying at De Groene Weide",
+      "intro": "Thanks for coming! We hope you slept well, despite the rooster.",
+      "review": "Did you enjoy your stay? A review helps Bert a lot: {url}",
+      "question": "How was it? Reply with 1 to 5 chickens."
+    },
+    "notice": {
+      "subject": "Nieuwe aanvraag: plek {plot}, {arrival}",
+      "intro": "Er is een nieuwe reservering binnengekomen op de website.",
+      "confirmed": "Status: direct bevestigd (niveau 2).",
+      "requested": "Status: wacht op jouw bevestiging. Bevestig in het beheer: {url}",
+      "contact": "Gast: {name}, {email}{phone}",
+      "remarks": "Opmerkingen: {remarks}",
+      "language": "Taal: {locale}"
+    }
+  },
+  "booking": {
+    "stepOf": "Book · step {step} of 7",
+    "stepsLabel": "Steps",
+    "steps": ["Dates", "Guests & stay", "Pitch match", "Choose a pitch", "Details", "Check", "Confirmation"],
+    "stepDone": "done",
+    "stepCurrent": "current step",
+    "titles": [
+      "When are you coming?",
+      "Who's coming?",
+      "Which pitch suits you?",
+      "Choose your spot in the meadow",
+      "Who should we expect?",
+      "Is everything right?",
+      "Cluck! Your request is in"
+    ],
+    "titleConfirmed": "Cluck! Your pitch is booked",
+    "announce": "Step {step} of 7: {title}",
+    "next": "Next",
+    "back": "Back",
+    "arrival": "Arrival",
+    "departure": "Departure",
+    "arrivalHint": "The season runs from 1 April to 31 October.",
+    "nights": "{count, plural, one {# night} other {# nights}}",
+    "minNights": "At least {count, plural, one {# night} other {# nights}}.",
+    "adults": "Adults",
+    "children": "Children (up to 12)",
+    "dogs": "Dogs",
+    "fewer": "One fewer: {what}",
+    "more": "One more: {what}",
+    "accommodation": "What will you sleep in?",
+    "accommodationValue": {
+      "tent": "Tent",
+      "caravan": "Caravan",
+      "camper": "Motorhome",
+      "safari_tent": "Safari tent"
+    },
+    "accommodationHint": {
+      "tent": "On the grass in Meadow A or B",
+      "caravan": "On the grass in Meadow A or B",
+      "camper": "Semi-paved motorhome pitch",
+      "safari_tent": "Furnished tent with beds"
+    },
+    "electricity": "Do you need electricity?",
+    "electricityYes": "Yes, please",
+    "electricityNo": "No, thanks",
+    "safariHasPower": "Safari tents always have electricity.",
+    "matchTitle": "Pitch match is on its way",
+    "matchText": "Soon the chicken will ask you five questions and suggest the three best pitches. Until then, choose on the map yourself. That's fine too: you know your family best.",
+    "matchSkip": "Choose on the map myself",
+    "summaryBar": "{nights} · {persons, plural, one {# person} other {# people}} · {accommodation}",
+    "change": "Change",
+    "unsuitable": "doesn't suit your group",
+    "loadingMap": "The map is fetching the free pitches…",
+    "mapError": "We couldn't fetch which pitches are free. Please try again.",
+    "retry": "Try again",
+    "holding": "The chicken is holding pitch {id} for you…",
+    "heldFor": "The chicken is holding this pitch for you for <strong>{minutes} minutes</strong>.",
+    "toDetails": "Continue to your details",
+    "pickFirst": "First choose a free pitch on the map or in the list.",
+    "notThisPlot": "This pitch doesn't suit your group. Choose a pitch for your type of accommodation.",
+    "holdStatus": {
+      "taken": "Just too late: someone else chose pitch {id} a moment earlier. Please choose another pitch.",
+      "blocked": "Pitch {id} can't be booked during this period.",
+      "too_many_holds": "You're already holding {max} pitches. Finish a booking first or wait 15 minutes.",
+      "rate_limited": "Slow down, the chicken can't keep up. Please try again in a few minutes.",
+      "error": "Something went wrong. Please try again or give us a call."
+    },
+    "countdown": "Held for another {time}",
+    "countdownWarning": "Heads up: 2 minutes left, then pitch {id} becomes free again.",
+    "expired": "Your 15 minutes are up, so pitch {id} has been released. Choose a pitch again: it may still be free.",
+    "priceFor": "Price for {nights}",
+    "priceUnknown": "Price to follow",
+    "name": "Name",
+    "email": "Email address",
+    "phone": "Phone number",
+    "phoneHint": "Handy in case we need to call you on the day.",
+    "optional": "(optional)",
+    "remarks": "Remarks",
+    "remarksHint": "For example: we'll be arriving late. Please don't add children's names or ages here.",
+    "privacyNote": "We only use your details for this booking. You don't pay through the website.",
+    "required": "Please fill in this field.",
+    "emailInvalid": "Please enter a valid email address, such as name@example.com.",
+    "reviewTitle": "Your booking",
+    "reviewStay": "Stay",
+    "reviewPlot": "Pitch",
+    "reviewGuests": "Guests",
+    "reviewContact": "Contact",
+    "persons": "{adults, plural, one {# adult} other {# adults}}{children, plural, =0 {} one {, # child} other {, # children}}{dogs, plural, =0 {} one {, # dog} other {, # dogs}}",
+    "withElectricity": "with electricity",
+    "priceTitle": "Price",
+    "priceNights": "{nights, plural, one {# night} other {# nights}} {period}",
+    "priceExtra": "{name} ({quantity} ×)",
+    "total": "Total",
+    "priceNote": "You pay at the campsite. Bert confirms the price in his email.",
+    "houseRules": "I have read the <link>house rules</link> and agree to them.",
+    "houseRulesRequired": "Please tick the box to say you've read the house rules.",
+    "submitRequest": "Send request",
+    "submitBook": "Book this pitch",
+    "submitting": "One moment, the chicken is running to Bert…",
+    "takenTitle": "Oh dear, pitch {id} has just been snapped up",
+    "takenText": "Someone else was a moment quicker. These pitches are similar and still free:",
+    "takenNone": "There's no similar pitch free in this period. Choose other dates or give us a call.",
+    "pickAlternative": "Choose pitch {id}",
+    "submitError": {
+      "expired": "Your pitch was no longer being held. Please choose a pitch again.",
+      "rate_limited": "You've tried quite a few times. Please wait a few minutes.",
+      "invalid": "Please check your details once more.",
+      "error": "Something went wrong while sending. Please try again or give us a call."
+    },
+    "doneRequested": "Bert will look at your request as soon as he can and confirm your pitch by email. Until then we're keeping pitch {plot} free for you.",
+    "doneConfirmed": "Your pitch {plot} is booked. The confirmation is in your inbox.",
+    "doneCode": "Your booking number",
+    "doneMail": "We've sent an email to {email}. Nothing there? Check your spam folder: the chicken sometimes lands there.",
+    "doneNext": "What now?",
+    "doneSteps": [
+      "Keep your booking number.",
+      "Want to change or cancel something? Get in touch with us.",
+      "Arrive within the arrival times. The chickens will be waiting."
+    ],
+    "doneHome": "Back to home",
+    "doneEvents": "See the events",
+    "phoneAlternative": "Would you rather call or email? That's fine too.",
+    "joke": "Hear clucking in the background? Then you've come to the right place.",
+    "errors": {
+      "departure_before_arrival": "Your departure date must be after your arrival date.",
+      "outside_season": "We're closed then. We're open from 1 April to 31 October.",
+      "arrival_on_last_day": "We close on 31 October. Please choose an earlier arrival date.",
+      "stay_crosses_season_end": "Your stay runs past the end of the season. The last day of departure is 31 October.",
+      "too_few_nights": "That's too short. Please choose at least {min, plural, one {# night} other {# nights}}.",
+      "too_many_nights": "You can book at most {max} nights online. Staying longer? Call or email us.",
+      "arrival_in_past": "That date has already passed. Please choose a date from today.",
+      "too_many_persons": "This pitch isn't big enough for that many people. Choose a larger pitch.",
+      "name_required": "Please enter your name.",
+      "email_invalid": "Please enter a valid email address.",
+      "adults_required": "At least one adult must come along."
+    },
+    "phoneAlternativeLink": "Go to the contact page"
+  }
+}

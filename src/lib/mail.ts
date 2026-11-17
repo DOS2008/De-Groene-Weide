@@ -23,11 +23,13 @@ function sender() {
   return { name, address };
 }
 
-/** Where contact form messages go: Bert's inbox. */
+/** Where contact form messages and booking notices go: Bert's inbox. */
 export function contactRecipient(): string {
   return process.env.CONTACT_EMAIL || sender().address;
 }
 
-export async function sendMail(message: { to: string; replyTo?: string; subject: string; text: string }) {
+export type Mail = { to: string; replyTo?: string; subject: string; text: string; html?: string };
+
+export async function sendMail(message: Mail) {
   await transport().sendMail({ from: sender(), ...message });
 }

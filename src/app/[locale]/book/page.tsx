@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
-import { getPageLocale } from "@/i18n/locale";
+import { getPageLocale, type Locale } from "@/i18n/locale";
 import { Link } from "@/i18n/navigation";
-import { extras, plotTypes } from "@/content/plots";
-import { site } from "@/content/site";
-import { Chicken } from "@/components/Chicken";
-import { CheckIcon, MailIcon, PhoneIcon } from "@/components/icons";
-import { PageIntro } from "@/components/PageIntro";
+import { plotTypes } from "@/content/plots";
+import { getSite, type Site } from "@/lib/data/content";
 import { Fact, Missing } from "@/components/Placeholder";
 import { text } from "@/lib/localized";
 import { pageMetadata } from "@/lib/seo";
+import { getBookingRules, getPriceInfo, type PriceInfo } from "@/lib/data/booking";
+import { getFacilities, getPlots } from "@/lib/data/map";
+import { BookingFlow } from "./BookingFlow";
 import styles from "./book.module.css";
-
-// Prio 1: information only. The 7-step booking flow replaces this in Prio 3.
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getPageLocale();
@@ -27,66 +26,40 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function BookPage() {
   const locale = await getPageLocale();
-  const t = await getTranslations("book");
-  const tc = await getTranslations("common");
-  const money = new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" });
+  const [plots, facilities, rules, prices] = await Promise.all([
+    getPlots(locale),
+    getFacilities(locale),
+    getBookingRules(),
+    getPriceInfo(locale),
+  ]);
 
   return (
     <div className="container section">
-      <div className={styles.top}>
-        <PageIntro eyebrow={t("eyebrow")} title={t("title")} lead={t("lead")} />
-        <figure className={styles.joke}>
-          <Chicken size={96} />
-          <figcaption>{t("joke")}</figcaption>
-        </figure>
-      </div>
+      {/* The flow reads its step from the URL, so it renders in the browser. */}
+      <Suspense fallback={<p className="muted">…</p>}>
+        <BookingFlow
+          plots={plots}
+          facilities={facilities}
+          rules={rules}
+          prices={prices}
+          info={<BookInfo locale={locale} prices={prices} site={await getSite()} />}
+        />
+      </Suspense>
+    </div>
+  );
+}
 
-      <div className={styles.grid}>
-        <section className={`card ${styles.how}`} aria-labelledby="how-title">
-          <h2 id="how-title">{t("howTitle")}</h2>
-          <p>{t("howText")}</p>
-          <div className="btn-row">
-            {site.phone ? (
-              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="btn btn-primary btn-large">
-                <PhoneIcon size={20} />
-                {t("call")}: {site.phone}
-              </a>
-            ) : (
-              <p className={styles.contactLine}>
-                <PhoneIcon size={20} />
-                {t("call")}: <Missing what="TELEFOON" />
-              </p>
-            )}
-            {site.email ? (
-              <a href={`mailto:${site.email}`} className="btn btn-secondary btn-large">
-                <MailIcon size={20} />
-                {t("mail")}
-              </a>
-            ) : (
-              <p className={styles.contactLine}>
-                <MailIcon size={20} />
-                {t("mail")}: <Missing what="E-MAIL" />
-              </p>
-            )}
-          </div>
-          <p>
-            <Link href="/contact">{t("orForm")}</Link>
-          </p>
-        </section>
+/** Prices, season and house rules: shown under step 1. */
+async function BookInfo({ locale, prices, site }: { locale: Locale; prices: PriceInfo; site: Site }) {
 
-        <section className={`card ${styles.need}`} aria-labelledby="need-title">
-          <h2 id="need-title">{t("needTitle")}</h2>
-          <ul className={styles.checks}>
-            {(t.raw("need") as string[]).map((item) => (
-              <li key={item}>
-                <CheckIcon size={20} className={styles.check} />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
+  const t = await getTranslations({ locale, namespace: "book" });
+  const tc = await getTranslations({ locale, namespace: "common" });
+  const money = new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" });
+  const priceOf = (group: string, period: string) =>
+    prices.prices.find((p) => p.priceGroupId === group && p.periodId === period)?.pricePerNight ?? null;
 
+  return (
+    <>
       <section className="section" aria-labelledby="prices-title">
         <h2 id="prices-title" className={styles.h2}>
           {t("pricesTitle")}
@@ -97,23 +70,28 @@ export default async function BookPage() {
               <tr>
                 <th scope="col">{t("plotType")}</th>
                 <th scope="col">{t("plots")}</th>
-                <th scope="col">{t("maxPersons")}</th>
-                <th scope="col">{t("price")}</th>
+                {prices.periods.map((p) => (
+                  <th scope="col" key={p.id}>
+                    {prices.periodNames[p.id] ?? p.id}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
               {plotTypes.map((p) => (
                 <tr key={p.id}>
                   <th scope="row">
-                    {text(p, "name", locale)}
+                    {prices.groupNames[p.id] ?? text(p, "name", locale)}
                     <span className={styles.rowNote}>{text(p, "description", locale)}</span>
                   </th>
                   <td>
                     {p.prefix}1–{p.prefix}
                     {p.count}
                   </td>
-                  <td>{p.maxPersons ?? <Missing what="aantal" />}</td>
-                  <td>{p.pricePerNight !== null ? money.format(p.pricePerNight) : <Missing what="PRIJS" />}</td>
+                  {prices.periods.map((period) => {
+                    const v = priceOf(p.id, period.id);
+                    return <td key={period.id}>{v !== null ? money.format(v) : <Missing what="PRIJS" />}</td>;
+                  })}
                 </tr>
               ))}
             </tbody>
@@ -122,10 +100,11 @@ export default async function BookPage() {
 
         <h3 className={styles.h3}>{t("extrasTitle")}</h3>
         <ul className={styles.extras}>
-          {extras.map((e) => (
+          {prices.extras.map((e) => (
             <li key={e.id}>
-              <strong>{text(e, "name", locale)}</strong>:{" "}
-              {e.amount !== null ? money.format(e.amount) : <Missing what="PRIJS" />} {text(e, "unit", locale)}
+              <strong>{prices.extraNames[e.id]?.name ?? e.id}</strong>:{" "}
+              {e.amount !== null ? money.format(e.amount) : <Missing what="PRIJS" />}{" "}
+              {prices.extraNames[e.id]?.unit}
             </li>
           ))}
         </ul>
@@ -166,6 +145,6 @@ export default async function BookPage() {
           </p>
         </section>
       </div>
-    </div>
+    </>
   );
 }

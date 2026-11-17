@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getPageLocale } from "@/i18n/locale";
 import { Link } from "@/i18n/navigation";
-import { routePlannerUrl, site } from "@/content/site";
+import { getSite, routePlannerUrl } from "@/lib/data/content";
 import { MailIcon, PhoneIcon, PinIcon } from "@/components/icons";
 import { PageIntro } from "@/components/PageIntro";
 import { Fact, Missing } from "@/components/Placeholder";
@@ -22,9 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
+  const site = await getSite();
   const t = await getTranslations("contact");
   const tc = await getTranslations("common");
-  const routeUrl = routePlannerUrl();
+  const routeUrl = routePlannerUrl(site);
 
   return (
     <div className="container section">

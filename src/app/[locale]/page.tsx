@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getPageLocale } from "@/i18n/locale";
 import { Link } from "@/i18n/navigation";
-import { events } from "@/content/events";
-import { facilities } from "@/content/facilities";
-import { jokes } from "@/content/jokes";
-import { routePlannerUrl, site } from "@/content/site";
+import { getEvents, getFacilityContent, getJokes, getSite, routePlannerUrl } from "@/lib/data/content";
 import { Chicken } from "@/components/Chicken";
 import { FacilityTile } from "@/components/FacilityTile";
 import { FarmIllustration } from "@/components/FarmIllustration";
@@ -31,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
+  const [events, facilities, jokes, site] = await Promise.all([getEvents(), getFacilityContent(), getJokes(), getSite()]);
   const locale = await getPageLocale();
   const t = await getTranslations("home");
   const tc = await getTranslations("common");
@@ -41,7 +39,7 @@ export default async function HomePage() {
   const joke = jokeOfTheDay(jokes, today, locale);
   const firstDay = firstOpenDay(site.season, today);
   const upcoming = nextOfEach(events, site.season, firstDay, 3);
-  const routeUrl = routePlannerUrl();
+  const routeUrl = routePlannerUrl(site);
 
   return (
     <>

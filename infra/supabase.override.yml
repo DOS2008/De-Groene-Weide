@@ -15,6 +15,16 @@ services:
     volumes:
       - storage-data:/var/lib/storage
 
+  # Staff accounts only (guests never sign in): invite only, TOTP 2FA and
+  # short sessions. The app forces 2FA; RLS refuses everything below aal2.
+  auth:
+    environment:
+      GOTRUE_MFA_TOTP_ENROLL_ENABLED: "true"
+      GOTRUE_MFA_TOTP_VERIFY_ENABLED: "true"
+      GOTRUE_MFA_MAX_ENROLLED_FACTORS: "3"
+      GOTRUE_SESSIONS_INACTIVITY_TIMEOUT: 8h
+      GOTRUE_SESSIONS_TIMEBOX: 24h
+
   # The database pooler only listens on this machine, never on the network.
   supavisor:
     ports: !override
@@ -24,3 +34,4 @@ services:
 volumes:
   db-data:
   storage-data:
+

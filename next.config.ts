@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   output: "standalone",
   cacheComponents: true,
   partialPrefetching: true,
+  // The e2e container reaches the dev server as http://web:3000.
+  allowedDevOrigins: ["web"],
 };
 
 export default withNextIntl(nextConfig);

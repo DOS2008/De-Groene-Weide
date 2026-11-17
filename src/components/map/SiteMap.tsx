@@ -10,7 +10,7 @@ import { CloseIcon } from "@/components/icons";
 import styles from "./SiteMap.module.css";
 
 /** Availability of a plot for the chosen dates (book mode only). */
-export type PlotStatus = "free" | "taken" | "blocked";
+export type PlotStatus = "free" | "taken" | "blocked" | "unsuitable";
 
 type Filter = "all" | "electricity" | "wheelchair" | "shade";
 
@@ -90,21 +90,27 @@ export function SiteMap({
   const facility = (id: string) => facilities.find((f) => f.id === id);
 
   function stateOf(p: MapPlot) {
-    const s = mode === "book" ? (status[p.id] ?? "free") : "free";
-    const disabled = mode === "book" && s !== "free" && p.id !== selectedPlotId;
+    const raw = mode === "book" ? (status[p.id] ?? "free") : "free";
+    const disabled = mode === "book" && raw !== "free" && p.id !== selectedPlotId;
+    const unsuitable = raw === "unsuitable";
+    const s = unsuitable ? "free" : raw;
     let visual: "free" | "taken" | "blocked" | "selected" | "tip" = s;
     const isSelected = mode === "book" ? p.id === selectedPlotId : focus?.kind === "plot" && focus.id === p.id;
     if (isSelected) visual = "selected";
     else if (s === "free" && tips[p.id]) visual = "tip";
-    const dimmed = filter !== "all" && !matches.has(p.id);
-    return { visual, disabled, dimmed, isSelected };
+    const dimmed = unsuitable || (filter !== "all" && !matches.has(p.id));
+    return { visual, disabled, dimmed, isSelected, unsuitable };
   }
 
   function plotLabel(p: MapPlot) {
-    const { visual, dimmed } = stateOf(p);
+    const { visual, dimmed, unsuitable } = stateOf(p);
     const state =
-      mode === "explore" && visual !== "selected" ? t(`type.${p.type}`) : t(`state.${visual}`);
-    return t("plotAria", { id: p.id, state }) + (dimmed ? `, ${t("state.dimmed")}` : "");
+      mode === "explore" && visual !== "selected"
+        ? t(`type.${p.type}`)
+        : unsuitable
+          ? t("state.unsuitable")
+          : t(`state.${visual}`);
+    return t("plotAria", { id: p.id, state }) + (dimmed && !unsuitable ? `, ${t("state.dimmed")}` : "");
   }
 
   function openPlot(p: MapPlot) {
@@ -285,7 +291,11 @@ export function SiteMap({
                 </div>
               </div>
               <p className="muted small">{t("keyboardHint")}</p>
-              <Legend mode={mode} hasTips={Object.keys(tips).length > 0} />
+              <Legend
+                mode={mode}
+                hasTips={Object.keys(tips).length > 0}
+                hasUnsuitable={Object.values(status).includes("unsuitable")}
+              />
             </>
           ) : (
             <ListView
@@ -347,7 +357,15 @@ function Zone({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-function Legend({ mode, hasTips }: { mode: "explore" | "book"; hasTips: boolean }) {
+function Legend({
+  mode,
+  hasTips,
+  hasUnsuitable,
+}: {
+  mode: "explore" | "book";
+  hasTips: boolean;
+  hasUnsuitable: boolean;
+}) {
   const t = useTranslations("map");
   return (
     <div className={styles.legend}>
@@ -373,6 +391,12 @@ function Legend({ mode, hasTips }: { mode: "explore" | "book"; hasTips: boolean 
           <span className={`${styles.swatch} ${styles.selected}`} aria-hidden="true">✓</span>
           {t("legendSelected")}
         </li>
+        {hasUnsuitable && (
+          <li>
+            <span className={`${styles.swatch} ${styles.unsuitableSwatch}`} aria-hidden="true" />
+            {t("legendUnsuitable")}
+          </li>
+        )}
         {hasTips && (
           <li>
             <span className={`${styles.swatch} ${styles.tip}`} aria-hidden="true">★</span>

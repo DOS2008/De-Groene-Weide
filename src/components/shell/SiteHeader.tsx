@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Chicken } from "@/components/Chicken";
 import { CalmToggle } from "./CalmToggle";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MainNav } from "./MainNav";
 import { MobileMenu } from "./MobileMenu";
 import styles from "./SiteHeader.module.css";
@@ -16,8 +17,8 @@ export async function SiteHeader() {
           <span>{t("siteName")}</span>
         </Link>
         <MainNav />
-        {/* The language switcher joins here in Prio 4. */}
         <div className={styles.tools}>
+          <LanguageSwitcher />
           <CalmToggle />
         </div>
         <MobileMenu />

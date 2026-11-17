@@ -1,11 +1,12 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { site } from "@/content/site";
+import { getSite } from "@/lib/data/content";
 import { Fact, Missing } from "@/components/Placeholder";
 import { CookieSettingsButton } from "./CookieBanner";
 import styles from "./SiteFooter.module.css";
 
 export async function SiteFooter() {
+  const site = await getSite();
   const t = await getTranslations("footer");
   const tc = await getTranslations("common");
   const tm = await getTranslations("meta");

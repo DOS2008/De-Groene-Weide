@@ -40,6 +40,7 @@ Update this table when tests, migrations or new scripts are added.
 - UI strings are in `messages/nl.json`. Content (facilities, events, jokes, prices, settings) is in `src/content/`, with a field per language (`title_nl`, `title_en`, `title_de`) until it moves to the database in Prio 5.
 - Facts that Bert still has to supply are `null` or `[…]` in the content, and show on the site as a marked placeholder.
 - Never import a constant from a `"use client"` file into a server component: it arrives as a client reference, not the value. Put shared constants in a plain module.
+- [src/proxy.ts](src/proxy.ts) runs the language routing and, for `/admin`, refreshes the staff session and sends anyone without 2FA to the login. Mind the matcher escaping: it must read `.*\\..*` (two backslashes) in the source. With a single backslash the string becomes `.*..*`, the proxy only runs for `/`, and every Dutch URL gives a 404. Admin pages also call `requireStaff()`, and RLS refuses staff data without `aal2`.
 
 On Windows, run `docker compose` builds from a working directory that starts with an uppercase `C:\`. With a lowercase `c:\`, Compose's bake builder fails with `failed to execute bake` (see README, "Troubleshooting on Windows").
 

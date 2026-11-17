@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getPageLocale } from "@/i18n/locale";
-import { events } from "@/content/events";
+import { getEvents } from "@/lib/data/content";
 import { EventIconFor } from "@/components/icons";
 import { PageIntro } from "@/components/PageIntro";
 import { kindSurface } from "@/components/events/format";
@@ -25,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const kinds: EventKind[] = ["animals", "play", "pool", "food"];
 
 export default async function EventsPage({ searchParams }: { searchParams: Promise<AgendaQuery> }) {
+  const events = await getEvents();
   const t = await getTranslations("events");
   const hasSamples = events.some((e) => e.sample);
 

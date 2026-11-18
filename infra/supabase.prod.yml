@@ -1,4 +1,13 @@
 # Server-only changes on top of the official Supabase compose file.
+#
+# No bind mounts from the repository: config files are copied into small
+# images at build time instead. Portainer (CE) checks the repository out
+# inside its own container, so a mounted file would arrive on the server as
+# an empty folder. Building works there; mounting doesn't.
+#
+# Relative paths here start at infra/supabase/ (the first included file).
+# Each FROM must match the image tag in infra/supabase/docker-compose.yml:
+# after an upgrade, update them too (README, "Upgrading Supabase").
 
 services:
   # The reverse proxy (Nginx Proxy Manager on npm_shared, or Caddy) is the
@@ -6,6 +15,14 @@ services:
   # The gateway also stays reachable on 127.0.0.1 for an SSH tunnel to the
   # Studio dashboard.
   api-gw:
+    image: groene-weide-envoy:prod
+    build:
+      context: ./volumes/api/envoy
+      dockerfile_inline: |
+        FROM envoyproxy/envoy:v1.39.6
+        COPY envoy.yaml cds.yaml lds.template.yaml /etc/envoy/
+        COPY docker-entrypoint.sh /docker-entrypoint.sh
+    volumes: !reset []
     ports: !override
       - "127.0.0.1:${API_GW_HTTP_PORT}:8000"
     networks:
@@ -14,6 +31,51 @@ services:
         aliases:
           - groene-weide-api
 
+  db:
+    image: groene-weide-db:prod
+    build:
+      context: ./volumes/db
+      dockerfile_inline: |
+        FROM supabase/postgres:17.6.1.136
+        COPY _supabase.sql /docker-entrypoint-initdb.d/migrations/97-_supabase.sql
+        COPY realtime.sql /docker-entrypoint-initdb.d/migrations/99-realtime.sql
+        COPY logs.sql /docker-entrypoint-initdb.d/migrations/99-logs.sql
+        COPY pooler.sql /docker-entrypoint-initdb.d/migrations/99-pooler.sql
+        COPY webhooks.sql /docker-entrypoint-initdb.d/init-scripts/98-webhooks.sql
+        COPY roles.sql /docker-entrypoint-initdb.d/init-scripts/99-roles.sql
+        COPY jwt.sql /docker-entrypoint-initdb.d/init-scripts/99-jwt.sql
+    volumes: !override
+      - db-data:/var/lib/postgresql/data
+      - db-config:/etc/postgresql-custom
+
+  supavisor:
+    image: groene-weide-pooler:prod
+    build:
+      context: ./volumes/pooler
+      dockerfile_inline: |
+        FROM supabase/supavisor:2.9.13
+        COPY pooler.exs /etc/pooler/pooler.exs
+    volumes: !reset []
+
+  functions:
+    image: groene-weide-functions:prod
+    build:
+      context: ./volumes/functions
+      dockerfile_inline: |
+        FROM supabase/edge-runtime:v1.77.9
+        COPY . /home/deno/functions
+    volumes: !override
+      - deno-cache:/root/.cache/deno
+
+  # Saved SQL snippets live in a volume. The edge functions page in Studio
+  # stays empty: the site uses no edge functions.
+  studio:
+    volumes: !override
+      - studio-snippets:/app/snippets
+
 networks:
   npm_shared:
     external: true
+
+volumes:
+  studio-snippets:

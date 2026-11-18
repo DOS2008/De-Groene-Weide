@@ -1,12 +1,22 @@
-# Server stack: production Next.js + self-hosted Supabase + Caddy (HTTPS).
+# Server stack: production Next.js + self-hosted Supabase, behind a reverse
+# proxy (Nginx Proxy Manager, or the built-in Caddy with --profile caddy).
 #
 #   docker compose -f compose.prod.yaml up -d --build
 #
-# Caddy gets Let's Encrypt certificates for SITE_DOMAIN and API_DOMAIN from .env.
-# Only ports 80 and 443 are open to the outside. The database and the
+# Nothing is mounted from the repository: files the containers need are
+# copied into images at build time, so the stack also runs from Portainer
+# (which can't mount files from its Git checkout). The database and the
 # Supabase gateway listen on 127.0.0.1 only. See README.md, "Deploying".
 
 name: groene-weide
+
+# Migrations and database scripts, for the migrate and backup services.
+x-db-tools-build: &db-tools-build
+  context: .
+  dockerfile_inline: |
+    FROM supabase/postgres:17.6.1.136
+    COPY supabase /supabase
+    COPY scripts/db /scripts
 
 # The included Supabase files read the same variables as this file: from
 # .env next to it, or from the stack variables in Portainer (which has no
@@ -21,7 +31,8 @@ services:
   # Applies supabase/migrations and supabase/seed, then exits. The website
   # waits for it, so the schema is always up to date before the site starts.
   migrate:
-    image: supabase/postgres:17.6.1.136
+    image: groene-weide-db-tools:prod
+    build: *db-tools-build
     entrypoint: ["sh", "/scripts/migrate.sh"]
     environment:
       PGHOST: db
@@ -29,9 +40,6 @@ services:
       PGDATABASE: ${POSTGRES_DB}
       PGUSER: postgres
       PGPASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
-      - ./supabase:/supabase:ro
-      - ./scripts/db:/scripts:ro
     depends_on:
       db:
         condition: service_healthy
@@ -93,10 +101,11 @@ services:
     depends_on:
       - web
 
-  # Nightly database dump plus the uploaded photos, 14 days kept in
-  # ./backups. Copy that folder off the server as well (docs/handover.md).
+  # Nightly database dump plus the uploaded photos, 14 days kept in the
+  # `backups` volume. Copy them off the server as well (docs/handover.md).
   backup:
-    image: supabase/postgres:17.6.1.136
+    image: groene-weide-db-tools:prod
+    build: *db-tools-build
     restart: unless-stopped
     entrypoint: ["sh", "-c"]
     command:
@@ -110,9 +119,9 @@ services:
       PGUSER: postgres
       PGPASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - ./scripts/db:/scripts:ro
-      - ./backups:/backups
-      - ./infra/supabase/volumes/storage:/storage:ro
+      - backups:/backups
+      # The photos as Storage keeps them (infra/supabase.override.yml).
+      - storage-data:/storage:ro
     depends_on:
       db:
         condition: service_healthy
@@ -121,7 +130,12 @@ services:
   # this server uses Nginx Proxy Manager (npm_shared), which already holds
   # ports 80 and 443. Turn it on with --profile caddy (see README).
   caddy:
-    image: caddy:2.11-alpine
+    image: groene-weide-caddy:prod
+    build:
+      context: ./infra/caddy
+      dockerfile_inline: |
+        FROM caddy:2.11-alpine
+        COPY Caddyfile /etc/caddy/Caddyfile
     profiles: ["caddy"]
     restart: unless-stopped
     ports:
@@ -132,7 +146,6 @@ services:
       SITE_DOMAIN: ${SITE_DOMAIN}
       API_DOMAIN: ${API_DOMAIN}
     volumes:
-      - ./infra/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
       - caddy-config:/config
     depends_on:
@@ -140,6 +153,7 @@ services:
       - api-gw
 
 volumes:
+  backups:
   caddy-data:
   caddy-config:
 

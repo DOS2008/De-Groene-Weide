@@ -86,7 +86,15 @@ The server stack is [compose.prod.yaml](compose.prod.yaml): the production websi
 The stack also starts:
 
 - `cron`, which calls `/api/jobs` every 15 minutes with `JOBS_SECRET` (mail retries, reminders, farewell mails);
-- `backup`, which writes a nightly database dump and a copy of the photos to `./backups` (14 kept). Copy that folder off the server. The restore test is `docker compose -f compose.prod.yaml run --rm backup sh /scripts/restore-check.sh`.
+- `backup`, which writes a nightly database dump and a copy of the photos to the `backups` volume (14 kept). Copy them off the server: `docker cp <project>-backup-1:/backups ./backups` (the project is `groene-weide`, or the stack name in Portainer). The restore test is `docker compose -f compose.prod.yaml run --rm backup sh /scripts/restore-check.sh`.
+
+The server stack mounts nothing from the repository. Config files, migrations and scripts are copied into images at build time (`infra/supabase.prod.yml`, `x-db-tools-build` in `compose.prod.yaml`), so a change to them needs `--build`.
+
+### Deploying with Portainer
+
+Add a stack from a **Repository**: the repository URL, the branch as reference (`refs/heads/main`), and `compose.prod.yaml` as compose path. Paste the variables from a fresh `.env` (made with `scripts/init-env.sh`, server values filled in) in *Advanced mode*, without comment lines or quotes. Portainer builds the images itself. To update, use *Pull and redeploy*.
+
+If a deploy fails halfway, Portainer doesn't save the stack. Its containers then show up as a stack with *Limited* control: remove that stack and its volumes (`docker volume ls`, names start with the stack name) and deploy again.
 
 The handover checklist (accounts, recurring tasks, emergency plan) is [docs/handover.md](docs/handover.md); the one-page manual for Bert is [docs/manual.md](docs/manual.md).
 
@@ -94,4 +102,4 @@ Only ports 80 and 443 are open to the outside. To reach the Studio dashboard, us
 
 ## Upgrading Supabase
 
-[infra/supabase/](infra/supabase/) is an unchanged copy of the official `docker/` folder from the Supabase repository. To upgrade, replace the folder with a newer copy, update `UPSTREAM.txt`, and check the upstream `CHANGELOG.md`. Our own changes are in `infra/supabase.override.yml` and `infra/supabase.prod.yml`.
+[infra/supabase/](infra/supabase/) is an unchanged copy of the official `docker/` folder from the Supabase repository. To upgrade, replace the folder with a newer copy, update `UPSTREAM.txt`, and check the upstream `CHANGELOG.md`. Our own changes are in `infra/supabase.override.yml` and `infra/supabase.prod.yml`. The `FROM` lines in `infra/supabase.prod.yml` (and `x-db-tools-build` in `compose.prod.yaml`) repeat image tags from the upstream `docker-compose.yml`: update them to the new tags, and check that the copied files still have the same names.

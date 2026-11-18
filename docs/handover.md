@@ -23,8 +23,8 @@ Voor Bert en de technische beheerder na de oplevering. Alle accounts staan **op 
 
 ## Reservekopieën
 
-- De service `backup` maakt elke nacht een dump van de database en een kopie van de foto's in `./backups` op de server, en bewaart de laatste 14.
-- **Kopieer `./backups` ook van de server af** (bijvoorbeeld wekelijks naar een externe schijf of een tweede EU-opslag). Een back-up op dezelfde server helpt niet als de server weg is.
+- De service `backup` maakt elke nacht een dump van de database en een kopie van de foto's in het volume `backups` op de server, en bewaart de laatste 14.
+- **Kopieer de back-ups ook van de server af** (bijvoorbeeld wekelijks naar een externe schijf of een tweede EU-opslag): `docker cp <project>-backup-1:/backups ./backups`, met als project `groene-weide` of de naam van de stack in Portainer. Een back-up op dezelfde server helpt niet als de server weg is.
 - **Hersteltest:** `docker compose -f compose.prod.yaml run --rm backup sh /scripts/restore-check.sh`. Die zet de nieuwste back-up in een losse database, vergelijkt de aantallen en ruimt hem weer op. De echte gegevens blijven onaangeroerd.
 
 | Datum hersteltest | Door | Uitkomst |
@@ -36,7 +36,7 @@ Voor Bert en de technische beheerder na de oplevering. Alle accounts staan **op 
 
 | Wanneer | Wat |
 | --- | --- |
-| Elke week | `./backups` van de server af kopiëren. |
+| Elke week | De back-ups van de server af kopiëren (zie boven). |
 | Elke maand | Updates: `git pull`, dan `docker compose -f compose.prod.yaml up -d --build`. Kijk of de site en het beheer werken. |
 | Elk kwartaal | Hersteltest (zie boven) en de datum hierboven invullen. |
 | Voor elk seizoen | Seizoen van het nieuwe jaar en de prijzen nakijken in *Prijzen & seizoenen*. Plekken controleren en *gecontroleerd* aanzetten. |

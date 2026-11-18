@@ -54,6 +54,12 @@ services:
         condition: service_completed_successfully
     expose:
       - "3000"
+    # npm_shared: Nginx Proxy Manager forwards SITE_DOMAIN to groene-weide-web:3000.
+    networks:
+      default:
+      npm_shared:
+        aliases:
+          - groene-weide-web
     environment:
       SUPABASE_URL: http://api-gw:8000
       NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_PUBLIC_URL}
@@ -111,8 +117,12 @@ services:
       db:
         condition: service_healthy
 
+  # HTTPS for a server without a reverse proxy of its own. Off by default:
+  # this server uses Nginx Proxy Manager (npm_shared), which already holds
+  # ports 80 and 443. Turn it on with --profile caddy (see README).
   caddy:
     image: caddy:2.11-alpine
+    profiles: ["caddy"]
     restart: unless-stopped
     ports:
       - "80:80"

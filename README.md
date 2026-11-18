@@ -69,6 +69,8 @@ The server stack is [compose.prod.yaml](compose.prod.yaml): the production websi
    docker compose -f compose.prod.yaml up -d --build
    ```
 
+   HTTPS comes from a reverse proxy. With **Nginx Proxy Manager** (the server's own proxy, on the external network `npm_shared`), add two proxy hosts: `SITE_DOMAIN` → `groene-weide-web` port `3000`, and `API_DOMAIN` → `groene-weide-api` port `8000` with *Websockets Support* on. Request a Let's Encrypt certificate for both. On a server **without** a proxy, use the built-in Caddy instead: add `--profile caddy` to every command, and remove the `npm_shared` network from `compose.prod.yaml` and `infra/supabase.prod.yml`.
+
 5. Create Bert's account (prints a one-time password; 2FA is set up on the first login):
 
    ```sh

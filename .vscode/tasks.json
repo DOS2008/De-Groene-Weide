@@ -1,0 +1,26 @@
+{
+  // Keeps the dev container in sync with your files (Compose Watch).
+  // Runs by itself when you open this folder; VS Code asks once to
+  // "Allow Automatic Tasks". Also: Terminal → Run Task → "Sync files to Docker".
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Sync files to Docker",
+      "type": "shell",
+      "options": {
+        "shell": { "executable": "powershell.exe", "args": ["-NoProfile", "-Command"] }
+      },
+      // 1. Compose fails to build from a lowercase "c:\" path (README, "Troubleshooting on Windows"),
+      //    so switch to the uppercase drive letter first.
+      // 2. A watch that died (reboot, crash) leaves a lock file. Once Windows hands its process
+      //    number to another app, Compose refuses to start. Remove the lock unless Docker holds it.
+      "command": "Set-Location ($PWD.Path.Substring(0,1).ToUpper() + $PWD.Path.Substring(1)); $lock = \"$env:LOCALAPPDATA\\docker-compose\\groene-weide.pid\"; if (Test-Path $lock) { $owner = Get-Process -Id ([int](Get-Content $lock -Raw)) -ErrorAction SilentlyContinue; if (-not $owner -or $owner.ProcessName -notlike 'docker*') { Remove-Item $lock } }; docker compose watch",
+      "linux": { "options": { "shell": { "executable": "sh", "args": ["-c"] } }, "command": "docker compose watch" },
+      "osx": { "options": { "shell": { "executable": "sh", "args": ["-c"] } }, "command": "docker compose watch" },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "silent", "panel": "dedicated", "group": "docker" },
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}

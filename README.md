@@ -48,6 +48,8 @@ Site texts are in `messages/nl.json`. Facilities, events, jokes, prices and cont
 cd C:\dev\De-Groene-Weide
 ```
 
+**Saved changes don't show up in the browser.** Nothing is syncing your files into the container. In VS Code, the task "Sync files to Docker" ([.vscode/tasks.json](.vscode/tasks.json)) starts `docker compose watch` when you open the folder (allow automatic tasks once when VS Code asks). You can also start it by hand with Terminal → Run Task. If `docker compose watch` says `cannot take exclusive lock … process with PID … is still running`, an earlier watch died and left a lock behind. Delete `%LOCALAPPDATA%\docker-compose\groene-weide.pid` and start it again (the VS Code task does this for you).
+
 ## Deploying
 
 The server stack is [compose.prod.yaml](compose.prod.yaml): the production website, Supabase and Caddy for HTTPS.

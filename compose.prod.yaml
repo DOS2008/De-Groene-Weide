@@ -130,3 +130,7 @@ services:
 volumes:
   caddy-data:
   caddy-config:
+
+networks:
+  npm_shared:
+    external: true

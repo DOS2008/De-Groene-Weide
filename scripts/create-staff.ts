@@ -32,26 +32,35 @@ if (!key) {
 const headers = { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
 const password = randomBytes(12).toString("base64url");
 
-const created = await fetch(`${url}/auth/v1/admin/users`, {
-  method: "POST",
-  headers,
-  body: JSON.stringify({ email, password, email_confirm: true }),
-});
-const user = (await created.json()) as { id?: string; msg?: string; message?: string };
-if (!created.ok || !user.id) {
-  console.error("Could not create the account:", user.msg ?? user.message ?? created.status);
-  process.exit(1);
+// No top-level await: without "type": "module" in package.json, tsx compiles
+// this file as CommonJS, which does not allow it.
+async function main() {
+  const created = await fetch(`${url}/auth/v1/admin/users`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ email, password, email_confirm: true }),
+  });
+  const user = (await created.json()) as { id?: string; msg?: string; message?: string };
+  if (!created.ok || !user.id) {
+    console.error("Could not create the account:", user.msg ?? user.message ?? created.status);
+    process.exit(1);
+  }
+
+  const profile = await fetch(`${url}/rest/v1/profiles`, {
+    method: "POST",
+    headers: { ...headers, Prefer: "return=minimal" },
+    body: JSON.stringify({ id: user.id, display_name: name, role }),
+  });
+  if (!profile.ok) {
+    console.error("Account created, but the profile failed:", await profile.text());
+    process.exit(1);
+  }
+
+  console.log(`Created ${role} ${email}. One-time password: ${password}`);
+  console.log("Log in at /admin/login and set up the authenticator app.");
 }
 
-const profile = await fetch(`${url}/rest/v1/profiles`, {
-  method: "POST",
-  headers: { ...headers, Prefer: "return=minimal" },
-  body: JSON.stringify({ id: user.id, display_name: name, role }),
-});
-if (!profile.ok) {
-  console.error("Account created, but the profile failed:", await profile.text());
+main().catch((error) => {
+  console.error(error);
   process.exit(1);
-}
-
-console.log(`Created ${role} ${email}. One-time password: ${password}`);
-console.log("Log in at /admin/login and set up the authenticator app.");
+});

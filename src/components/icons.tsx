@@ -128,6 +128,22 @@ export function MoonIcon(p: IconProps) {
   );
 }
 
+export function PauseIcon(p: IconProps) {
+  return (
+    <Svg {...p}>
+      <path d="M8 5v14M16 5v14" />
+    </Svg>
+  );
+}
+
+export function PlayIcon(p: IconProps) {
+  return (
+    <Svg {...p}>
+      <path d="M7 5l12 7-12 7z" />
+    </Svg>
+  );
+}
+
 export function MenuIcon(p: IconProps) {
   return (
     <Svg {...p}>

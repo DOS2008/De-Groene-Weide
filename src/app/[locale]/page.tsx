@@ -77,7 +77,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div className={styles.heroArt}>
-            <FarmIllustration label={t("illustration")} className={styles.farm} />
+            <FarmIllustration className={styles.farm} />
             {joke ? (
               <p className={styles.joke}>
                 <strong>{t("jokeLabel")}</strong>

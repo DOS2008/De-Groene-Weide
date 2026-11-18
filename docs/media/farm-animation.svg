@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 560 400" width="840" height="600">
+  <title>De Groene Weide: farmyard animation</title>
+  <desc>Standalone copy of the home page illustration (src/components/FarmIllustration.tsx). A chicken walks, pecks and tries to fly; birds and a tractor pass by. On the website the sun follows the real sun; here it stands still.</desc>
+
+  <style>
+    /* Every moving group turns around its local (0, 0); pivot groups put that point in place. */
+    svg * { transform-origin: 0 0; }
+
+    /* ---------- The chicken: one loop of 28 s ---------- */
+    .walk { animation: walk 28s ease-in-out infinite; }
+    .facing { animation: facing 28s linear infinite; }
+    .hop { animation: hop 28s ease-in-out infinite; }
+    .peck { animation: peck 28s ease-in-out infinite; }
+    .walkingLegs { opacity: 0; animation: walking 28s step-end infinite; }
+    .standingLegs { animation: standing 28s step-end infinite; }
+    .legBack, .legFront { animation: step 0.5s ease-in-out infinite alternate; }
+    .legFront { animation-delay: -0.5s; }
+    .flappingWing { opacity: 0; animation: flying 28s step-end infinite; }
+    .restingWing { animation: notFlying 28s step-end infinite; }
+    .flap { animation: flap 0.2s ease-in-out infinite alternate; }
+
+    @keyframes walk {
+      0%, 8% { transform: translateX(0); }
+      23.5%, 34.5% { transform: translateX(-170px); }
+      48.5%, 53% { transform: translateX(-300px); }
+      66.5%, 77% { transform: translateX(-170px); }
+      93%, 100% { transform: translateX(0); }
+    }
+    @keyframes facing {
+      0%, 7% { transform: scaleX(1); }
+      8%, 52% { transform: scaleX(-1); }
+      53%, 100% { transform: scaleX(1); }
+    }
+    @keyframes peck {
+      0%, 23.5% { transform: rotate(0); }
+      25% { transform: rotate(50deg); }
+      26.5% { transform: rotate(8deg); }
+      28% { transform: rotate(50deg); }
+      29.5% { transform: rotate(8deg); }
+      31% { transform: rotate(50deg); }
+      33%, 100% { transform: rotate(0); }
+    }
+    @keyframes hop {
+      0%, 66.5% { transform: translateY(0); }
+      68% { transform: translateY(-16px); }
+      69.5% { transform: translateY(0); }
+      71% { transform: translateY(-26px); }
+      73% { transform: translateY(0); }
+      74.5% { transform: translateY(-12px); }
+      76%, 100% { transform: translateY(0); }
+    }
+    @keyframes walking {
+      0% { opacity: 0; } 8% { opacity: 1; } 23.5% { opacity: 0; } 34.5% { opacity: 1; }
+      48.5% { opacity: 0; } 53% { opacity: 1; } 66.5% { opacity: 0; } 77% { opacity: 1; } 93% { opacity: 0; }
+    }
+    @keyframes standing {
+      0% { opacity: 1; } 8% { opacity: 0; } 23.5% { opacity: 1; } 34.5% { opacity: 0; }
+      48.5% { opacity: 1; } 53% { opacity: 0; } 66.5% { opacity: 1; } 77% { opacity: 0; } 93% { opacity: 1; }
+    }
+    @keyframes step { from { transform: rotate(-18deg); } to { transform: rotate(18deg); } }
+    @keyframes flying { 0% { opacity: 0; } 66.5% { opacity: 1; } 77% { opacity: 0; } }
+    @keyframes notFlying { 0% { opacity: 1; } 66.5% { opacity: 0; } 77% { opacity: 1; } }
+    @keyframes flap { from { transform: rotate(0); } to { transform: rotate(70deg); } }
+
+    /* ---------- Birds ---------- */
+    .flockA { animation: flockA 24s linear infinite; }
+    .flockB { animation: flockB 31s linear infinite; }
+    .wings { animation: wings 0.7s ease-in-out infinite alternate; }
+    @keyframes flockA {
+      0% { transform: translate(-320px, 10px); }
+      32% { transform: translate(20px, -6px); }
+      65%, 100% { transform: translate(360px, 4px); }
+    }
+    @keyframes flockB {
+      0%, 40% { transform: translate(450px, 6px); }
+      62% { transform: translate(110px, -4px); }
+      85%, 100% { transform: translate(-230px, 4px); }
+    }
+    @keyframes wings { from { transform: scaleY(1); } to { transform: scaleY(-0.5); } }
+
+    /* ---------- The tractor: drives by once every 45 s ---------- */
+    .tractor { transform: translate(-80px, 280px); animation: tractor 45s linear infinite; }
+    .rumble { animation: rumble 0.16s linear infinite alternate; }
+    .wheel { animation: spin 0.5s linear infinite; }
+    .puff { opacity: 0; animation: puff 0.9s ease-out infinite; }
+    @keyframes tractor {
+      0%, 30% { transform: translate(-60px, 280.8px) rotate(-25.6deg); }
+      31.18% { transform: translate(-20px, 261.6px) rotate(-25.6deg); }
+      32.35% { transform: translate(20px, 242.7px) rotate(-23.5deg); }
+      33.53% { transform: translate(60px, 227.9px) rotate(-16.9deg); }
+      34.71% { transform: translate(100px, 218.2px) rotate(-10deg); }
+      35.88% { transform: translate(140px, 213.7px) rotate(-3.1deg); }
+      37.06% { transform: translate(180px, 213.8px) rotate(3.3deg); }
+      38.24% { transform: translate(220px, 218px) rotate(8.7deg); }
+      39.41% { transform: translate(260px, 225.8px) rotate(13deg); }
+      40.59% { transform: translate(300px, 236.2px) rotate(15.8deg); }
+      41.76% { transform: translate(340px, 247px) rotate(11.4deg); }
+      42.94% { transform: translate(380px, 251.3px) rotate(0.9deg); }
+      44.12% { transform: translate(420px, 248.5px) rotate(-8.8deg); }
+      45.29% { transform: translate(460px, 239.3px) rotate(-16.5deg); }
+      46.47% { transform: translate(500px, 225.4px) rotate(-21.2deg); }
+      47.65% { transform: translate(540px, 209.3px) rotate(-21.3deg); }
+      48.82% { transform: translate(580px, 198.4px) rotate(-10.2deg); }
+      50%, 100% { transform: translate(620px, 191.2px) rotate(-10.2deg); }
+    }
+    @keyframes rumble { from { transform: translateY(0); } to { transform: translateY(-1px); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes puff {
+      0% { opacity: 0.9; transform: translate(0, 0) scale(0.6); }
+      100% { opacity: 0; transform: translate(-12px, -12px) scale(1.7); }
+    }
+  </style>
+
+  <defs>
+    <path id="bird" d="M-10 -4 Q-5 -6 0 1 Q5 -6 10 -4" fill="none" stroke="#3b2a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="legBack" d="M56 94 L54 108 M48 108 H60" stroke="#3b2a1a" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path id="legFront" d="M70 92 L72 108 M66 108 H78" stroke="#3b2a1a" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path id="wing" d="M44 66 C52 58 66 60 70 70 C62 78 50 78 44 66 Z" fill="#f2e8dc" stroke="#3b2a1a" stroke-width="3" stroke-linejoin="round"/>
+  </defs>
+
+  <!-- Sky (the hero background on the site) -->
+  <rect width="560" height="400" fill="#e4f0de"/>
+
+  <!-- Sun -->
+  <g transform="translate(450 96)">
+    <circle r="58" fill="#f5c84b" opacity="0.3"/>
+    <circle r="42" fill="#f5c84b"/>
+  </g>
+
+  <!-- Birds far away: a flock to the right, a pair to the left -->
+  <g transform="translate(250 64)">
+    <g class="flockA">
+      <g transform="translate(0 0)"><use xlink:href="#bird" href="#bird" class="wings"/></g>
+      <g transform="translate(26 12)"><use xlink:href="#bird" href="#bird" class="wings" style="animation-delay:-0.25s"/></g>
+      <g transform="translate(-22 16)"><use xlink:href="#bird" href="#bird" class="wings" style="animation-delay:-0.4s"/></g>
+    </g>
+  </g>
+  <g transform="translate(150 40)">
+    <g class="flockB">
+      <g transform="translate(0 0) scale(0.75)"><use xlink:href="#bird" href="#bird" class="wings" style="animation-delay:-0.1s"/></g>
+      <g transform="translate(20 -8) scale(0.75)"><use xlink:href="#bird" href="#bird" class="wings" style="animation-delay:-0.35s"/></g>
+    </g>
+  </g>
+
+  <!-- Back hill -->
+  <path d="M0 250 C120 190 220 210 320 240 C420 270 500 220 560 200 L560 400 L0 400 Z" fill="#9cc48c"/>
+
+  <!-- Tractor on the back hill, behind the milking parlour -->
+  <g class="tractor">
+    <g stroke="#3b2a1a" stroke-width="2.5" stroke-linejoin="round">
+      <g class="rumble">
+        <path d="M8 -19 V-29" stroke-linecap="round" fill="none"/>
+        <path d="M-17 -10 V-33 H-2 L0 -19 H18 V-9 Z" fill="#c2583a"/>
+        <path d="M-13 -29 H-5 V-20 H-13 Z" fill="#f2e8dc" stroke-width="2"/>
+      </g>
+      <circle cx="13" cy="-6" r="6" fill="#2d3a30"/>
+      <g transform="translate(-9 -10)">
+        <circle r="10" fill="#2d3a30"/>
+        <g class="wheel">
+          <path d="M-6 0 H6 M0 -6 V6" stroke="#f2e8dc" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </g>
+      <g transform="translate(8 -32)" stroke="none" fill="#d9ddd3">
+        <circle class="puff" r="3.5"/>
+        <circle class="puff" r="3.5" style="animation-delay:-0.45s"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Front hill, milking parlour, fence -->
+  <path d="M0 300 C140 260 260 290 380 300 C460 306 520 290 560 280 L560 400 L0 400 Z" fill="#6fa35f"/>
+  <g stroke="#3b2a1a" stroke-width="4" stroke-linejoin="round">
+    <path d="M90 290 V200 L160 150 L230 200 V290 Z" fill="#c2583a"/>
+    <path d="M135 290 V240 H185 V290" fill="#f2e8dc"/>
+    <path d="M80 205 L160 145 L240 205" fill="none"/>
+    <rect x="146" y="180" width="28" height="22" fill="#f2e8dc"/>
+  </g>
+  <g stroke="#3b2a1a" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M300 300 V260 M340 300 V260 M380 300 V260 M290 272 H400"/>
+  </g>
+
+  <!-- The chicken -->
+  <g transform="translate(380 250)">
+    <g class="walk">
+      <g class="hop">
+        <g transform="scale(1.15) translate(64 0)">
+          <g class="facing">
+            <g transform="translate(-64 0)">
+              <g class="standingLegs">
+                <use xlink:href="#legBack" href="#legBack"/>
+                <use xlink:href="#legFront" href="#legFront"/>
+              </g>
+              <g class="walkingLegs">
+                <g transform="translate(56 94)"><g class="legBack"><g transform="translate(-56 -94)"><use xlink:href="#legBack" href="#legBack"/></g></g></g>
+                <g transform="translate(70 92)"><g class="legFront"><g transform="translate(-70 -92)"><use xlink:href="#legFront" href="#legFront"/></g></g></g>
+              </g>
+              <g transform="translate(62 94)">
+                <g class="peck">
+                  <g transform="translate(-62 -94)">
+                    <g stroke-linejoin="round" stroke="#3b2a1a">
+                      <path d="M30 66 C20 58 18 46 24 40 C28 50 32 54 38 56" fill="#ffffff" stroke-width="4"/>
+                      <path d="M30 70 C30 45 50 32 66 36 C70 24 86 22 92 34 C100 50 98 84 72 92 C50 98 30 90 30 70 Z" fill="#ffffff" stroke-width="4"/>
+                      <path d="M76 27 C73 18 80 13 84 20 C86 12 95 14 92 25" fill="#ee8a3c" stroke-width="3"/>
+                      <path d="M96 40 L108 44 L96 48 Z" fill="#f5c84b" stroke-width="3"/>
+                      <path d="M95 50 C97 57 92 59 90 54" fill="#ee8a3c" stroke-width="2.5"/>
+                      <circle cx="86" cy="38" r="3.5" fill="#3b2a1a" stroke="none"/>
+                    </g>
+                    <g class="restingWing"><use xlink:href="#wing" href="#wing"/></g>
+                    <g class="flappingWing">
+                      <g transform="translate(66 66)"><g class="flap"><g transform="translate(-66 -66)"><use xlink:href="#wing" href="#wing"/></g></g></g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

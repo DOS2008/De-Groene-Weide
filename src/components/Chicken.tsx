@@ -30,7 +30,24 @@ export function Chicken({
 
 /** The chicken's paths, for use inside a larger illustration. */
 export function ChickenShape() {
-  const line = "var(--color-outline)";
+  return (
+    <g strokeLinejoin="round">
+      <ChickenBody />
+      <ChickenWing />
+      <ChickenLeg which="back" />
+      <ChickenLeg which="front" />
+    </g>
+  );
+}
+
+const line = "var(--color-outline)";
+
+/**
+ * The separate parts, so the farm illustration can move them. In the
+ * chicken's 120 × 120 grid: the hips sit at (56, 94) and (70, 92), the wing
+ * joint at (66, 66).
+ */
+export function ChickenBody() {
   return (
     <g strokeLinejoin="round">
       <path
@@ -54,19 +71,30 @@ export function ChickenShape() {
       <path d="M96 40 L108 44 L96 48 Z" fill="var(--color-eigeel)" stroke={line} strokeWidth="3" />
       <path d="M95 50 C97 57 92 59 90 54" fill="var(--color-kam-oranje)" stroke={line} strokeWidth="2.5" />
       <circle cx="86" cy="38" r="3.5" fill={line} />
-      <path
-        d="M44 66 C52 58 66 60 70 70 C62 78 50 78 44 66 Z"
-        fill="var(--color-stro)"
-        stroke={line}
-        strokeWidth="3"
-      />
-      <path
-        d="M56 94 L54 108 M70 92 L72 108 M48 108 H60 M66 108 H78"
-        stroke={line}
-        strokeWidth="4"
-        strokeLinecap="round"
-        fill="none"
-      />
     </g>
+  );
+}
+
+export function ChickenWing() {
+  return (
+    <path
+      d="M44 66 C52 58 66 60 70 70 C62 78 50 78 44 66 Z"
+      fill="var(--color-stro)"
+      stroke={line}
+      strokeWidth="3"
+      strokeLinejoin="round"
+    />
+  );
+}
+
+export function ChickenLeg({ which }: { which: "back" | "front" }) {
+  return (
+    <path
+      d={which === "back" ? "M56 94 L54 108 M48 108 H60" : "M70 92 L72 108 M66 108 H78"}
+      stroke={line}
+      strokeWidth="4"
+      strokeLinecap="round"
+      fill="none"
+    />
   );
 }

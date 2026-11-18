@@ -1,0 +1,444 @@
+/*
+ * Motion for the farm illustration. Every moving group has no transform
+ * attribute of its own (CSS would replace it) and turns around its local
+ * (0, 0); the pivot groups in the markup put that point where it belongs.
+ *
+ * With no animation (Rustknop, prefers-reduced-motion) each element falls
+ * back to its base style here: the chicken stands at its usual spot, the
+ * birds hang in the sky and the tractor waits out of sight.
+ */
+
+.wrap {
+  position: relative;
+}
+
+.wrap svg * {
+  transform-origin: 0 0;
+}
+
+.paused,
+.paused * {
+  animation-play-state: paused !important;
+}
+
+/* Round, icon only, in the bottom-left corner: the chicken never walks there. */
+.toggle {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  width: var(--tap-min);
+  padding: 0;
+}
+
+:global([data-calm="true"]) .toggle {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle {
+    display: none;
+  }
+}
+
+/* ---------- The chicken: one loop of 28 s ---------- */
+
+.walk {
+  animation: walk 28s ease-in-out infinite;
+}
+
+.facing {
+  animation: facing 28s linear infinite;
+}
+
+.hop {
+  animation: hop 28s ease-in-out infinite;
+}
+
+.peck {
+  animation: peck 28s ease-in-out infinite;
+}
+
+.walkingLegs {
+  opacity: 0;
+  animation: walking 28s step-end infinite;
+}
+
+.standingLegs {
+  animation: standing 28s step-end infinite;
+}
+
+.legBack,
+.legFront {
+  animation: step 0.5s ease-in-out infinite alternate;
+}
+
+.legFront {
+  animation-delay: -0.5s;
+}
+
+.flappingWing {
+  opacity: 0;
+  animation: flying 28s step-end infinite;
+}
+
+.restingWing {
+  animation: notFlying 28s step-end infinite;
+}
+
+.flap {
+  animation: flap 0.2s ease-in-out infinite alternate;
+}
+
+/* 0–7 % stand · 7–8 % turn left · 8–23.5 % walk · 23.5–34.5 % peck ·
+   34.5–48.5 % walk · 48.5–53 % stand, turn right · 53–66.5 % walk ·
+   66.5–77 % try to fly · 77–93 % walk home · 93–100 % stand */
+
+@keyframes walk {
+  0%,
+  8% {
+    transform: translateX(0);
+  }
+  23.5%,
+  34.5% {
+    transform: translateX(-170px);
+  }
+  48.5%,
+  53% {
+    transform: translateX(-300px);
+  }
+  66.5%,
+  77% {
+    transform: translateX(-170px);
+  }
+  93%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes facing {
+  0%,
+  7% {
+    transform: scaleX(1);
+  }
+  8%,
+  52% {
+    transform: scaleX(-1);
+  }
+  53%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes peck {
+  0%,
+  23.5% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(50deg);
+  }
+  26.5% {
+    transform: rotate(8deg);
+  }
+  28% {
+    transform: rotate(50deg);
+  }
+  29.5% {
+    transform: rotate(8deg);
+  }
+  31% {
+    transform: rotate(50deg);
+  }
+  33%,
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes hop {
+  0%,
+  66.5% {
+    transform: translateY(0);
+  }
+  68% {
+    transform: translateY(-16px);
+  }
+  69.5% {
+    transform: translateY(0);
+  }
+  71% {
+    transform: translateY(-26px);
+  }
+  73% {
+    transform: translateY(0);
+  }
+  74.5% {
+    transform: translateY(-12px);
+  }
+  76%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes walking {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  23.5% {
+    opacity: 0;
+  }
+  34.5% {
+    opacity: 1;
+  }
+  48.5% {
+    opacity: 0;
+  }
+  53% {
+    opacity: 1;
+  }
+  66.5% {
+    opacity: 0;
+  }
+  77% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0;
+  }
+}
+
+@keyframes standing {
+  0% {
+    opacity: 1;
+  }
+  8% {
+    opacity: 0;
+  }
+  23.5% {
+    opacity: 1;
+  }
+  34.5% {
+    opacity: 0;
+  }
+  48.5% {
+    opacity: 1;
+  }
+  53% {
+    opacity: 0;
+  }
+  66.5% {
+    opacity: 1;
+  }
+  77% {
+    opacity: 0;
+  }
+  93% {
+    opacity: 1;
+  }
+}
+
+@keyframes step {
+  from {
+    transform: rotate(-18deg);
+  }
+  to {
+    transform: rotate(18deg);
+  }
+}
+
+@keyframes flying {
+  0% {
+    opacity: 0;
+  }
+  66.5% {
+    opacity: 1;
+  }
+  77% {
+    opacity: 0;
+  }
+}
+
+@keyframes notFlying {
+  0% {
+    opacity: 1;
+  }
+  66.5% {
+    opacity: 0;
+  }
+  77% {
+    opacity: 1;
+  }
+}
+
+@keyframes flap {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(70deg);
+  }
+}
+
+/* ---------- Birds ---------- */
+
+.flockA {
+  animation: flockA 24s linear infinite;
+}
+
+.flockB {
+  animation: flockB 31s linear infinite;
+}
+
+.wings {
+  animation: wings 0.7s ease-in-out infinite alternate;
+}
+
+/* Left to right, then out of sight for a while. */
+@keyframes flockA {
+  0% {
+    transform: translate(-320px, 10px);
+  }
+  32% {
+    transform: translate(20px, -6px);
+  }
+  65%,
+  100% {
+    transform: translate(360px, 4px);
+  }
+}
+
+/* Right to left, later in its loop. */
+@keyframes flockB {
+  0%,
+  40% {
+    transform: translate(450px, 6px);
+  }
+  62% {
+    transform: translate(110px, -4px);
+  }
+  85%,
+  100% {
+    transform: translate(-230px, 4px);
+  }
+}
+
+@keyframes wings {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(-0.5);
+  }
+}
+
+/* ---------- The tractor: drives by once every 45 s ---------- */
+
+.tractor {
+  transform: translate(-80px, 280px);
+  animation: tractor 45s linear infinite;
+}
+
+.rumble {
+  animation: rumble 0.16s linear infinite alternate;
+}
+
+.wheel {
+  animation: spin 0.5s linear infinite;
+}
+
+.puff {
+  opacity: 0;
+  animation: puff 0.9s ease-out infinite;
+}
+
+/* Follows the ridge of the back hill (sampled from its path). */
+@keyframes tractor {
+  0%,
+  30% {
+    transform: translate(-60px, 280.8px) rotate(-25.6deg);
+  }
+  31.18% {
+    transform: translate(-20px, 261.6px) rotate(-25.6deg);
+  }
+  32.35% {
+    transform: translate(20px, 242.7px) rotate(-23.5deg);
+  }
+  33.53% {
+    transform: translate(60px, 227.9px) rotate(-16.9deg);
+  }
+  34.71% {
+    transform: translate(100px, 218.2px) rotate(-10deg);
+  }
+  35.88% {
+    transform: translate(140px, 213.7px) rotate(-3.1deg);
+  }
+  37.06% {
+    transform: translate(180px, 213.8px) rotate(3.3deg);
+  }
+  38.24% {
+    transform: translate(220px, 218px) rotate(8.7deg);
+  }
+  39.41% {
+    transform: translate(260px, 225.8px) rotate(13deg);
+  }
+  40.59% {
+    transform: translate(300px, 236.2px) rotate(15.8deg);
+  }
+  41.76% {
+    transform: translate(340px, 247px) rotate(11.4deg);
+  }
+  42.94% {
+    transform: translate(380px, 251.3px) rotate(0.9deg);
+  }
+  44.12% {
+    transform: translate(420px, 248.5px) rotate(-8.8deg);
+  }
+  45.29% {
+    transform: translate(460px, 239.3px) rotate(-16.5deg);
+  }
+  46.47% {
+    transform: translate(500px, 225.4px) rotate(-21.2deg);
+  }
+  47.65% {
+    transform: translate(540px, 209.3px) rotate(-21.3deg);
+  }
+  48.82% {
+    transform: translate(580px, 198.4px) rotate(-10.2deg);
+  }
+  50%,
+  100% {
+    transform: translate(620px, 191.2px) rotate(-10.2deg);
+  }
+}
+
+@keyframes rumble {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes puff {
+  0% {
+    opacity: 0.9;
+    transform: translate(0, 0) scale(0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-12px, -12px) scale(1.7);
+  }
+}

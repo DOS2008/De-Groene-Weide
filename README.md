@@ -94,6 +94,8 @@ The server stack mounts nothing from the repository. Config files, migrations an
 
 Add a stack from a **Repository**: the repository URL, the branch as reference (`refs/heads/main`), and `compose.prod.yaml` as compose path. Paste the variables from a fresh `.env` (made with `scripts/init-env.sh`, server values filled in) in *Advanced mode*, without comment lines or quotes. Portainer builds the images itself. To update, use *Pull and redeploy*.
 
+Portainer itself usually publishes port 8000 (Edge agents), so set `API_GW_HTTP_PORT` to a free port, for example `8100`. It is only the local port for an SSH tunnel to Studio; Nginx Proxy Manager reaches the gateway at `groene-weide-api:8000` either way. The same goes for `POSTGRES_PORT` (5432) and `POOLER_PROXY_PORT_TRANSACTION` (6543) if another database on the server already uses them.
+
 If a deploy fails halfway, Portainer doesn't save the stack. Its containers then show up as a stack with *Limited* control: remove that stack and its volumes (`docker volume ls`, names start with the stack name) and deploy again.
 
 The handover checklist (accounts, recurring tasks, emergency plan) is [docs/handover.md](docs/handover.md); the one-page manual for Bert is [docs/manual.md](docs/manual.md).

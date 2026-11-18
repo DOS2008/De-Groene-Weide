@@ -63,6 +63,7 @@ On Windows, run `docker compose` builds from a working directory that starts wit
 - **Role access is enforced in the database** (Supabase RLS), not only in the UI.
 - Roles: Bert/beheerder (everything) · Receptie (bookings, messages, events, blocking plots) · Animatie (events, photos) · Seizoenskracht (read only). In the database: `admin`, `reception`, `animation`, `seasonal`.
 - Admin accounts use 2FA. Spam protection on forms without tracking.
+- Security review tooling for Claude Code (plugins, agents) is weighed in [docs/security-agents.md](docs/security-agents.md). Nothing is installed yet; until then use the built-in `/security-review`.
 
 **Languages**
 - NL, EN and DE. Separate text fields per language and **a URL per language**. No automatic translation.

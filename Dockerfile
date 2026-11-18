@@ -45,6 +45,8 @@ RUN addgroup -S -g 1001 nodejs && adduser -S -u 1001 -G nodejs nextjs
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# The first staff account on the server: node create-staff.ts <email> "<name>" admin
+COPY --chown=nextjs:nodejs scripts/create-staff.ts ./create-staff.ts
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]

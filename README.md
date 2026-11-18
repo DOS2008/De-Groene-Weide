@@ -74,10 +74,10 @@ The server stack is [compose.prod.yaml](compose.prod.yaml): the production websi
 5. Create Bert's account (prints a one-time password; 2FA is set up on the first login):
 
    ```sh
-   docker compose -f compose.prod.yaml run --rm --no-deps \
-     -v ./scripts/create-staff.ts:/app/create-staff.ts:ro \
-     web node create-staff.ts bert@example.nl "Bert" admin
+   docker compose -f compose.prod.yaml exec web node create-staff.ts bert@example.nl "Bert" admin
    ```
+
+   In Portainer: open a *Console* on the web container (`/bin/sh`) and run `node create-staff.ts bert@example.nl "Bert" admin`.
 
    Invite everyone else from *Gebruikers & rollen*. Add a second admin, so Bert's 2FA can be reset if he loses his phone.
 

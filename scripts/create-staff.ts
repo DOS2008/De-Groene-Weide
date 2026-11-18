@@ -2,9 +2,8 @@
  * Creates a staff account (accounts are invite-only, there is no sign-up).
  *
  *   development:  docker compose exec web npm run create-staff -- bert@example.nl "Bert" admin
- *   server:       docker compose -f compose.prod.yaml run --rm --no-deps \
- *                   -v ./scripts/create-staff.ts:/app/create-staff.ts:ro \
- *                   web node create-staff.ts bert@example.nl "Bert" admin
+ *   server:       docker compose -f compose.prod.yaml exec web node create-staff.ts bert@example.nl "Bert" admin
+ *                 (Portainer: open a console on the web container, run the same node command)
  *
  * Roles: admin, reception, animation, seasonal. Prints a one-time password;
  * the person sets up 2FA on first login. Later staff are invited from the

@@ -8,12 +8,14 @@
 
 name: groene-weide
 
+# The included Supabase files read the same variables as this file: from
+# .env next to it, or from the stack variables in Portainer (which has no
+# .env file, so don't name one here).
 include:
   - path:
       - infra/supabase/docker-compose.yml
       - infra/supabase.override.yml
       - infra/supabase.prod.yml
-    env_file: .env
 
 services:
   # Applies supabase/migrations and supabase/seed, then exits. The website

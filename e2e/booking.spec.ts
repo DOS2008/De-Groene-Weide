@@ -33,6 +33,17 @@ test("a guest books a plot on a phone, and gets an email @phone", async ({ page 
   await expectMail(email, /aanvraag voor plek T12/);
 });
 
+test("dates typed into step 1 carry over to step 2", async ({ page }) => {
+  const stay = randomStay();
+  await page.goto("/reserveren");
+  await page.waitForLoadState("networkidle");
+  await page.getByLabel("Aankomst").fill(stay.arrival);
+  await page.getByLabel("Vertrek").fill(stay.departure);
+  await page.getByRole("button", { name: "Volgende", exact: true }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Met wie kom je?" })).toBeVisible();
+  await expect(page).toHaveURL(new RegExp(`aankomst=${stay.arrival}.*vertrek=${stay.departure}`));
+});
+
 test("invalid dates are refused with a clear message", async ({ page }) => {
   await page.goto("/reserveren?aankomst=2029-10-31&vertrek=2029-11-02");
   await page.waitForLoadState("networkidle");

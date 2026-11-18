@@ -269,8 +269,9 @@ export function BookingFlow({ plots, facilities, rules, prices, info }: Props) {
           departure={departure}
           rules={rules}
           today={today}
-          onChange={(a, d) => update({ aankomst: a, vertrek: d })}
-          onNext={() => go(2)}
+          // One update for dates and step: two router.push calls in a row both
+          // start from the old URL, so the second would drop the dates.
+          onSubmit={(a, d, valid) => update({ aankomst: a, vertrek: d, ...(valid && { stap: 2 }) })}
           info={info}
         />
       )}
@@ -500,16 +501,14 @@ function StepDates({
   departure,
   rules,
   today,
-  onChange,
-  onNext,
+  onSubmit,
   info,
 }: {
   arrival: string;
   departure: string;
   rules: BookingRules;
   today: string;
-  onChange: (arrival: string, departure: string) => void;
-  onNext: () => void;
+  onSubmit: (arrival: string, departure: string, valid: boolean) => void;
   info: ReactNode;
 }) {
   const t = useTranslations("booking");
@@ -529,8 +528,7 @@ function StepDates({
         onSubmit={(e) => {
           e.preventDefault();
           setTried(true);
-          onChange(a, d);
-          if (!localError) onNext();
+          onSubmit(a, d, !localError);
         }}
       >
         <div className={styles.fields2}>

@@ -106,6 +106,10 @@ services:
   backup:
     image: groene-weide-db-tools:prod
     build: *db-tools-build
+    # The Postgres image's own health check expects a database server in
+    # this container; there is none, so it would always say "unhealthy".
+    healthcheck:
+      disable: true
     restart: unless-stopped
     entrypoint: ["sh", "-c"]
     command:
